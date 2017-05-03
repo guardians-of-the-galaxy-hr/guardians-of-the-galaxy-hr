@@ -6,7 +6,7 @@ const path = require('path');
 const Photos = require(path.join(__dirname, '/database/index') );
 
 app.use(express.static(__dirname + '/client'));
-
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 // //MongoDB testing put the data 
 // var photos = new Photos({
 //   userName: 'abc',
@@ -29,10 +29,7 @@ Photos.findAsync({})
   throw error;
 });
 
-
-
 console.log(__dirname + '/database/index');
-
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port: ', process.env.PORT || 3000);
