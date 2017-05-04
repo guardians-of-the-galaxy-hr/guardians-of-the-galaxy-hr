@@ -11,7 +11,7 @@ const Photos = require(path.join(__dirname, '/database/index') );
 app.use(bodyParser.json());
 
 
-//MongoDB testing Input the data 
+//MongoDB testing Input the data
 // var photos = new Photos();
 // photos.photoListName = {
 //   'hrsf_76': [
@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/client'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
+// app.use('/bower_components', express.static(__dirname + '/bower_components'));
 // //MongoDB testing put the data
 // var photos = new Photos({
 //   userName: 'abc',
@@ -49,6 +49,7 @@ Photos.findAsync({})
   throw error;
 });
 
+<<<<<<< HEAD
 // app.post('/classmate', (req, res) => {
 //   var options = {
 //     body: {
@@ -60,9 +61,9 @@ Photos.findAsync({})
 //     "app_key":api.kairos.app_key,
 //     "url":"http://media.kairos.com/kairos-elizabeth.jpg",
 //     "gallery_name":"MyGallery",
-//     "threshold":"0.00" 
+//     "threshold":"0.00"
 //   }
-  
+
 // })
 
 
