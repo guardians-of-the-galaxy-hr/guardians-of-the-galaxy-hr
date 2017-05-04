@@ -11,7 +11,8 @@ console.log ('api.kairos', api.kairos);
 //mongoDB connection
 const Photos = require(path.join(__dirname, '/database/index') );
 app.use(bodyParser.json());
-
+app.use(express.static(__dirname + '/client'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 //MongoDB testing Input the data
 // var photos = new Photos();
@@ -24,8 +25,7 @@ app.use(bodyParser.json());
 //   ]
 // };
 
-app.use(express.static(__dirname + '/client'));
-app.use('/node_modules', express.static(__dirname + '/node_modules'));
+
 // app.use('/bower_components', express.static(__dirname + '/bower_components'));
 // //MongoDB testing put the data
 // var photos = new Photos({
@@ -53,21 +53,37 @@ Photos.findAsync({})
   throw error;
 });
 
-// app.post('/classmate', (req, res) => {
-//   console.log ('app post');
-//   var options = {
-//     body: {
-//     "image":"http://media.kairos.com/kairos-elizabeth.jpg",
-//     "gallery_name":"MyGallery"
-//     },
-//     "contentType":'application/json',
-//     "app_id":api.kairos.appId,
-//     "app_key":api.kairos.app_key,
-//     "url":"http://media.kairos.com/kairos-elizabeth.jpg",
-//     "gallery_name":"MyGallery",
-//     "threshold":"0.00"
-//   }
-// })
+
+
+app.post('/recognize', (req, res) => {
+  var name = req.body.name;
+  var body = {
+    image: "http://media.kairos.com/kairos-elizabeth.jpg",
+    gallery_name: "testGallery",
+    minHeadScale: 0.15,
+    threshold: 0.63,
+    max_num_results: 5.00
+  }
+  body = JSON.stringify(body);
+  var options = {
+    method: 'POST',
+    url: 'https://api.kairos.com/recognize',
+    headers: {
+      'app_id': '077d4b23',
+      'app_key': 'd217274b4c07e0acef0e9cec7507d94d'
+    },
+    body: body
+  }
+  request(options, (error, results, body) => {
+    if (error) {
+      console.log('ERROR IN RECOGNIZE-----', error);
+    } else {
+      console.log('RECOGNIZED-----', body);
+      res.send(JSON.parse(body));
+    }
+  });
+});
+
 
 
 var persons = {
@@ -122,19 +138,16 @@ request({
 
 
 
-app.post('/recognize', (req, res) => {
-  var name = req.body.name;
+
+
+app.get('/query', (req, res) => {
   var body = {
-    image: "http://media.kairos.com/kairos-elizabeth.jpg",
-    gallery_name: "testGallery",
-    minHeadScale: 0.15,
-    threshold: 0.63,
-    max_num_results: 5.00
+    gallery_name: 'testGallery'
   }
   body = JSON.stringify(body);
   var options = {
     method: 'POST',
-    url: 'https://api.kairos.com/recognize',
+    url: 'https://api.kairos.com/gallery/view',
     headers: {
       'app_id': '077d4b23',
       'app_key': 'd217274b4c07e0acef0e9cec7507d94d'
