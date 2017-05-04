@@ -2,9 +2,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-// const api = require('./client/env/config.js');
+const api = require('./config/api.js');
 const request = require('request');
 
+console.log ('api.kairos', api.kairos);
 
 //mongoDB connection
 const Photos = require(path.join(__dirname, '/database/index') );
@@ -50,6 +51,7 @@ Photos.findAsync({})
 });
 
 // app.post('/classmate', (req, res) => {
+//   console.log ('app post');
 //   var options = {
 //     body: {
 //     "image":"http://media.kairos.com/kairos-elizabeth.jpg",
@@ -62,10 +64,22 @@ Photos.findAsync({})
 //     "gallery_name":"MyGallery",
 //     "threshold":"0.00"
 //   }
-
 // })
 
 
+request({
+  method: 'POST',
+  url: 'https://api.kairos.com/verify',
+  headers: {
+    'app_id': '550cd7ca',
+    'app_key': 'e4b1649137b64cdfc843fd922fe76db2'
+  },
+  body: "{  \"image\": \"http://media.kairos.com/kairos-elizabeth2.jpg\",  \"gallery_name\": \"MyGallery\",  \"subject_id\": \"Elizabeth\"}"
+}, function (error, response, body) {
+  console.log('Status:', response.statusCode);
+  console.log('Headers:', JSON.stringify(response.headers));
+  console.log('Response:', body);
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port: ', process.env.PORT || 3000);
