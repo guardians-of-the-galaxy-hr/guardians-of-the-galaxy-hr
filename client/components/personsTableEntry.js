@@ -5,9 +5,9 @@ angular.module('in-your-face')
     controller: function($scope) {
     },
     template: `
-      <div>
+      <div class="person-row">
         <span class="person-name">{{person.name}}</span>
-        <span>
+        <span class="person-image">
           <img ng-src={{person.imageUrl}} height="{{200}}"/>
         </span>
       </div>`
