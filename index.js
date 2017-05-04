@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-const api = require('./client/env/config.js');
+// const api = require('./client/env/config.js');
 const request = require('request');
 
 
@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 //   ]
 // };
 
+app.use(express.static(__dirname + '/client'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 // //MongoDB testing put the data 
 // var photos = new Photos({
@@ -47,21 +48,21 @@ Photos.findAsync({})
   throw error;
 });
 
-app.post('/classmate', (req, res) => {
-  var options = {
-    body: {
-    "image":"http://media.kairos.com/kairos-elizabeth.jpg",
-    "gallery_name":"MyGallery"
-    },
-    "contentType":'application/json',
-    "app_id":api.kairos.appId,
-    "app_key":api.kairos.app_key,
-    "url":"http://media.kairos.com/kairos-elizabeth.jpg",
-    "gallery_name":"MyGallery",
-    "threshold":"0.00" 
-  }
+// app.post('/classmate', (req, res) => {
+//   var options = {
+//     body: {
+//     "image":"http://media.kairos.com/kairos-elizabeth.jpg",
+//     "gallery_name":"MyGallery"
+//     },
+//     "contentType":'application/json',
+//     "app_id":api.kairos.appId,
+//     "app_key":api.kairos.app_key,
+//     "url":"http://media.kairos.com/kairos-elizabeth.jpg",
+//     "gallery_name":"MyGallery",
+//     "threshold":"0.00" 
+//   }
   
-})
+// })
 
 
 app.listen(process.env.PORT || 3000, () => {
