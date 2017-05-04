@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
+const api = require('./client/env/config.js');
+const request = require('request');
+
 
 //mongoDB connection
 const Photos = require(path.join(__dirname, '/database/index') );
-
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 // //MongoDB testing put the data 
@@ -28,6 +32,23 @@ Photos.findAsync({})
 .catch(function(error) {
   throw error;
 });
+
+app.post('/classmate', (req, res) => {
+  var options = {
+    body: {
+    "image":"http://media.kairos.com/kairos-elizabeth.jpg",
+    "gallery_name":"MyGallery"
+    },
+    "contentType":'application/json',
+    "app_id":api.kairos.appId,
+    "app_key":api.kairos.app_key,
+    "url":"http://media.kairos.com/kairos-elizabeth.jpg",
+    "gallery_name":"MyGallery",
+    "threshold":"0.00" 
+  }
+  
+})
+
 
 console.log(__dirname + '/database/index');
 
