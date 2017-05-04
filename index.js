@@ -7,11 +7,17 @@ const Photos = require(path.join(__dirname, '/database/index') );
 
 app.use(express.static(__dirname + '/client'));
 
-// //MongoDB testing put the data 
-// var photos = new Photos({
-//   userName: 'abc',
-//   filePath: 'https://drive.google.com/file/d/0B3AAJJ2UZGHwVm9LWGxGOE9abkE/view?usp=sharing'
-// });
+//MongoDB testing Input the data 
+// var photos = new Photos();
+// photos.photoListName = {
+//   'hrsf_76': [
+//     {
+//       'userName': 'Alana',
+//       'fiePath': 'https://drive.google.com/file/d/0B3AAJJ2UZGHwVm9LWGxGOE9abkE/view?usp=sharing'
+//     }
+
+//   ]
+// };
 // photos.saveAsync()
 // .then(function(results) {
 //   console.log(results);
@@ -28,10 +34,6 @@ Photos.findAsync({})
 .catch(function(error) {
   throw error;
 });
-
-
-
-console.log(__dirname + '/database/index');
 
 
 app.listen(process.env.PORT || 3000, () => {
