@@ -1,0 +1,20 @@
+{
+  "name": "guardians-of-the-galaxy-hr",
+  "description": "Have you ever wondered how much you look like someone else?  Your family members, friends, classmates, celebrities, or even random inanimate objects!  Now you can!  In Your Face allows you to compare your face to the faces of anyone you want and have fun doing it!  Sign up today to start enjoying this wonderful app!",
+  "main": "index.js",
+  "authors": [
+    "GotG"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ShawnShiFeng/guardians-of-the-galaxy-hr",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webcam": "webcam-directive#^3.1.1"
+  }
+}

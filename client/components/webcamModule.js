@@ -1,6 +1,5 @@
 angular.module('in-your-face')
 .controller('webcamModuleCtrl', function($scope) {
-  console.log("123");
   var _video = null;
   var patData = null;
   var self = this;
@@ -74,7 +73,6 @@ angular.module('in-your-face')
       ctxPat.putImageData(idata, 0, 0);
 
       sendSnapshotToServer(patCanvas.toDataURL());
-
 
       patData = idata;
     }
