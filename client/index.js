@@ -1,19 +1,19 @@
 var classmates = [
   {
     name: 'Edward Kim',
-    imageUrl: 'http://tinyurl.com/n4vgcl5',
+    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwSzZETlI5aVhSZE0=w2560-h1398-iv1',
   },
   {
     name: 'Mahima Shrikanta',
-    imageUrl: 'http://tinyurl.com/n4vgcl5',
+    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwaEhsOWI3NUtwcTQ=w2560-h1398-iv2',
   },
   {
     name: 'Mike Diodoro',
-    imageUrl: 'http://tinyurl.com/n4vgcl5',
+    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwb2c2MUMzeDNJbTg=w2560-h1398-iv1',
   },
   {
     name: 'Sean Feng',
-    imageUrl: 'http://tinyurl.com/kxd7cuu',
+    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwUkN4QmpzLWJLRjQ=w2560-h1398-iv1',
   }
 ];
 
