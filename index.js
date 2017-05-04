@@ -25,7 +25,8 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/client'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
-// //MongoDB testing put the data 
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+// //MongoDB testing put the data
 // var photos = new Photos({
 //   userName: 'abc',
 //   filePath: 'https://drive.google.com/file/d/0B3AAJJ2UZGHwVm9LWGxGOE9abkE/view?usp=sharing'

@@ -17,7 +17,7 @@ var classmates = [
   }
 ];
 
-angular.module('in-your-face',[])
+angular.module('in-your-face', ['webcam'])
 .directive('app', function() {
   return {
     scope: {
@@ -29,10 +29,17 @@ angular.module('in-your-face',[])
     controller: function() {
       this.persons = classmates;
     },
-    template:
-      `<div class="container">
+    template: `
+      <nav class="navbar navbar-defalut">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">In your face</a>
+          </div>
+      </nav>
+      <div class="container">
         <div class="row">
-          <div class="col-md-7 yellow">Placeholder Text</div>
+          <div class="col-md-7 yellow">
+            <webcam-module></webcam-module>
+          </div>
           <div class="col-md-5 pink">
             <persons-table persons="ctrl.persons"></persons-table>
           </div>

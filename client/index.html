@@ -3,14 +3,18 @@
 <head>
   <title>In Your Face</title>
   <script src="/node_modules/angular/angular.js"></script>
+  <script src="/bower_components/webcam/app/scripts/webcam.js"></script>
+  <script src="/bower_components/webcam/dist/webcam.min.js"></script>
+  <script src="/bower_components/ng-camera/dist/ng-camera.js"></script>
   <script src="index.js"></script>
   <script src="components/personsTable.js"></script>
   <script src="components/personsTableEntry.js"></script>
+  <script src="components/webcamModule.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Scada:400,700" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-<body ng-app="in-your-face">
-  <app></app>
+<body >
+  <app ng-app="in-your-face"></app>
 </body>
 </html>
