@@ -1,0 +1,32 @@
+.person-row {
+  width: 100%;
+}
+
+.person-name {
+  display: inline-block;
+  color: red;
+  width: 30%;
+  font-family: Scada;
+  font-size: 2.0em;
+  font-weight: 700;
+}
+
+.person-image {
+  background-color: white;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.pink {
+    background-color: pink;
+}
