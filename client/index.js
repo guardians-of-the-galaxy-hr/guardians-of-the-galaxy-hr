@@ -27,7 +27,7 @@ angular.module('in-your-face', [])
     template:
       `<div class="container">
         <div class="row">
-          <div class="col-md-7 yellow">Yellow</div>
+          <div class="col-md-7 yellow"></div>
           <div class="col-md-5 pink">
             <persons-table persons=$scope.persons></persons-table>
           </div>
