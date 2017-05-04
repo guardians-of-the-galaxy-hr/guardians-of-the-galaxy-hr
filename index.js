@@ -49,7 +49,6 @@ Photos.findAsync({})
   throw error;
 });
 
-<<<<<<< HEAD
 // app.post('/classmate', (req, res) => {
 //   var options = {
 //     body: {
@@ -65,6 +64,7 @@ Photos.findAsync({})
 //   }
 
 // })
+
 
 
 app.listen(process.env.PORT || 3000, () => {
