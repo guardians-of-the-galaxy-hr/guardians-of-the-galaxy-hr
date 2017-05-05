@@ -69,8 +69,6 @@ Photos.findAsync({})
 //   }
 // })
 
-// var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-// console.log (fullUrl);
 
 var persons = {
   hrsf_76: [
@@ -121,6 +119,64 @@ request({
   console.log('Response:', body);
   // console.log('Student Count: ', body.subject_ids.length)
 });
+
+
+
+app.post('/recognize', (req, res) => {
+  var name = req.body.name;
+  var body = {
+    image: "http://media.kairos.com/kairos-elizabeth.jpg",
+    gallery_name: "testGallery",
+    minHeadScale: 0.15,
+    threshold: 0.63,
+    max_num_results: 5.00
+  }
+  body = JSON.stringify(body);
+  var options = {
+    method: 'POST',
+    url: 'https://api.kairos.com/recognize',
+    headers: {
+      'app_id': '077d4b23',
+      'app_key': 'd217274b4c07e0acef0e9cec7507d94d'
+    },
+    body: body
+  }
+  request(options, (error, results, body) => {
+    if (error) {
+      console.log('ERROR IN RECOGNIZE-----', error);
+    } else {
+      console.log('RECOGNIZED-----', body);
+      res.send(JSON.parse(body));
+    }
+  });
+});
+
+
+app.get('/query', (req, res) => {
+  var body = {
+    gallery_name: 'testGallery'
+  }
+  body = JSON.stringify(body);
+  var options = {
+    method: 'POST',
+    url: 'https://api.kairos.com/gallery/view',
+    headers: {
+      'app_id': '077d4b23',
+      'app_key': 'd217274b4c07e0acef0e9cec7507d94d'
+    },
+    body: body
+  }
+  request(options, (error, response, body) => {
+    if (error) {
+      console.log('GET USERS ERROR-----');
+    } else {
+      console.log('USERS----', body);
+    }
+  });
+});
+
+
+
 
 
 app.listen(process.env.PORT || 3000, () => {
