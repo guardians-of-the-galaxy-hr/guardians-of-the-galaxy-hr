@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const api = require('./config/api.js');
 const request = require('request');
+const url = require('url');
 
 console.log ('api.kairos', api.kairos);
 
@@ -40,10 +41,13 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 //   console.log(error);
 // });
 
-//MongoDB testing accessing the data
+// MongoDB testing accessing the data
+var hrsf_76;
 Photos.findAsync({})
 .then(function(results) {
-  console.log('reading from mongo', results);
+  console.log('reading from mongo', results[0].photoListName.hrsf_76);
+  hrsf_76 = results[0].photoListName.hrsf_76;
+  // kairosEnroll(hrsf_76);
 })
 .catch(function(error) {
   throw error;
@@ -65,20 +69,59 @@ Photos.findAsync({})
 //   }
 // })
 
+// var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+// console.log (fullUrl);
+
+var persons = {
+  hrsf_76: [
+    {
+      'userName': 'Edward Kim',
+      'filePath': 'http://www.skrappie.com/hrsf76/Edward%20Kim.jpg'
+    },
+  ]
+};
+
+var kairosEnroll = function (persons) {
+  persons.forEach(function(person) {
+    var userName = person.userName;
+    var filePath = person.filePath;
+    console.log (userName);
+    console.log (filePath);
+
+    request({
+      method: 'POST',
+      url: 'https://api.kairos.com/enroll',
+      headers: {
+        'app_id': '550cd7ca',
+        'app_key': 'e4b1649137b64cdfc843fd922fe76db2'
+      },
+      // body: "{  \"image\": \"http://media.kairos.com/kairos-elizabeth.jpg\",  \"subject_id\": \"Elizabeth\",  \"gallery_name\": \"MyGallery\"}"
+      body: `{\"image\": \"${filePath}\",  \"subject_id\": \"${userName}\",  \"gallery_name\": \"hrsf76\"}`
+    }, function (error, response, body) {
+      console.log('Status:', response.statusCode);
+      console.log('Headers:', JSON.stringify(response.headers));
+      console.log('Response:', body);
+    });
+  });
+}
 
 request({
   method: 'POST',
-  url: 'https://api.kairos.com/verify',
+  url: 'https://api.kairos.com/gallery/view',
   headers: {
     'app_id': '550cd7ca',
     'app_key': 'e4b1649137b64cdfc843fd922fe76db2'
   },
-  body: "{  \"image\": \"http://media.kairos.com/kairos-elizabeth2.jpg\",  \"gallery_name\": \"MyGallery\",  \"subject_id\": \"Elizabeth\"}"
+  body: JSON.stringify({
+    'gallery_name': 'hrsf76'
+  })
 }, function (error, response, body) {
   console.log('Status:', response.statusCode);
   console.log('Headers:', JSON.stringify(response.headers));
   console.log('Response:', body);
+  // console.log('Student Count: ', body.subject_ids.length)
 });
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port: ', process.env.PORT || 3000);
