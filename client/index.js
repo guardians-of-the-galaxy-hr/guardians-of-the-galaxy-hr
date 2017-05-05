@@ -17,7 +17,7 @@ var classmates = [
   }
 ];
 
-angular.module('in-your-face', ['webcam'])
+var app = angular.module('in-your-face', ['webcam'])
 .directive('app', function() {
   return {
     scope: {
@@ -26,8 +26,9 @@ angular.module('in-your-face', ['webcam'])
     restrict: 'E',
     bindToController: true,
     controllerAs: 'ctrl',
-    controller: function() {
+    controller: function(myService) {
       this.persons = classmates;
+      myService.getClassMateDetails();
     },
     template: `
       <nav class="navbar navbar-defalut">
