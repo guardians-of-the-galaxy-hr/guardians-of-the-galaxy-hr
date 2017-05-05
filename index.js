@@ -190,6 +190,21 @@ app.get('/query', (req, res) => {
 
 
 
+app.post('/enroll', (req, res) => {
+  var options = {
+  method: 'POST',
+    url: 'https://api.kairos.com/enroll',
+    body: "{  \"image\": \"http://media.kairos.com/kairos-elizabeth.jpg\",  \"subject_id\": \"Elizabeth\",  \"gallery_name\": \"MyGallery\"}"
+  }
+  request(options, function (error, response, body) {
+    if (error) {
+      console.log('ERROR-----', error);
+    } else {
+      console.log('BODY-----', body);
+    }
+  });
+});
+
 
 
 app.listen(process.env.PORT || 3000, () => {
