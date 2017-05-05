@@ -165,46 +165,6 @@ app.get('/query', (req, res) => {
 });
 
 
-app.get('/query', (req, res) => {
-  var body = {
-    gallery_name: 'testGallery'
-  }
-  body = JSON.stringify(body);
-  var options = {
-    method: 'POST',
-    url: 'https://api.kairos.com/gallery/view',
-    headers: {
-      'app_id': '077d4b23',
-      'app_key': 'd217274b4c07e0acef0e9cec7507d94d'
-    },
-    body: body
-  }
-  request(options, (error, response, body) => {
-    if (error) {
-      console.log('GET USERS ERROR-----');
-    } else {
-      console.log('USERS----', body);
-    }
-  });
-});
-
-
-
-app.post('/enroll', (req, res) => {
-  var options = {
-  method: 'POST',
-    url: 'https://api.kairos.com/enroll',
-    body: "{  \"image\": \"http://media.kairos.com/kairos-elizabeth.jpg\",  \"subject_id\": \"Elizabeth\",  \"gallery_name\": \"MyGallery\"}"
-  }
-  request(options, function (error, response, body) {
-    if (error) {
-      console.log('ERROR-----', error);
-    } else {
-      console.log('BODY-----', body);
-    }
-  });
-});
-
 
 
 app.listen(process.env.PORT || 3000, () => {
