@@ -104,7 +104,8 @@ angular.module('in-your-face')
           on-stream="ctrl.onStream(stream)">
         </webcam>
         <div class="webcam-buttons">
-          <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()">take picture</button>
+          <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()"><i class="fa fa-camera" aria-hidden="true"></i> take picture</button>
+          <button class="btn btn-primary"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
         </div>
       </div>
       <canvas id="snapshot"></canvas>
