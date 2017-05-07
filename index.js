@@ -5,9 +5,16 @@ const bodyParser = require('body-parser');
 const api = require('./config/api.js');
 const request = require('request');
 const url = require('url');
+// maultiParty
+const multiparty = require('multiparty');
+const util = require('util');
+const base64 = require('file-base64');
+const jsonfile = require('jsonfile');
+
 
 app.use(express.static(__dirname + '/client'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(bodyParser.json());
 
 // //mongoDB connection
@@ -35,6 +42,31 @@ app.use(bodyParser.json());
 // .catch(function(error) {
 //   console.log(error);
 // });
+
+
+//Receive enncoded image and decode and save as pic.jpg
+app.post('/upload/url', function(req, res) {
+  console.log('hello from uploader');
+  var form = new multiparty.Form();
+
+  form.parse(req, function(err, fields, files) {
+    res.writeHead(200, {'content-type': 'text/plain'});
+    res.write('upload'); 
+
+    //decoding back to image file text.jpg
+    base64.decode(fields.file[0].split(',')[1], 'pic.jpg', function(err, output) {
+      if (!err) {
+        console.log('success');
+        //Here we can call the Kairo's recognize function and pass the base64 encoded string as fields.file[0].split(',')[1]
+        //testing(fields.file[0].split(',')[1]); 
+      }
+      
+    });
+    res.end(util.inspect({fields: fields, files: files}));
+
+  }); 
+
+});
 
 var galleryName = 'hrsf76';
 app.get('/recognize', (req, res) => {
