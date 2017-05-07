@@ -46,25 +46,26 @@ app.use(bodyParser.json());
 
 //Receive enncoded image and decode and save as pic.jpg
 app.post('/upload/url', function(req, res) {
-  console.log('hello from uploader');
+  // console.log('hello from uploader');
   var form = new multiparty.Form();
 
   form.parse(req, function(err, fields, files) {
     res.writeHead(200, {'content-type': 'text/plain'});
-    res.write('upload'); 
+    res.write('upload');
 
     //decoding back to image file text.jpg
     base64.decode(fields.file[0].split(',')[1], 'pic.jpg', function(err, output) {
       if (!err) {
         console.log('success');
         //Here we can call the Kairo's recognize function and pass the base64 encoded string as fields.file[0].split(',')[1]
-        //testing(fields.file[0].split(',')[1]); 
+        //testing(fields.file[0].split(',')[1]);
+
       }
-      
+
     });
     res.end(util.inspect({fields: fields, files: files}));
 
-  }); 
+  });
 
 });
 
@@ -98,7 +99,7 @@ app.get('/recognize', (req, res) => {
         res.send(body.Errors);
       } else {
         console.log(JSON.parse(body).images[0].candidates);
-        res.send(JSON.parse(body));        
+        res.send(JSON.parse(body));
       }
     }
   });
@@ -124,7 +125,7 @@ app.get('/classmates', (req, res) => {
       console.log('Headers:', JSON.stringify(response.headers));
       console.log('Response:', body);
       res.send(body);
-      // console.log('Student Count: ', body.subject_ids.length)      
+      // console.log('Student Count: ', body.subject_ids.length)
     }
   });
 });

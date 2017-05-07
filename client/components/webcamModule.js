@@ -3,7 +3,7 @@ angular.module('in-your-face')
   var _video = null;
   var patData = null;
   var self = this;
-
+  this.snapshotData = '';
   this.patOpts = {x: 0, y: 0, w: 25, h: 25};
 
   // Setup a channel to receive a video property
@@ -41,8 +41,6 @@ angular.module('in-your-face')
     return ctx.getImageData(x, y, w, h);
   };
 
-
-
     /**
      * This function could be used to send the image data
      * to a backend server that expects base64 encoded images.
@@ -51,21 +49,18 @@ angular.module('in-your-face')
      */
 // receive back base64 uploaded image from the server
   // this.picCallback = (response) => {
-  //  
+  //
   //   self.picurl = response.split('[')[1].split(']')[0];
   // };
 
 //
-  var sendSnapshotToServer = function sendSnapshotToServer(imgBase64) {
-    this.snapshotData = imgBase64;
-    console.log(this.snapshotData);
+//imgBase64
+  this.sendSnapshotToServer = function () {
+    // this.snapshotData = imgBase64;
     rank.uploadFile(this.snapshotData);
+    console.log("base64 image file sent to server!");
 
   };
-
-
-
-  
 
 //
     // this.onStream = function (stream) {
@@ -86,7 +81,9 @@ angular.module('in-your-face')
       var idata = getVideoData(this.patOpts.x, this.patOpts.y, this.patOpts.w, this.patOpts.h);
       ctxPat.putImageData(idata, 0, 0);
 
-      sendSnapshotToServer(patCanvas.toDataURL());
+      this.snapshotData = patCanvas.toDataURL();
+      console.log("took snapshot and saved in base64 format!");
+      // sendSnapshotToServer(patCanvas.toDataURL());
 
       patData = idata;
     }
@@ -119,7 +116,7 @@ angular.module('in-your-face')
         </webcam>
         <div class="webcam-buttons">
           <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()"><i class="fa fa-camera" aria-hidden="true"></i> take picture</button>
-          <button class="btn btn-primary"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
+          <button class="btn btn-primary" ng-click="ctrl.sendSnapshotToServer()"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
         </div>
       </div>
       <canvas id="snapshot"></canvas>
