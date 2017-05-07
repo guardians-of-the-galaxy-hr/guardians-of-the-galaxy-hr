@@ -7,7 +7,8 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "seed-hrsf76": "node ./server/seed_hrsf76.js"
   },
   "dependencies": {
     "angular": "^1.6.4",
