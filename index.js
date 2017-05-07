@@ -17,32 +17,35 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(bodyParser.json());
 
-// //mongoDB connection
+//mongoDB connection
 // const Photos = require(path.join(__dirname, '/database/index'));
-// // MongoDB testing Input the data
-// var photos = new Photos();
-// photos.photoListName = {
-//   'hrsf_76': [
-//     {
-//       'userName': 'Alana',
-//       'fiePath': 'https://drive.google.com/file/d/0B3AAJJ2UZGHwVm9LWGxGOE9abkE/view?usp=sharing'
-//     }
-//   ]
-// };
-// //MongoDB testing put the data
-// var photos = new Photos({
-//   userName: 'abc',
-//   filePath: 'https://drive.google.com/file/d/0B3AAJJ2UZGHwVm9LWGxGOE9abkE/view?usp=sharing'
-// });
-
-// photos.saveAsync()
+// var tempArray=[];
+// //Get all the details from mongoDB
+// Photos.photos.findAsync({})
 // .then(function(results) {
-//   console.log(results);
+//   tempArray = results[0].photoListName.hrsf_76;
+//   createAnotherCollection(tempArray);
 // })
-// .catch(function(error) {
-//   console.log(error);
+// .catch(function(err) {
+//   console.log(err);
 // });
 
+// //create one more collection with photogallery schema
+// function createAnotherCollection (tempArray) {
+// tempArray.forEach(function(item) {
+//   var picgallery = new Photos.photoGallery();
+//   picgallery.userName= item.userName;
+//   picgallery.filePath= item.filePath;
+//   picgallery.galleryName= "hrsf_76";
+//   picgallery.saveAsync()
+//   .then(function (resul) {
+//     console.log(resul);
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//   })
+// });
+// }
 
 //Receive enncoded image and decode and save as pic.jpg
 app.post('/upload/url', function(req, res) {

@@ -32,4 +32,11 @@ var photosSchema = new mongoose.Schema({
   photoListName: Object
 });
 
-module.exports = mongoose.model('photos', photosSchema);
+//Testing with another schema
+var photoGallerySchema = new mongoose.Schema({
+  userName: {type: String, unique: true},
+  filePath: String,
+  galleryName: String
+});
+module.exports.photos = mongoose.model('photos', photosSchema);
+module.exports.photoGallery = mongoose.model('photoGallery', photoGallerySchema);

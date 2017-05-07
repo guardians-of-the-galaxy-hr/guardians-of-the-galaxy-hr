@@ -1,6 +1,6 @@
 var Promise = require('bluebird');
 const Photos = require('../database');
-const kairos = require('./kairos.js')
+const kairos = require('./kairos.js');
 Promise.promisifyAll(kairos);
 
 kairos.removeGalleryAsync('hrsf76')
