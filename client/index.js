@@ -1,4 +1,4 @@
-var app = angular.module('in-your-face', ['webcam'])
+var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
 .directive('app', function() {
   return {
     scope: {
@@ -9,14 +9,17 @@ var app = angular.module('in-your-face', ['webcam'])
     controllerAs: 'ctrl',
     controller: function(rank) {
       this.persons = rank.classmates((persons) => {
-        if (persons) {this.persons = persons.map(person => {
-          var confidence = (person.confidence*100).toFixed(1);
-          return {
-            name: person.subject_id,
-            imageUrl: `http://www.skrappie.com/hrsf76/${person.subject_id}.jpg`,
-            confidence: confidence
-          }
-        })}
+        if (persons) {
+          this.persons = persons.map(person => {
+            var confidence = (person.confidence * 100).toFixed(1);
+            return {
+              name: person.subject_id,
+              imageUrl: `http://www.skrappie.com/hrsf76/${person.subject_id}.jpg`,
+              confidence: confidence
+            };
+          })
+ ;
+        }
       });
     },
     template: `

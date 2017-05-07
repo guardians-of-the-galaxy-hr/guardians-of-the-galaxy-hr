@@ -1,5 +1,5 @@
 angular.module('in-your-face')
-.controller('webcamModuleCtrl', function($scope) {
+.controller('webcamModuleCtrl', function($scope, rank) {
   var _video = null;
   var patData = null;
   var self = this;
@@ -25,7 +25,7 @@ angular.module('in-your-face')
     _video = this.channel.video;
     $scope.$apply(function() {
       _video.width = 540;
-      _video.height =300;
+      _video.height = 300;
       self.patOpts.w = _video.width;
       self.patOpts.h = _video.height;
       this.showDemos = true;
@@ -41,17 +41,31 @@ angular.module('in-your-face')
     return ctx.getImageData(x, y, w, h);
   };
 
+
+
     /**
      * This function could be used to send the image data
      * to a backend server that expects base64 encoded images.
      *
      * In this example, we simply store it in the scope for display.
      */
+// receive back base64 uploaded image from the server
+  // this.picCallback = (response) => {
+  //  
+  //   self.picurl = response.split('[')[1].split(']')[0];
+  // };
+
 //
   var sendSnapshotToServer = function sendSnapshotToServer(imgBase64) {
     this.snapshotData = imgBase64;
     console.log(this.snapshotData);
+    rank.uploadFile(this.snapshotData);
+
   };
+
+
+
+  
 
 //
     // this.onStream = function (stream) {
@@ -61,12 +75,12 @@ angular.module('in-your-face')
   this.makeSnapshot = function() {
     if (_video) {
       var patCanvas = document.querySelector('#snapshot');
-      if (!patCanvas) {return;}
+      if (!patCanvas) { return; }
 
       patCanvas.width = _video.width;
-      console.log("video width: ", _video.width);
+      console.log('video width: ', _video.width);
       patCanvas.height = _video.height;
-      console.log("video height: ", _video.height);
+      console.log('video height: ', _video.height);
       var ctxPat = patCanvas.getContext('2d');
 
       var idata = getVideoData(this.patOpts.x, this.patOpts.y, this.patOpts.w, this.patOpts.h);
