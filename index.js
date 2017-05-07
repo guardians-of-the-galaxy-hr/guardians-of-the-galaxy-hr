@@ -36,49 +36,65 @@ app.use(bodyParser.json());
 //   console.log(error);
 // });
 
-app.post('/recognize', (req, res) => {
-  var name = req.body.name;
+var galleryName = 'hrsf76';
+app.get('/recognize', (req, res) => {
+  console.log ('recognize post route');
+  console.log ('gallery name', galleryName);
   var body = {
-    image: "http://media.kairos.com/kairos-elizabeth.jpg",
-    gallery_name: "testGallery",
-    minHeadScale: 0.15,
-    threshold: 0.63,
-    max_num_results: 5.00
+    image: "https://www.linkedin.com/mpr/mpr/p/2/000/199/182/18b5425.jpg",
+    gallery_name: galleryName,
+    threshold: 0.00001,
+    max_num_results: 50
   }
   body = JSON.stringify(body);
   var options = {
     method: 'POST',
-    url: 'https://api.kairos.com/recognize',
+    url: api.kairos.api_url + '/recognize',
     headers: {
-      'app_id': '077d4b23',
-      'app_key': 'd217274b4c07e0acef0e9cec7507d94d'
+      'app_id': api.kairos.app_id,
+      'app_key': api.kairos.app_key
     },
     body: body
   }
   request(options, (error, results, body) => {
     if (error) {
-      console.log('ERROR IN RECOGNIZE-----', error);
+      console.log(error);
     } else {
-      console.log('RECOGNIZED-----', body);
-      res.send(JSON.parse(body));
+      //DO NOT DELETE! Kairos ErrCode:3001 "API temporarily unavailable" will be caught here
+      if (body.Errors) {
+        console.log(body.Errors);
+        res.send(body.Errors);
+      } else {
+        console.log(JSON.parse(body).images[0].candidates);
+        res.send(JSON.parse(body));        
+      }
     }
   });
 });
 
-app.post('/classmate', (req, res) => {
-  console.log ('app post');
-  var options = {
-    body: {
-      "image": "http://media.kairos.com/kairos-elizabeth.jpg",
-      "gallery_name": "MyGallery"
+app.get('/classmates', (req, res) => {
+  console.log ('classmates get route');
+  request({
+    method: 'POST',
+    url: api.kairos.api_url + '/gallery/view',
+    headers: {
+      'app_id': api.kairos.app_id,
+      'app_key': api.kairos.app_key
     },
-    "contentType": 'application/json',
-    "app_id": api.kairos.app_id,
-    "app_key": api.kairos.app_key,
-    "url": "http://media.kairos.com/kairos-elizabeth.jpg",
-    "gallery_name": "MyGallery",
-    "threshold": "0.00"
-  }
+    body: JSON.stringify({
+      'gallery_name': 'hrsf76'
+    })
+  }, function (error, response, body) {
+    if (error) {
+      console.log (err);
+    } else {
+      console.log('Status:', response.statusCode);
+      console.log('Headers:', JSON.stringify(response.headers));
+      console.log('Response:', body);
+      res.send(body);
+      // console.log('Student Count: ', body.subject_ids.length)      
+    }
+  });
 });
 
 app.get('/query', (req, res) => {
@@ -105,22 +121,6 @@ app.get('/query', (req, res) => {
   });
 });
 
-request({
-  method: 'POST',
-  url: api.kairos.api_url + '/gallery/view',
-  headers: {
-    'app_id': api.kairos.app_id,
-    'app_key': api.kairos.app_key
-  },
-  body: JSON.stringify({
-    'gallery_name': 'hrsf76'
-  })
-}, function (error, response, body) {
-  console.log('Status:', response.statusCode);
-  console.log('Headers:', JSON.stringify(response.headers));
-  console.log('Response:', body);
-  // console.log('Student Count: ', body.subject_ids.length)
-});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port: ', process.env.PORT || 3000);
