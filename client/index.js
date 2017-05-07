@@ -20,20 +20,23 @@ var app = angular.module('in-your-face', ['webcam'])
       });
     },
     template: `
-      <nav class="navbar navbar-defalut">
+      <div class="container inyourface">
+        <nav class="navbar navbar-defalut">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">In your face</a>
           </div>
-      </nav>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7 yellow">
-            <webcam-module></webcam-module>
-          </div>
-          <div class="col-md-5 pink">
-            <persons-table persons="ctrl.persons"></persons-table>
+        </nav>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <webcam-module></webcam-module>
+            </div>
+            <div class="col-md-6">
+              <persons-table persons="ctrl.persons"></persons-table>
+            </div>
           </div>
         </div>
-      </div>`,
+      </div>
+    `,
   };
 });

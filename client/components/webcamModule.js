@@ -98,15 +98,16 @@ angular.module('in-your-face')
     controller: 'webcamModuleCtrl',
     template: `
       <div id="app-container">
-
-            <webcam channel="ctrl.channel"
-                on-streaming="ctrl.onSuccess()"
-                on-error="ctrl.onError(err)"
-                on-stream="ctrl.onStream(stream)"></webcam>
-            <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()">take picture</button>
+        <webcam channel="ctrl.channel"
+          on-streaming="ctrl.onSuccess()"
+          on-error="ctrl.onError(err)"
+          on-stream="ctrl.onStream(stream)">
+        </webcam>
+        <div class="webcam-buttons">
+          <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()">take picture</button>
+        </div>
       </div>
-            <canvas id="snapshot"></canvas>
-
-    `
+      <canvas id="snapshot"></canvas>
+      `
   };
 });
