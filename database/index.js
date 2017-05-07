@@ -10,7 +10,7 @@ mongoose.connection.on('connected', function () {
   console.log('Mongoose connection open');
 }); 
 
-// If any error throws an error
+// If any error logs an error
 mongoose.connection.on('error', function (err) {  
   console.log('Mongoose error: ' + err);
 }); 
@@ -27,7 +27,6 @@ process.on('SIGINT', function() {
     process.exit(0); 
   }); 
 }); 
-
 
 var photosSchema = new mongoose.Schema({
   photoListName: Object
