@@ -11,7 +11,7 @@ angular.module('in-your-face')
     },
     template: `
       <div class="person-row">
-        <span class="person-name">{{ctrl.person.name}}</span>
+        <span class="person-name">{{ctrl.person.name}} {{ctrl.person.confidence}}</span>
         <span class="person-image">
           <img ng-src={{ctrl.person.imageUrl}} height="{{200}}"/>
         </span>
