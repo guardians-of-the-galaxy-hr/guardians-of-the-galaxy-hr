@@ -1,17 +1,22 @@
-app.service('myService', function($http) {
+app.service('rank', function($http) {
 
-  this.getClassMateDetails = function (){
+  this.classmates = function(callback) {
+    console.log ('ranking classmates');
     var options = {
       method: "GET",
-      url: "/classmates",
+      url: "/recognize",
       headers: {contentType: "application/json"}
     }
+
     $http(options)
-    .then(function(response){
-      console.log(response);
-    })
-    .catch(function(err){
-      console.log(err);
-    })
+      .then(
+        function success(result) {
+          console.log (result.data.images[0].candidates);
+          callback(result.data.images[0].candidates);
+        },
+        function error(err) {
+          console.log (err);
+        }
+      );
   }
 });

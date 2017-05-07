@@ -1,32 +1,49 @@
+.background {
+  background: #FFB75E;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ED8F03, #FFB75E);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ED8F03, #FFB75E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.inyourface {
+  background-color: white;
+  margin-top: 70px;
+  padding-top: 50px;
+}
+
 .person-row {
   width: 100%;
+  margin-top: 10px
 }
 
 .person-name {
   display: inline-block;
-  color: red;
   width: 30%;
   font-family: Scada;
   font-size: 2.0em;
   font-weight: 700;
+  text-align: center;
 }
 
 .person-image {
-  background-color: white;
+  border-radius: 50%;
+}
+
+.webcam-buttons {
+  text-align: center;
 }
 
 .blue {
-    background-color: blue;
+  background-color: blue;
 }
 
 .green {
-    background-color: green;
+  background-color: green;
 }
 
 .yellow {
-    background-color: yellow;
+  background-color: yellow;
 }
 
 .pink {
-    background-color: pink;
+  background-color: pink;
 }

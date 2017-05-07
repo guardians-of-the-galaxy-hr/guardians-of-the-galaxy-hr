@@ -1,22 +1,3 @@
-var classmates = [
-  {
-    name: 'Edward Kim',
-    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwSzZETlI5aVhSZE0=w2560-h1398-iv1',
-  },
-  {
-    name: 'Mahima Shrikanta',
-    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwaEhsOWI3NUtwcTQ=w2560-h1398-iv2',
-  },
-  {
-    name: 'Mike Diodoro',
-    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwb2c2MUMzeDNJbTg=w2560-h1398-iv1',
-  },
-  {
-    name: 'Sean Feng',
-    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwUkN4QmpzLWJLRjQ=w2560-h1398-iv1',
-  }
-];
-
 var app = angular.module('in-your-face', ['webcam'])
 .directive('app', function() {
   return {
@@ -26,25 +7,30 @@ var app = angular.module('in-your-face', ['webcam'])
     restrict: 'E',
     bindToController: true,
     controllerAs: 'ctrl',
-    controller: function(myService) {
-      this.persons = classmates;
-      myService.getClassMateDetails();
+    controller: function(rank) {
+      this.persons = rank.classmates((persons) => {
+        if (persons) {this.persons = persons.map(person => {
+          var confidence = (person.confidence*100).toFixed(1);
+          return {
+            name: person.subject_id,
+            imageUrl: `http://www.skrappie.com/hrsf76/${person.subject_id}.jpg`,
+            confidence: confidence
+          }
+        })}
+      });
     },
     template: `
-      <nav class="navbar navbar-defalut">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">In your face</a>
-          </div>
-      </nav>
-      <div class="container">
+      <nav-bar></nav-bar>
+      <div class="container inyourface">
         <div class="row">
-          <div class="col-md-7 yellow">
+          <div class="col-md-6">
             <webcam-module></webcam-module>
           </div>
-          <div class="col-md-5 pink">
+          <div class="col-md-6">
             <persons-table persons="ctrl.persons"></persons-table>
           </div>
         </div>
-      </div>`,
+      </div>
+    `,
   };
 });
