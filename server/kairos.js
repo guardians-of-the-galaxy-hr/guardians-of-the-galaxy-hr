@@ -29,3 +29,26 @@ var enroll = function(person, callback) {
 }
 
 module.exports.enroll = enroll;
+
+var removeGallery = (galleryName='hrsf76', callback) => {
+  request({
+    method: 'POST',
+    url: api.kairos.api_url + '/gallery/remove',
+    headers: {
+      'app_id': api.kairos.app_id,
+      'app_key': api.kairos.app_key
+    },
+    body: `{"gallery_name": "${galleryName}"}`
+  }, function (err, res, body) {
+    if (err) {
+      callback(err);
+    } else {
+      console.log('Status:', res.statusCode);
+      console.log('Headers:', JSON.stringify(res.headers));
+      console.log('Response:', body);
+      callback(err, body);
+    }
+  });
+}
+
+module.exports.removeGallery = removeGallery;
