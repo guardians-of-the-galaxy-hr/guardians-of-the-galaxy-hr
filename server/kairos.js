@@ -4,7 +4,7 @@ const Promise = require('bluebird');
 
 const galleryName = 'hrsf76';
 
-var enroll = function(person, callback) {
+var enroll = (person, callback) => {
   var userName = person.userName;
   var filePath = person.filePath;
 
