@@ -8,7 +8,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
     bindToController: true,
     controllerAs: 'ctrl',
     controller: function(rank) {
-      
+
       this.persons = [];
 //       rank.classmates((results) => {
 //         if (results) {
@@ -40,17 +40,19 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
       <nav-bar></nav-bar>
       <div class="container inyourface">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <webcam-module persons="ctrl.persons" pic-callback= "ctrl.picCallback"></webcam-module>
-            </div>
           </div>
-          <div class = "row">
-            <div class="col-xs-offset-2 col-xs-offset-10">
-               <persons-table persons="ctrl.persons" ></persons-table>
-            </div>
+          <div class="col-md-6">
+          </div>
+        </div>
+        <div class = "row">
+          <div class="col-xs-offset-2 col-xs-offset-10">
+            <persons-table persons="ctrl.persons" ></persons-table>
           </div>
         </div>
       </div>
+    </div>
     `,
   };
 });
