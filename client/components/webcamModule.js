@@ -21,6 +21,7 @@ angular.module('in-your-face')
   //     );
   // };
   //
+
   this.onSuccess = function () {
   // The video element contains the captured camera data
     _video = this.channel.video;
