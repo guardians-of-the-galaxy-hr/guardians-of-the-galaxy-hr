@@ -1,8 +1,9 @@
 angular.module('in-your-face')
-.controller('webcamModuleCtrl', function($scope, rank) {
+.controller('webcamModuleCtrl', function(rank) {
   var _video = null;
   var patData = null;
   var self = this;
+  this.showUpload = false; // show upload button should be disabled initially
   this.snapshotData = '';
   this.patOpts = {x: 0, y: 0, w: 25, h: 25};
 
@@ -21,15 +22,15 @@ angular.module('in-your-face')
   // };
   //
   this.onSuccess = function () {
-          // The video element contains the captured camera data
+  // The video element contains the captured camera data
     _video = this.channel.video;
-    $scope.$apply(function() {
-      _video.width = 540;
-      _video.height = 300;
-      self.patOpts.w = _video.width;
-      self.patOpts.h = _video.height;
-      this.showDemos = true;
-    });
+   // $scope.$apply(function() {
+    _video.width = 540;
+    _video.height = 300;
+    self.patOpts.w = _video.width;
+    self.patOpts.h = _video.height;
+    this.showDemos = true;
+   // });
   };
 
   var getVideoData = function getVideoData(x, y, w, h) {
@@ -49,16 +50,16 @@ angular.module('in-your-face')
      */
 // receive back base64 uploaded image from the server
   // this.picCallback = (response) => {
-  //
-  //   self.picurl = response.split('[')[1].split(']')[0];
+  //   console.log('results from kairos', response);
+  //   this.persons = response;
   // };
 
 //
 //imgBase64
   this.sendSnapshotToServer = function () {
     // this.snapshotData = imgBase64;
-    rank.uploadFile(this.snapshotData);
-    console.log("base64 image file sent to server!");
+    rank.uploadFile(this.snapshotData, this.picCallback);
+    console.log('base64 image file sent to server!');
 
   };
 
@@ -82,7 +83,8 @@ angular.module('in-your-face')
       ctxPat.putImageData(idata, 0, 0);
 
       this.snapshotData = patCanvas.toDataURL();
-      console.log("took snapshot and saved in base64 format!");
+      console.log('took snapshot and saved in base64 format!');
+      this.showUpload = true;
       // sendSnapshotToServer(patCanvas.toDataURL());
 
       patData = idata;
@@ -101,7 +103,8 @@ angular.module('in-your-face')
 .directive('webcamModule', function() {
   return {
     scope: {
-
+      persons: '<',
+      picCallback: '<',
     },
     restrict: 'E',
     bindToController: true,
@@ -116,10 +119,11 @@ angular.module('in-your-face')
         </webcam>
         <div class="webcam-buttons">
           <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()"><i class="fa fa-camera" aria-hidden="true"></i> take picture</button>
-          <button class="btn btn-primary" ng-click="ctrl.sendSnapshotToServer()"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
+          <button class="btn btn-primary" ng-show = "ctrl.showUpload" ng-click="ctrl.sendSnapshotToServer()"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
         </div>
       </div>
       <canvas id="snapshot"></canvas>
+    
       `
   };
 });

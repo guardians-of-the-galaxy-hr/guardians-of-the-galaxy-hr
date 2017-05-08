@@ -21,13 +21,13 @@ app.service('rank', function($http, Upload) {
   };
 
   //send base64 encoded image to server
-  this.uploadFile = function (file) {
+  this.uploadFile = function (file, callback) {
     Upload.upload({
       url: 'upload/url',
       data: {file: file}
     }).then(function (resp) {
-      console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: '+ resp.data);
-      //callback(resp.data);
+      console.log('Success ', typeof(resp));
+      callback(resp);
     }, function (resp) {
       console.log('Error status: ' + resp.status);
     }, function (evt) {
