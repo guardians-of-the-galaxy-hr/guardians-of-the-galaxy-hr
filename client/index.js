@@ -10,6 +10,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
     controller: function(rank) {
 
       this.persons = [];
+      this.takePicPage = true;
 //       rank.classmates((results) => {
 //         if (results) {
 //           this.persons = results.map(person => {
@@ -23,7 +24,11 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
 //  ;
 //         }
 //       });
+      //open Take Pic Page
 
+      this.openTakePic = () => {
+        this.takePicPage= false;
+      }
       this.picCallback = (response) => {
         console.log('results from kairos', (response));
         this.persons = response.data.map(person => {
@@ -36,23 +41,24 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
         });
       };
     },
-    template: `
-      <nav-bar></nav-bar>
-      <div class="container inyourface">
-        <div class="row">
-          <div class="col-md-6">
-            <webcam-module persons="ctrl.persons" pic-callback= "ctrl.picCallback"></webcam-module>
-          </div>
-          <div class="col-md-6">
-          </div>
-        </div>
-        <div class = "row">
-          <div class="col-xs-offset-2 col-xs-offset-10">
-            <persons-table persons="ctrl.persons" ></persons-table>
-          </div>
-        </div>
-      </div>
-    </div>
-    `,
+    templateUrl: './templates/app.html'
+    // template: `
+    //   <nav-bar></nav-bar>
+    //   <div class="container inyourface">
+    //     <div class="row">
+    //       <div class="col-md-6">
+    //         <webcam-module persons="ctrl.persons" pic-callback= "ctrl.picCallback"></webcam-module>
+    //       </div>
+    //       <div class="col-md-6">
+    //       </div>
+    //     </div>
+    //     <div class = "row">
+    //       <div class="col-xs-offset-2 col-xs-offset-10">
+    //         <persons-table persons="ctrl.persons" ></persons-table>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+    // `,
   };
 });
