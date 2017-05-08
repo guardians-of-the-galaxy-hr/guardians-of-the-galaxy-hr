@@ -28,15 +28,10 @@ process.on('SIGINT', function() {
   }); 
 }); 
 
-var photosSchema = new mongoose.Schema({
-  photoListName: Object
-});
-
-//Testing with another schema
-var photoGallerySchema = new mongoose.Schema({
-  userName: {type: String, unique: true},
+var PhotoSchema = new mongoose.Schema({
+  userName: String,
   filePath: String,
   galleryName: String
 });
-module.exports.photos = mongoose.model('photos', photosSchema);
-module.exports.photoGallery = mongoose.model('photoGallery', photoGallerySchema);
+
+module.exports.photo = mongoose.model('Photo', PhotoSchema);
