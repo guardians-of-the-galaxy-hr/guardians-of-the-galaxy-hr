@@ -74,8 +74,8 @@ var recognize = (uploadImage, callback) => {
       console.log(error);
     } else {
       //DO NOT DELETE! Kairos ErrCode:3001 "API temporarily unavailable" will be caught here
-      if (body.Errors) {
-        console.log(body.Errors);
+      if (JSON.parse(body).Errors) {
+        console.log(JSON.parse(body).Errors);
 
       } else {
         console.log("resulttttt",JSON.parse(body));

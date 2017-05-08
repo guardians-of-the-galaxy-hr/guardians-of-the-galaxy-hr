@@ -30,13 +30,14 @@
 
 .webcam-buttons {
   text-align: center;
-  position: left;
 }
 
 .webcam-position {
-  height: 340px;
-  width: 580px;
-
+  height: 300px;
+  width: 540px;
+  position: relative;
+  margin: 15px;
+  padding: 15px;
 }
 
 .blue {
