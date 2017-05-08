@@ -36,8 +36,8 @@ angular.module('in-your-face')
   this.onSuccess = () => {
   // The video element contains the captured camera data
     _video = this.channel.video;
-    _video.width = _video.width * 1.7;
-    _video.height = _video.height * 1.7;
+    _video.width = _video.width * 1.65;
+    _video.height = _video.height * 1.65;
     self.patOpts.w = _video.width;
     self.patOpts.h = _video.height;
     this.showDemos = true;
@@ -99,17 +99,17 @@ angular.module('in-your-face')
     controller: 'webcamModuleCtrl',
     template: `
       <div id="webcam-module-container">
-        <div class="canvas-container" ng-show="ctrl.showSnapshotCanvas">
+        <div ng-show="ctrl.showSnapshotCanvas">
           <canvas id="snapshot"></canvas>
         </div>
-        <div class="webcam-container" ng-show="ctrl.showCamera">
+        <div ng-show="ctrl.showCamera">
           <webcam channel="ctrl.channel"
             on-streaming="ctrl.onSuccess()"
             on-error="ctrl.onError(err)"
             on-stream="ctrl.onStream(stream)">
           </webcam>
         </div>
-        <div class="webcam-buttons">
+        <div class="webcam-buttons-div">
           <button class="btn btn-primary" ng-click="ctrl.onRetakeButtonClicked()"
             ng-show="ctrl.showRetakeButton"><i class="fa fa-camera" aria-hidden="true"></i> retake picture</button>
           <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()"
@@ -121,6 +121,10 @@ angular.module('in-your-face')
       `
   };
 });
+//class="canvas-container"
+//class="webcam-container"
+
+
   // this.onStream = function (stream) {
   //     // You could do something manually with the stream.
   // };
