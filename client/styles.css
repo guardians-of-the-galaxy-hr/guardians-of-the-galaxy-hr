@@ -5,39 +5,49 @@
 }
 
 .inyourface {
-  background-color: white;
-  margin-top: 70px;
-  padding-top: 50px;
+  background-color:white;
+  margin-top:90px;
+  padding-top:20px;
 }
 
 .person-row {
-  width: 100%;
-  margin-top: 10px
+  width:100%;
+  margin-top:10px
 }
 
 .person-name {
-  display: inline-block;
-  width: 30%;
-  font-family: Scada;
-  font-size: 2.0em;
-  font-weight: 700;
-  text-align: center;
+  display:inline-block;
+  width:30%;
+  font-family:Scada;
+  font-size:2.0em;
+  font-weight:700;
+  text-align:center;
 }
 
 .person-image {
   border-radius: 50%;
 }
 
-.webcam-buttons {
-  text-align: center;
+.webcam-buttons-div {
+  text-align:center;
+  margin:20px;
 }
 
-.webcam-position {
-  height: 300px;
-  width: 540px;
-  position: relative;
-  margin: 15px;
-  padding: 15px;
+.webcam-button {
+  margin:10px;
+}
+/*.webcam-container {
+  max-width:540px;
+  max-height:300px;
+}*/
+
+/*.canvas-container {
+  max-width:540px;
+  max-height:300px;
+}*/
+
+#webcam-module-container {
+  margin:15px;
 }
 
 .blue {
