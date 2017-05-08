@@ -36,11 +36,11 @@ angular.module('in-your-face')
   this.onSuccess = () => {
   // The video element contains the captured camera data
     _video = this.channel.video;
-    _video.width = 540;
-    _video.height = 300;
+    _video.width = _video.width * 1.7;
+    _video.height = _video.height * 1.7;
     self.patOpts.w = _video.width;
     self.patOpts.h = _video.height;
-    this.showDemos = false;
+    this.showDemos = true;
   };
 
   this.getVideoData = (x, y, w, h) => {
@@ -98,17 +98,24 @@ angular.module('in-your-face')
     controllerAs: 'ctrl',
     controller: 'webcamModuleCtrl',
     template: `
-      <div id="app-container">
-        <canvas id="snapshot" ng-show="ctrl.showSnapshotCanvas"></canvas>
-        <webcam channel="ctrl.channel" ng-show="ctrl.showCamera"
-          on-streaming="ctrl.onSuccess()"
-          on-error="ctrl.onError(err)"
-          on-stream="ctrl.onStream(stream)">
-        </webcam>
+      <div id="webcam-module-container">
+        <div class="canvas-container" ng-show="ctrl.showSnapshotCanvas">
+          <canvas id="snapshot"></canvas>
+        </div>
+        <div class="webcam-container" ng-show="ctrl.showCamera">
+          <webcam channel="ctrl.channel"
+            on-streaming="ctrl.onSuccess()"
+            on-error="ctrl.onError(err)"
+            on-stream="ctrl.onStream(stream)">
+          </webcam>
+        </div>
         <div class="webcam-buttons">
-          <button class="btn btn-primary" ng-click="ctrl.onRetakeButtonClicked()" ng-show="ctrl.showRetakeButton"><i class="fa fa-camera" aria-hidden="true"></i> retake picture</button>
-          <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()" ng-show="ctrl.showTakePicButton"><i class="fa fa-camera" aria-hidden="true"></i>   take picture</button>
-          <button class="btn btn-primary" ng-click="ctrl.sendSnapshotToServer()" ng-show="ctrl.showUploadButton"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
+          <button class="btn btn-primary" ng-click="ctrl.onRetakeButtonClicked()"
+            ng-show="ctrl.showRetakeButton"><i class="fa fa-camera" aria-hidden="true"></i> retake picture</button>
+          <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()"
+            ng-show="ctrl.showTakePicButton"><i class="fa fa-camera" aria-hidden="true"></i>   take picture</button>
+          <button class="btn btn-primary" ng-click="ctrl.sendSnapshotToServer()"
+            ng-show="ctrl.showUploadButton"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
         </div>
       </div>
       `
