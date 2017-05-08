@@ -10,11 +10,15 @@ angular.module('in-your-face')
     controller: function() {
     },
     template: `
-      <div class="person-row">
-        <span class="person-name">{{ctrl.person.name}} {{ctrl.person.confidence}}%</span>
-        <span class="person-image">
-          <img class="person-image" ng-src={{ctrl.person.imageUrl}} height="{{200}}"/>
+      <div>
+        <span>{{ctrl.person.name}} {{ctrl.person.confidence}}%</span>
+        <span>
+          <img ng-src={{ctrl.person.imageUrl}} height="{{200}}"/>
         </span>
-      </div>`
+      </div>  
+      
+      
+      
+      `
   };
 });

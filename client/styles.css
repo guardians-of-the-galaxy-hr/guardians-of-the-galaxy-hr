@@ -47,3 +47,31 @@
 .pink {
   background-color: pink;
 }
+
+/* Style for Sephia and thumbnails*/
+img {
+  filter: gray; /* IE6-9 */
+  -webkit-filter: sepia(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    margin-bottom:20px;
+}
+
+img:hover {
+  filter: none; /* IE6-9 */
+  -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+ 
+}
+body { 
+  background: url(./assets/graytravel.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.jumbotron{
+    background: rgba(220, 220, 220, 0.1);
+    color:#fff; 
+}
+

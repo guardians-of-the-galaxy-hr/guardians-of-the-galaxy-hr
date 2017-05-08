@@ -49,6 +49,43 @@ var removeGallery = (galleryName='hrsf76', callback) => {
       callback(err, body);
     }
   });
-}
-
+};
 module.exports.removeGallery = removeGallery;
+
+var recognize = (uploadImage, callback) => {
+  var body = {
+    image: uploadImage,
+    gallery_name: galleryName,
+    threshold: 0.00001,
+    max_num_results: 50
+  };
+  body = JSON.stringify(body);
+  var options = {
+    method: 'POST',
+    url: api.kairos.api_url + '/recognize',
+    headers: {
+      'app_id': api.kairos.app_id,
+      'app_key': api.kairos.app_key
+    },
+    body: body
+  };
+  request(options, (error, results, body) => {
+    if (error) {
+      console.log(error);
+    } else {
+      //DO NOT DELETE! Kairos ErrCode:3001 "API temporarily unavailable" will be caught here
+      if (body.Errors) {
+        console.log(body.Errors);
+
+      } else {
+        console.log("resulttttt",JSON.parse(body));
+        //console.log(JSON.parse(body).images[0].candidates);
+        callback(JSON.parse(body).images[0].candidates);
+
+      }
+    }
+  });
+
+};
+
+module.exports.recognize = recognize;

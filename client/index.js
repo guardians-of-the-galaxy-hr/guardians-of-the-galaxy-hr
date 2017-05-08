@@ -8,29 +8,46 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
     bindToController: true,
     controllerAs: 'ctrl',
     controller: function(rank) {
-      this.persons = rank.classmates((persons) => {
-        if (persons) {
-          this.persons = persons.map(person => {
-            var confidence = (person.confidence * 100).toFixed(1);
-            return {
-              name: person.subject_id,
-              imageUrl: `http://www.skrappie.com/hrsf76/${person.subject_id}.jpg`,
-              confidence: confidence
-            };
-          })
- ;
-        }
-      });
+      
+      this.persons = [];
+//       rank.classmates((results) => {
+//         if (results) {
+//           this.persons = results.map(person => {
+//             var confidence = (person.confidence * 100).toFixed(1);
+//             return {
+//               name: person.subject_id,
+//               imageUrl: `http://www.skrappie.com/hrsf76/${person.subject_id}.jpg`,
+//               confidence: confidence
+//             };
+//           })
+//  ;
+//         }
+//       });
+
+      this.picCallback = (response) => {
+        console.log('results from kairos', (response));
+        this.persons = response.data.map(person => {
+          var confidence = (person.confidence * 100).toFixed(1);
+          return {
+            name: person.subject_id,
+            imageUrl: `http://www.skrappie.com/hrsf76/${person.subject_id}.jpg`,
+            confidence: confidence
+          };
+        });
+      };
     },
     template: `
       <nav-bar></nav-bar>
       <div class="container inyourface">
         <div class="row">
-          <div class="col-md-6">
-            <webcam-module></webcam-module>
+          <div class="col-md-12">
+            <webcam-module persons="ctrl.persons" pic-callback= "ctrl.picCallback"></webcam-module>
+            </div>
           </div>
-          <div class="col-md-6">
-            <persons-table persons="ctrl.persons"></persons-table>
+          <div class = "row">
+            <div class="col-xs-offset-2 col-xs-offset-10">
+               <persons-table persons="ctrl.persons" ></persons-table>
+            </div>
           </div>
         </div>
       </div>

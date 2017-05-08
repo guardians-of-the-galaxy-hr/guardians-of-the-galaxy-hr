@@ -10,6 +10,8 @@ const multiparty = require('multiparty');
 const util = require('util');
 const base64 = require('file-base64');
 const jsonfile = require('jsonfile');
+//Kairos
+const kairo = require('./server/kairos');
 
 
 app.use(express.static(__dirname + '/client'));
@@ -53,35 +55,47 @@ app.post('/upload/url', function(req, res) {
   var form = new multiparty.Form();
 
   form.parse(req, function(err, fields, files) {
-    res.writeHead(200, {'content-type': 'text/plain'});
-    res.write('upload');
+    if (!err) {
+      kairo.recognize(fields.file[0].split(',')[1], (kairoResults) => {
+      
+        console.log('results from kairos', typeof(kairoResults));
+       // res.json(util.inspect(kairoResults));
+ 
+        res.send((kairoResults));
+      });
+    }
 
     //decoding back to image file text.jpg
-    base64.decode(fields.file[0].split(',')[1], 'pic.jpg', function(err, output) {
-      if (!err) {
-        console.log('success');
-        //Here we can call the Kairo's recognize function and pass the base64 encoded string as fields.file[0].split(',')[1]
-        //testing(fields.file[0].split(',')[1]);
+    // base64.decode(fields.file[0].split(',')[1], 'pic.jpg', function(err, output) {
+    //   if (!err) {
+    //     console.log('success');
+    //     //Here we can call the Kairo's recognize function and pass the base64 encoded string as fields.file[0].split(',')[1]
+       
+    //     //testing(fields.file[0].split(',')[1]);
 
-      }
+    //   }
 
-    });
-    res.end(util.inspect({fields: fields, files: files}));
+    // });
+    
 
   });
 
 });
+
+
+//helper function kairo's recognize
+
 
 var galleryName = 'hrsf76';
 app.get('/recognize', (req, res) => {
   console.log ('recognize post route');
   console.log ('gallery name', galleryName);
   var body = {
-    image: "https://www.linkedin.com/mpr/mpr/p/2/000/199/182/18b5425.jpg",
+    image: 'https://www.linkedin.com/mpr/mpr/p/2/000/199/182/18b5425.jpg',
     gallery_name: galleryName,
     threshold: 0.00001,
     max_num_results: 50
-  }
+  };
   body = JSON.stringify(body);
   var options = {
     method: 'POST',
@@ -91,7 +105,7 @@ app.get('/recognize', (req, res) => {
       'app_key': api.kairos.app_key
     },
     body: body
-  }
+  };
   request(options, (error, results, body) => {
     if (error) {
       console.log(error);
@@ -136,7 +150,7 @@ app.get('/classmates', (req, res) => {
 app.get('/query', (req, res) => {
   var body = {
     gallery_name: 'testGallery'
-  }
+  };
   body = JSON.stringify(body);
   var options = {
     method: 'POST',
@@ -146,7 +160,7 @@ app.get('/query', (req, res) => {
       'app_key': 'd217274b4c07e0acef0e9cec7507d94d'
     },
     body: body
-  }
+  };
   request(options, (error, results, body) => {
     if (error) {
       console.log('ERROR IN RECOGNIZE-----', error);

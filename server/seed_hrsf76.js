@@ -5,13 +5,14 @@ Promise.promisifyAll(kairos);
 
 kairos.removeGalleryAsync('hrsf76')
   .then(function() {
-    return Photos.findAsync({});
+    return Photos.photos.findAsync({});
   })
   .then(function(results) {
     // console.log("/////////////////");
     // console.log("results", results);
     // console.log("/////////////////");
     return Promise.map(results[0].photoListName.hrsf_76, function (person) {
+      console.log("checking");
       return kairos.enrollAsync(person);
     });
   })
