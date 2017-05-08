@@ -3,7 +3,12 @@ angular.module('in-your-face')
   var _video = null;
   var patData = null;
   var self = this;
-  this.showUpload = false; // show upload button should be disabled initially
+  this.showUploadButton = false; // show upload button should be disabled initially
+  this.showRetakeButton = false;
+  this.showTakePicButton = true;
+  this.showSnapshotCanvas = false; // the canvas for the snapshot should be hide initially
+  this.showCamera = true;
+
   this.snapshotData = '';
   this.patOpts = {x: 0, y: 0, w: 25, h: 25};
 
@@ -30,7 +35,7 @@ angular.module('in-your-face')
     _video.height = 300;
     self.patOpts.w = _video.width;
     self.patOpts.h = _video.height;
-    this.showDemos = true;
+    this.showDemos = false;
    // });
   };
 
@@ -81,11 +86,17 @@ angular.module('in-your-face')
       var ctxPat = patCanvas.getContext('2d');
 
       var idata = getVideoData(this.patOpts.x, this.patOpts.y, this.patOpts.w, this.patOpts.h);
+      this.showSnapshotCanvas = true; // once the snapshot is generated
+                                      // screen should show the canvas instead
+                                      // of the camera
       ctxPat.putImageData(idata, 0, 0);
 
       this.snapshotData = patCanvas.toDataURL();
       console.log('took snapshot and saved in base64 format!');
-      this.showUpload = true;
+      this.showUploadButton = true;
+      this.showRetakeButton = true;
+      this.showTakePicButton = false;
+      this.showCamera = false;
       // sendSnapshotToServer(patCanvas.toDataURL());
 
       patData = idata;
@@ -113,18 +124,20 @@ angular.module('in-your-face')
     controller: 'webcamModuleCtrl',
     template: `
       <div id="app-container">
-        <webcam channel="ctrl.channel"
+        <canvas id="snapshot" ng-show="ctrl.showSnapshotCanvas"></canvas>
+        <webcam channel="ctrl.channel" ng-show="ctrl.showCamera"
           on-streaming="ctrl.onSuccess()"
           on-error="ctrl.onError(err)"
           on-stream="ctrl.onStream(stream)">
         </webcam>
         <div class="webcam-buttons">
-          <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()"><i class="fa fa-camera" aria-hidden="true"></i> take picture</button>
-          <button class="btn btn-primary" ng-show = "ctrl.showUpload" ng-click="ctrl.sendSnapshotToServer()"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
+          <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()" ng-show="ctrl.showRetakeButton"><i class="fa fa-camera" aria-hidden="true"></i> retake picture</button>
+          <button class="btn btn-primary" ng-click="ctrl.makeSnapshot()" ng-show="ctrl.showTakePicButton"><i class="fa fa-camera" aria-hidden="true"></i> take picture</button>
+          <button class="btn btn-primary" ng-click="ctrl.sendSnapshotToServer()" ng-show="ctrl.showUploadButton"><i class="fa fa-upload" aria-hidden="true"></i> upload image</button>
         </div>
       </div>
-      <canvas id="snapshot"></canvas>
-    
+
+
       `
   };
 });

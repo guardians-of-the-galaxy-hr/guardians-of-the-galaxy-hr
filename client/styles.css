@@ -30,6 +30,13 @@
 
 .webcam-buttons {
   text-align: center;
+  position: left;
+}
+
+.webcam-position {
+  height: 340px;
+  width: 580px;
+
 }
 
 .blue {
@@ -61,10 +68,10 @@ img {
 img:hover {
   filter: none; /* IE6-9 */
   -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
- 
+
 }
-body { 
-  background: url(./assets/graytravel.jpg) no-repeat center center fixed; 
+body {
+  background: url(./assets/graytravel.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -72,6 +79,6 @@ body {
 }
 .jumbotron{
     background: rgba(220, 220, 220, 0.1);
-    color:#fff; 
+    color:#fff;
 }
 
