@@ -11,12 +11,14 @@ const util = require('util');
 const base64 = require('file-base64');
 const jsonfile = require('jsonfile');
 //Kairos
-const kairo = require('./server/kairos');
+const kairos = require('./server/kairos');
 
 app.use(express.static(__dirname + '/client'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(bodyParser.json());
+
+var galleryName = 'hrsf-76';
 
 //mongoDB connection
 // const Photos = require(path.join(__dirname, '/database/index'));
@@ -55,12 +57,12 @@ app.post('/upload/url', function(req, res) {
 
   form.parse(req, function(err, fields, files) {
     if (!err) {
-      kairo.recognize(fields.file[0].split(',')[1], (kairoResults) => {
+      kairos.recognize(fields.file[0].split(',')[1], galleryName, (kairosResults) => {
       
-        console.log('results from kairos', typeof(kairoResults));
+        console.log('results from kairos', typeof(kairosResults));
        // res.json(util.inspect(kairoResults));
  
-        res.send((kairoResults));
+        res.send((kairosResults));
       });
     }
 
@@ -75,49 +77,6 @@ app.post('/upload/url', function(req, res) {
     //   }
 
     // });
-    
-
-  });
-
-});
-
-
-//helper function kairo's recognize
-
-
-var galleryName = 'hrsf76';
-app.get('/recognize', (req, res) => {
-  console.log ('recognize post route');
-  console.log ('gallery name', galleryName);
-  var body = {
-    image: 'https://www.linkedin.com/mpr/mpr/p/2/000/199/182/18b5425.jpg',
-    gallery_name: galleryName,
-    threshold: 0.00001,
-    max_num_results: 50
-  };
-  body = JSON.stringify(body);
-  var options = {
-    method: 'POST',
-    url: api.kairos.api_url + '/recognize',
-    headers: {
-      'app_id': api.kairos.app_id,
-      'app_key': api.kairos.app_key
-    },
-    body: body
-  };
-  request(options, (error, results, body) => {
-    if (error) {
-      console.log(error);
-    } else {
-      //DO NOT DELETE! Kairos ErrCode:3001 "API temporarily unavailable" will be caught here
-      if (body.Errors) {
-        console.log(body.Errors);
-        res.send(body.Errors);
-      } else {
-        console.log(JSON.parse(body).images[0].candidates);
-        res.send(JSON.parse(body));
-      }
-    }
   });
 });
 
@@ -169,7 +128,6 @@ app.get('/query', (req, res) => {
     }
   });
 });
-
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port: ', process.env.PORT || 3000);

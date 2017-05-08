@@ -3,7 +3,7 @@ const database = require('../database');
 const kairos = require('./kairos.js');
 Promise.promisifyAll(kairos);
 
-var galleryName = 'hrsf76' // lower resolution images
+var galleryName = 'hrsf-76' // lower resolution images
 
 kairos.removeGalleryAsync(galleryName)
   .then(function() {

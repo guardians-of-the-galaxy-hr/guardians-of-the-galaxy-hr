@@ -15,10 +15,7 @@ angular.module('in-your-face')
         <span>
           <img ng-src={{ctrl.person.imageUrl}} height="{{200}}"/>
         </span>
-      </div>  
-      
-      
-      
-      `
+      </div>
+    `
   };
 });
