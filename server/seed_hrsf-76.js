@@ -3,7 +3,7 @@ const database = require('../database');
 const kairos = require('./kairos.js');
 Promise.promisifyAll(kairos);
 
-var galleryName = 'hrsf_76' // lower resolution images
+var galleryName = 'hrsf-76' // lower resolution images
 
 kairos.removeGalleryAsync(galleryName)
   .then(function() {
@@ -13,7 +13,7 @@ kairos.removeGalleryAsync(galleryName)
     console.log (results);
     console.log (results.length);
     return Promise.map(results, function (person) {
-      return kairos.enrollAsync(person);
+      return kairos.enrollAsync(person, galleryName);
     });
   })
   .then(function(results) {

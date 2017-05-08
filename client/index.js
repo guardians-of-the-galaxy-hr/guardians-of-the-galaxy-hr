@@ -35,7 +35,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
           var confidence = (person.confidence * 100).toFixed(1);
           return {
             name: person.subject_id,
-            imageUrl: `http://www.skrappie.com/hrsf76/${person.subject_id}.jpg`,
+            imageUrl: person.imageUrl,
             confidence: confidence
           };
         });

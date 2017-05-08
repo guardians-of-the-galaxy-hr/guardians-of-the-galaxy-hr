@@ -13,7 +13,7 @@ kairos.removeGalleryAsync(galleryName)
     console.log (results);
     console.log (results.length);
     return Promise.map(results, function (person) {
-      return kairos.enrollAsync(person);
+      return kairos.enrollAsync(person, galleryName);
     });
   })
   .then(function(results) {
