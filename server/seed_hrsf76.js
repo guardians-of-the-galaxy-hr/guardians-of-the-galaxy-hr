@@ -1,18 +1,18 @@
 var Promise = require('bluebird');
-const Photos = require('../database');
+const database = require('../database');
 const kairos = require('./kairos.js');
 Promise.promisifyAll(kairos);
 
-kairos.removeGalleryAsync('hrsf76')
+var galleryName = 'hrsf76' // lower resolution images
+
+kairos.removeGalleryAsync(galleryName)
   .then(function() {
-    return Photos.photos.findAsync({});
+    return database.photo.findAsync({galleryName: galleryName});
   })
   .then(function(results) {
-    // console.log("/////////////////");
-    // console.log("results", results);
-    // console.log("/////////////////");
-    return Promise.map(results[0].photoListName.hrsf_76, function (person) {
-      console.log("checking");
+    console.log (results);
+    console.log (results.length);
+    return Promise.map(results, function (person) {
       return kairos.enrollAsync(person);
     });
   })
