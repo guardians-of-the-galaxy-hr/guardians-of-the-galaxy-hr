@@ -1,4 +1,14 @@
-var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
+var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb'])
+.config(function (ezfbProvider) {
+  /**
+   * Basic setup
+   *
+   * https://github.com/pc035860/angular-easyfb#configuration
+   */
+  ezfbProvider.setInitParams({
+    appId: '1929333797297736'
+  });  
+})
 .directive('app', function() {
   return {
     scope: {
@@ -7,28 +17,15 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
     restrict: 'E',
     bindToController: true,
     controllerAs: 'ctrl',
-    controller: function(rank) {
+    controller: function(rank, ezfb, $scope ) {
 
       this.persons = [];
       this.takePicPage = true;
-//       rank.classmates((results) => {
-//         if (results) {
-//           this.persons = results.map(person => {
-//             var confidence = (person.confidence * 100).toFixed(1);
-//             return {
-//               name: person.subject_id,
-//               imageUrl: `http://www.skrappie.com/hrsf76/${person.subject_id}.jpg`,
-//               confidence: confidence
-//             };
-//           })
-//  ;
-//         }
-//       });
       //open Take Pic Page
 
       this.openTakePic = () => {
-        this.takePicPage= false;
-      }
+        this.takePicPage = false;
+      };
       this.picCallback = (response) => {
         console.log('results from kairos', (response));
         this.persons = response.data.map(person => {
@@ -40,25 +37,38 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
           };
         });
       };
+
+
+      //Facebook
+
+      this.login = ()=> {
+    /**
+     * Calling FB.login with required permissions specified
+     * https://developers.facebook.com/docs/reference/javascript/FB.login/v2.0
+     */
+        ezfb.login((res) => {
+          console.log(res);
+      /**
+       * no manual $scope.$apply, I got that handled
+       */
+          if (res.authResponse) {
+            this.takePicPage = false;
+        
+          }
+        }, {scope: 'email,user_likes'});
+      };
+
+      this.logout = () =>{
+    /**
+     * Calling FB.logout
+     * https://developers.facebook.com/docs/reference/javascript/FB.logout
+     */
+        ezfb.logout(() => {
+          this.takePicPage = true;
+  
+        });
+      };
     },
     templateUrl: './templates/app.html'
-    // template: `
-    //   <nav-bar></nav-bar>
-    //   <div class="container inyourface">
-    //     <div class="row">
-    //       <div class="col-md-6">
-    //         <webcam-module persons="ctrl.persons" pic-callback= "ctrl.picCallback"></webcam-module>
-    //       </div>
-    //       <div class="col-md-6">
-    //       </div>
-    //     </div>
-    //     <div class = "row">
-    //       <div class="col-xs-offset-2 col-xs-offset-10">
-    //         <persons-table persons="ctrl.persons" ></persons-table>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-    // `,
   };
 });
