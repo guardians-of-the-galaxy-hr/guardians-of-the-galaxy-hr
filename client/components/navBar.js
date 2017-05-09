@@ -1,4 +1,17 @@
 angular.module('in-your-face')
+// .config(function($routeProvider, $locationProvider) {
+//   $locationProvider.hashPrefix('');
+//   $routeProvider
+//     .when('/', {
+//       templateUrl: '/templates/testing1'
+//     })
+//     .when('/testing', {
+//       templateUrl: '/templates/testing2'
+//     });
+// })
+.controller('navBarCtrl', function() {
+
+})
 .directive('navBar', function() {
   return {
     scope: {
@@ -6,8 +19,7 @@ angular.module('in-your-face')
     restrict: 'E',
     controllerAs: 'ctrl',
     bindToController: true,
-    controller: function() {
-    },
+    controller: 'navBarCtrl',
     template: `
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -25,9 +37,9 @@ angular.module('in-your-face')
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Mode<span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Mode<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Classmates</a></li>
+                  <li><a href="#/classmates">Classmates</a></li>
                   <li><a href="#">Celebrities</a></li>
                   <li><a href="#">Objects</a></li>
                   <li role="separator" class="divider"></li>

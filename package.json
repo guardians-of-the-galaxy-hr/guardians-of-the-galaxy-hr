@@ -14,6 +14,7 @@
   "dependencies": {
     "angular": "^1.6.4",
     "angular-easyfb": "^1.5.1",
+    "angular-route": "^1.6.4",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "bower": "^1.8.0",
