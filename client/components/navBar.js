@@ -9,6 +9,6 @@ angular.module('in-your-face')
     controllerAs: 'ctrl',
     bindToController: true,
     controller: 'navBarCtrl',
-    templateUrl: '../templates/navBar.html'
+    templateUrl: './templates/navBar.html'
   };
 });
