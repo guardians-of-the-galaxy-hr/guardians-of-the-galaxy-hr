@@ -1,4 +1,4 @@
-var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb'])
+var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngRoute'])
 .config(function (ezfbProvider) {
   /**
    * Basic setup
@@ -7,7 +7,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb'])
    */
   ezfbProvider.setInitParams({
     appId: '1929333797297736'
-  });  
+  });
 })
 .directive('app', function() {
   return {
@@ -54,7 +54,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb'])
        */
           if (res.authResponse) {
             this.takePicPage = false;
-        
+
           }
         }, {scope: 'email,user_likes'});
       };
@@ -66,7 +66,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb'])
      */
         ezfb.logout(() => {
           this.takePicPage = true;
-  
+
         });
       };
     },
