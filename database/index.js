@@ -1,8 +1,9 @@
 var Promise = require('bluebird');
 var mongoose = require('mongoose');
 var dbConfig = require('../config/db');
+var dbKey = process.env.dbKey || dbConfig.dbKey;
 
-mongoose.connect(dbConfig.dbKey);
+mongoose.connect(dbKey);
 Promise.promisifyAll(mongoose);
 
 //If the Mongoose connection is connected
