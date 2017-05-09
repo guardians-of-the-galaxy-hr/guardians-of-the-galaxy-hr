@@ -1,0 +1,14 @@
+<nav-bar></nav-bar>
+<div class="container inyourface">
+  <button class="btn btn-danger" ng-click="ctrl.logout()">Logout</button>
+  <div class="row">
+    <div class="col-md-12">
+      <webcam-module persons="ctrl.persons" pic-callback= "ctrl.picCallback"></webcam-module>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="col-md-12">
+      <persons-table persons="ctrl.persons" ></persons-table>
+    </div>
+  </div>
+</div>

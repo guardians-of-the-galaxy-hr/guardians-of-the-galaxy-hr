@@ -2,11 +2,11 @@ angular.module('in-your-face')
 // .config(function($routeProvider, $locationProvider) {
 //   $locationProvider.hashPrefix('');
 //   $routeProvider
-//     .when('/', {
-//       templateUrl: '/templates/testing1'
+//     .when('/blue', {
+//       templateUrl: '/templates/blue.html'
 //     })
-//     .when('/testing', {
-//       templateUrl: '/templates/testing2'
+//     .when('/red', {
+//       templateUrl: '/templates/red.html'
 //     });
 // })
 .controller('navBarCtrl', function() {
@@ -40,10 +40,10 @@ angular.module('in-your-face')
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Mode<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#/classmates">Classmates</a></li>
-                  <li><a href="#">Celebrities</a></li>
-                  <li><a href="#">Objects</a></li>
+                  <li><a href="#/celebrities">Celebrities</a></li>
+                  <li><a href="#/objects">Objects</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Photo Booth</a></li>
+                  <li><a href="#/photo-booth">Photo Booth</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="#">Face Analyzer</a></li>
                 </ul>
