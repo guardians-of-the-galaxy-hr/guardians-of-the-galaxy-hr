@@ -3,9 +3,9 @@ const api = require('../config/api.js');
 const Promise = require('bluebird');
 const database = require('../database');
 
-var enroll = (person, galleryName, callback) => {
-  var userName = person.userName;
-  var filePath = person.filePath;
+const enroll = (person, galleryName, callback) => {
+  const userName = person.userName;
+  const filePath = person.filePath;
 
   request({
     method: 'POST',
@@ -26,7 +26,7 @@ var enroll = (person, galleryName, callback) => {
 
 module.exports.enroll = enroll;
 
-var removeGallery = (galleryName, callback) => {
+const removeGallery = (galleryName, callback) => {
   request({
     method: 'POST',
     url: api.kairos.api_url + '/gallery/remove',
@@ -46,8 +46,8 @@ var removeGallery = (galleryName, callback) => {
 
 module.exports.removeGallery = removeGallery;
 
-var recognize = (uploadImage, galleryName, callback) => {
-  var body = {
+const recognize = (uploadImage, galleryName, callback) => {
+  const body = {
     image: uploadImage,
     gallery_name: galleryName,
     threshold: 0.00001,
@@ -56,7 +56,7 @@ var recognize = (uploadImage, galleryName, callback) => {
 
   body = JSON.stringify(body);
 
-  var options = {
+  const options = {
     method: 'POST',
     url: api.kairos.api_url + '/recognize',
     headers: {
@@ -73,19 +73,19 @@ var recognize = (uploadImage, galleryName, callback) => {
       if (JSON.parse(body).Errors) {
         console.log(JSON.parse(body).Errors);
       } else {
-        var persons = JSON.parse(body).images[0].candidates;
-        return Promise.map(persons, function (person) {
+        const persons = JSON.parse(body).images[0].candidates;
+        return Promise.map(persons,  (person) => {
           return database.photo.findAsync({userName: person.subject_id, galleryName: galleryName})
-          .then(function(result) {
+          .then((result) => {
             person.imageUrl = result[0].filePath;
             return person;
           });
         })
-        .then(function(result) {
-          callback(result);
+        .then((result) => {
+          callback('CLASSMATE INFORMATION-----', result);
         })
-        .catch(function(error) {
-          console.log(error);
+        .catch((error) => {
+          console.log('ERROR RECOGNIZING-----', error);
         });
       }
     }

@@ -69,9 +69,8 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
     // Calling FB.login with required permissions specified
     // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.0
     ezfb.login((res) => {
-      console.log(res);
       //no manual $scope.$apply, I got that handled
-      if (res.authResponse) { this.takePicPage = false; }
+      if (res.authResponse) {this.goGoToClassmates(); }
     }, {scope: 'email,user_likes'});
   };
   this.logout = () => {

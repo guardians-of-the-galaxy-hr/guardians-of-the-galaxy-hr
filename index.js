@@ -20,62 +20,26 @@ app.use(bodyParser.json());
 
 var galleryName = 'hrsf-76';
 
-//mongoDB connection
-// const Photos = require(path.join(__dirname, '/database/index'));
-// var tempArray=[];
-// //Get all the details from mongoDB
-// Photos.photos.findAsync({})
-// .then(function(results) {
-//   tempArray = results[0].photoListName.hrsf_76;
-//   createAnotherCollection(tempArray);
-// })
-// .catch(function(err) {
-//   console.log(err);
-// });
-
-// //create one more collection with photogallery schema
-// function createAnotherCollection (tempArray) {
-// tempArray.forEach(function(item) {
-//   var picgallery = new Photos.photoGallery();
-//   picgallery.userName= item.userName;
-//   picgallery.filePath= item.filePath;
-//   picgallery.galleryName= "hrsf_76";
-//   picgallery.saveAsync()
-//   .then(function (resul) {
-//     console.log(resul);
-//   })
-//   .catch(function(err) {
-//     console.log(err);
-//   })
-// });
-// }
-
 //Receive enncoded image and decode and save as pic.jpg
-app.post('/upload/url', function(req, res) {
+app.post('/upload/url', (req, res) => {
   // console.log('hello from uploader');
   var form = new multiparty.Form();
 
-  form.parse(req, function(err, fields, files) {
+  form.parse(req, (err, fields, files) => {
     if (!err) {
       kairos.recognize(fields.file[0].split(',')[1], galleryName, (kairosResults) => {
-      
         console.log('results from kairos', typeof(kairosResults));
        // res.json(util.inspect(kairoResults));
- 
         res.send((kairosResults));
       });
     }
-
     //decoding back to image file text.jpg
     // base64.decode(fields.file[0].split(',')[1], 'pic.jpg', function(err, output) {
     //   if (!err) {
     //     console.log('success');
     //     //Here we can call the Kairo's recognize function and pass the base64 encoded string as fields.file[0].split(',')[1]
-       
     //     //testing(fields.file[0].split(',')[1]);
-
     //   }
-
     // });
   });
 });
@@ -92,7 +56,7 @@ app.get('/classmates', (req, res) => {
     body: JSON.stringify({
       'gallery_name': 'hrsf76'
     })
-  }, function (error, response, body) {
+  }, (error, response, body) => {
     if (error) {
       console.log (err);
     } else {
