@@ -2,6 +2,8 @@ const request = require('request');
 const api = require('../config/api.js');
 const Promise = require('bluebird');
 const database = require('../database');
+const apiKey = process.env.kairos-api-key || api.kairos.apiKey;
+const appId = process.env.kairos-app-id || api.kairos.appId;
 
 const enroll = (person, galleryName, callback) => {
   const userName = person.userName;
@@ -11,8 +13,8 @@ const enroll = (person, galleryName, callback) => {
     method: 'POST',
     url: api.kairos.api_url + '/enroll',
     headers: {
-      'app_id': api.kairos.app_id,
-      'app_key': api.kairos.app_key
+      'app_id': appId,
+      'app_key': apiKey
     },
     body: `{"image": "${filePath}",  "subject_id": "${userName}",  "gallery_name": "${galleryName}"}`
   }, (err, res, body) => {
@@ -31,8 +33,8 @@ const removeGallery = (galleryName, callback) => {
     method: 'POST',
     url: api.kairos.api_url + '/gallery/remove',
     headers: {
-      'app_id': api.kairos.app_id,
-      'app_key': api.kairos.app_key
+      'app_id': appId,
+      'app_key': apiKey
     },
     body: `{"gallery_name": "${galleryName}"}`
   }, (err, res, body) => {
@@ -47,7 +49,7 @@ const removeGallery = (galleryName, callback) => {
 module.exports.removeGallery = removeGallery;
 
 const recognize = (uploadImage, galleryName, callback) => {
-  var body = {
+  let body = {
     image: uploadImage,
     gallery_name: galleryName,
     threshold: 0.00001,
@@ -56,12 +58,12 @@ const recognize = (uploadImage, galleryName, callback) => {
 
   body = JSON.stringify(body);
 
-  const options = {
+  let options = {
     method: 'POST',
     url: api.kairos.api_url + '/recognize',
     headers: {
-      'app_id': api.kairos.app_id,
-      'app_key': api.kairos.app_key
+      'app_id': appId,
+      'app_key': appKey
     },
     body: body
   };
@@ -73,7 +75,7 @@ const recognize = (uploadImage, galleryName, callback) => {
       if (JSON.parse(body).Errors) {
         console.log(JSON.parse(body).Errors);
       } else {
-        const persons = JSON.parse(body).images[0].candidates;
+        let persons = JSON.parse(body).images[0].candidates;
         return Promise.map(persons,  (person) => {
           return database.photo.findAsync({userName: person.subject_id, galleryName: galleryName})
           .then((result) => {
@@ -82,7 +84,7 @@ const recognize = (uploadImage, galleryName, callback) => {
           });
         })
         .then((result) => {
-          callback( result);
+          callback(result);
         })
         .catch((error) => {
           console.log('ERROR RECOGNIZING-----', error);
