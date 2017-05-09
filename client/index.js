@@ -27,8 +27,9 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload'])
       //open Take Pic Page
 
       this.openTakePic = () => {
-        this.takePicPage= false;
-      }
+        this.takePicPage = false;
+      };
+
       this.picCallback = (response) => {
         console.log('results from kairos', (response));
         this.persons = response.data.map(person => {

@@ -6,8 +6,8 @@
 
 .inyourface {
   background-color:white;
-  margin-top:90px;
-  padding-top:20px;
+  margin-top:80px;
+  padding-top:40px;
 }
 
 .person-row {
@@ -24,30 +24,49 @@
   text-align:center;
 }
 
+#persons-table-container {
+  margin-left:25px;
+  margin-right:25px;
+}
+
+.persons-table-winner-deco {
+  position:absolute;
+  top: 20px;
+  z-index: 2;
+  height:40px;
+  width:40px;
+}
+
+.persons-table-entry-pic {
+  height:230px;
+  z-index: 1;
+}
+
+.person-table-entry-align {
+  vertical-align: middle;
+}
+
+#person-table-entry-container {
+  margin-bottom:20px;
+  position: relative;
+}
+
 .person-image {
   border-radius: 50%;
 }
 
 .webcam-buttons-div {
   text-align:center;
-  margin:20px;
 }
 
 .webcam-button {
   margin:10px;
+  vertical-align: middle;
 }
-/*.webcam-container {
-  max-width:540px;
-  max-height:300px;
-}*/
-
-/*.canvas-container {
-  max-width:540px;
-  max-height:300px;
-}*/
 
 #webcam-module-container {
-  margin:15px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .blue {

@@ -2,7 +2,8 @@ angular.module('in-your-face')
 .directive('personsTableEntry', function() {
   return {
     scope: {
-      person: '<'
+      person: '<',
+      index: '<'
     },
     restrict: 'E',
     controllerAs: 'ctrl',
@@ -10,10 +11,10 @@ angular.module('in-your-face')
     controller: function() {
     },
     template: `
-      <div>
-        <span>{{ctrl.person.name}} {{ctrl.person.confidence}}%</span>
+      <div id="person-table-entry-container">
+        <span>{{$parent.$index + 1}}.    {{ctrl.person.name}}      {{ctrl.person.confidence}}%</span>
         <span>
-          <img ng-src={{ctrl.person.imageUrl}} height="{{200}}"/>
+          <img class="persons-table-entry-pic" ng-src={{ctrl.person.imageUrl}} />
         </span>
       </div>
     `
