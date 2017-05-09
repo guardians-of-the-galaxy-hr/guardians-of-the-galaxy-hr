@@ -9,6 +9,6 @@ angular.module('in-your-face')
     bindToController: true,
     controller: function() {
     },
-    template: '../templates/personTable.html'
+    templateUrl: '../templates/personTable.html'
   };
 });

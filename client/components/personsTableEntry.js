@@ -10,6 +10,6 @@ angular.module('in-your-face')
     bindToController: true,
     controller: function() {
     },
-    template: '../templates/personsTableEntry.html'
+    templateUrl: '../templates/personsTableEntry.html'
   };
 });

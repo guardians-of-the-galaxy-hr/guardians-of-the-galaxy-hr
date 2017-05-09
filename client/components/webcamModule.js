@@ -97,6 +97,6 @@ angular.module('in-your-face')
     bindToController: true,
     controllerAs: 'ctrl',
     controller: 'webcamModuleCtrl',
-    template: '../templates/webcamModule.html'
+    templateUrl: '../templates/webcam.html'
   };
 });

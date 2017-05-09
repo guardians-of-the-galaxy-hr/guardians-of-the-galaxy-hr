@@ -20,7 +20,7 @@ angular.module('in-your-face')
     controllerAs: 'ctrl',
     bindToController: true,
     controller: 'navBarCtrl',
-    template: '../templates/navBar.html'
+    templateUrl: '../templates/navBar.html'
   };
 });
 

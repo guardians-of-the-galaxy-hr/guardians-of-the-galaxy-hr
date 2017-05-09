@@ -6,20 +6,20 @@ Promise.promisifyAll(kairos);
 var galleryName = 'hrsf76' // lower resolution images
 
 kairos.removeGalleryAsync(galleryName)
-.then(function() {
+.then(() => {
   return database.photo.findAsync({galleryName: galleryName});
 })
-.then(function(results) {
+.then((results) => {
   console.log (results);
   console.log (results.length);
-  return Promise.map(results, function (person) {
+  return Promise.map(results,  (person) {
     return kairos.enrollAsync(person, galleryName);
   });
 })
-.then(function(results) {
+.then((results) => {
   console.log ('Kairos enroll completed', results);
   process.exit();
 })
-.catch(function(error) {
+.catch((error) => {
   throw error;
 });
