@@ -12,6 +12,8 @@ const base64 = require('file-base64');
 const jsonfile = require('jsonfile');
 //Kairos
 const kairos = require('./server/kairos');
+var Promise = require('bluebird');
+Promise.promisifyAll(kairos);
 
 app.use(express.static(__dirname + '/client'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
@@ -91,6 +93,8 @@ app.get('/query', (req, res) => {
     }
   });
 });
+
+kairos.analyze();
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port: ', process.env.PORT || 3000);
