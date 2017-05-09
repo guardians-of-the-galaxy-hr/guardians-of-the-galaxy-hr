@@ -47,7 +47,7 @@ const removeGallery = (galleryName, callback) => {
 module.exports.removeGallery = removeGallery;
 
 const recognize = (uploadImage, galleryName, callback) => {
-  const body = {
+  var body = {
     image: uploadImage,
     gallery_name: galleryName,
     threshold: 0.00001,
@@ -82,7 +82,7 @@ const recognize = (uploadImage, galleryName, callback) => {
           });
         })
         .then((result) => {
-          callback('CLASSMATE INFORMATION-----', result);
+          callback( result);
         })
         .catch((error) => {
           console.log('ERROR RECOGNIZING-----', error);

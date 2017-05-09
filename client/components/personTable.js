@@ -1,15 +1,14 @@
 angular.module('in-your-face')
-.directive('personsTableEntry', function() {
+.directive('personsTable', function() {
   return {
     scope: {
-      person: '<',
-      index: '<'
+      persons: '<'
     },
     restrict: 'E',
     controllerAs: 'ctrl',
     bindToController: true,
     controller: function() {
     },
-    templateUrl: '../templates/personsTableEntry.html'
+    templateUrl: './templates/personTable.html'
   };
 });
