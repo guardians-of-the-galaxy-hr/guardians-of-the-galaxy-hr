@@ -38,6 +38,12 @@
 </div>
 </div>
 
+    <div>
+        <button class="btn btn-primary" ng-click="ctrl.login()" ng-disabled="loginStatus.status == 'connected'">Connect with Facebook</button>
+         &nbsp; 
+       
+         &nbsp;
+      </div>
 <div class="container text-center">
   <h3>THE TEAM</h3>
   <p> Lorem ipsum..</p>
@@ -87,6 +93,7 @@
 
 <nav-bar></nav-bar>
       <div ng-hide ="ctrl.takePicPage"  class="container inyourface">
+         <button class="btn btn-danger" ng-click="ctrl.logout()">Logout</button>
         <div class="row">
           <div class="col-md-12">
             <webcam-module persons="ctrl.persons" pic-callback= "ctrl.picCallback"></webcam-module>
