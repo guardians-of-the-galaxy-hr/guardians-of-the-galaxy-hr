@@ -26,9 +26,16 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
     });
 })
 .controller('landingCtrl', function(rank, ezfb, $scope, $window) {
-  // go to classmates
   this.goToClassmates = () => {
     $window.location.href = '/#/classmates';
+  };
+
+  this.goToCelebrities = () => {
+    $window.location.href = '/#/celebrities';
+  };
+
+  this.goToFriends = () => {
+    $window.location.href = '/#/friends';
   };
 
   //Facebook Login
