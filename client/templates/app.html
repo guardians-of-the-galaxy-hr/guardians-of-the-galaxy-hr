@@ -1,5 +1,5 @@
 
-<div ng-show ="ctrl.takePicPage"> 
+<div ng-show ="ctrl.takePicPage">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -15,7 +15,7 @@
       <div class="carousel-caption">
         <button class = "btn btn-warning" ng-click = "ctrl.openTakePic()">In Your Face</button>
         <p> lorem ipsum.</p>
-      </div> 
+      </div>
     </div>
 
     <div class="item">
@@ -23,7 +23,7 @@
       <div class="carousel-caption">
         <button class = "btn btn-warning" ng-click = "ctrl.openTakePic()">In Your Face</button>
         <p>In</p>
-      </div> 
+      </div>
     </div>
 
   <!-- Left and right controls -->
@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="col-sm-3">
-  
+
     <a href="#demo2" data-toggle="collapse">
       <img src="http://www.skrappie.com/hrsf76/Michael%20Diodoro.jpg" class="img-circle person" alt="Random Name">
     </a>
@@ -63,7 +63,7 @@
     </div>
   </div>
   <div class="col-sm-3">
-    
+
     <a href="#demo3" data-toggle="collapse">
       <img src="http://www.skrappie.com/hrsf76/Shawn%20Feng.jpg" class="img-circle person" alt="Random Name">
     </a>
@@ -88,14 +88,13 @@
 <nav-bar></nav-bar>
       <div ng-hide ="ctrl.takePicPage"  class="container inyourface">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <webcam-module persons="ctrl.persons" pic-callback= "ctrl.picCallback"></webcam-module>
-          </div>
-          <div class="col-md-6">
           </div>
         </div>
         <div class = "row">
-          <div class="col-xs-offset-2 col-xs-offset-10">
+          <!--<div class="col-xs-offset-2 col-xs-offset-10">-->
+            <div class="col-md-12">
             <persons-table persons="ctrl.persons" ></persons-table>
           </div>
         </div>
