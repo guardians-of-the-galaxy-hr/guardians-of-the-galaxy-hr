@@ -53,7 +53,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
   this.persons = [];
 
   this.picCallback = (response) => {
-    console.log('results from kairos', (response));
+    console.log('FROM PIC CALLBACK', response.data)
     this.persons = response.data.map(person => {
       var confidence = (person.confidence * 100).toFixed(1);
       return {

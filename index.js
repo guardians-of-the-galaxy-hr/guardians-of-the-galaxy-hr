@@ -62,9 +62,8 @@ app.get('/classmates', (req, res) => {
     } else {
       console.log('Status:', response.statusCode);
       console.log('Headers:', JSON.stringify(response.headers));
-      console.log('Response:', body);
+      console.log('Response:', body); 
       res.send(body);
-      // console.log('Student Count: ', body.subject_ids.length)
     }
   });
 });
