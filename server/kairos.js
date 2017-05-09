@@ -2,8 +2,9 @@ const request = require('request');
 const api = require('../config/api.js');
 const Promise = require('bluebird');
 const database = require('../database');
-const apiKey = process.env.kairos-api-key || api.kairos.apiKey;
-const appId = process.env.kairos-app-id || api.kairos.appId;
+const apiKey = process.env.kairosApiKey || api.kairos.apiKey;
+const appId = process.env.kairosAppId || api.kairos.appId;
+const kairosApiUrl = 'https://api.kairos.com';
 
 const enroll = (person, galleryName, callback) => {
   const userName = person.userName;
@@ -11,7 +12,7 @@ const enroll = (person, galleryName, callback) => {
 
   request({
     method: 'POST',
-    url: api.kairos.api_url + '/enroll',
+    url: kairosApiUrl + '/enroll',
     headers: {
       'app_id': appId,
       'app_key': apiKey
@@ -31,7 +32,7 @@ module.exports.enroll = enroll;
 const removeGallery = (galleryName, callback) => {
   request({
     method: 'POST',
-    url: api.kairos.api_url + '/gallery/remove',
+    url: kairosApiUrl + '/gallery/remove',
     headers: {
       'app_id': appId,
       'app_key': apiKey
@@ -60,7 +61,7 @@ const recognize = (uploadImage, galleryName, callback) => {
 
   let options = {
     method: 'POST',
-    url: api.kairos.api_url + '/recognize',
+    url: kairosApiUrl + '/recognize',
     headers: {
       'app_id': appId,
       'app_key': appKey
