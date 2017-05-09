@@ -121,28 +121,3 @@ angular.module('in-your-face')
       `
   };
 });
-//class="canvas-container"
-//class="webcam-container"
-
-
-  // this.onStream = function (stream) {
-  //     // You could do something manually with the stream.
-  // };
-
-  /**
-   * Redirect the browser to the URL given.
-   * Used to download the image by passing a dataURL string
-   */
-
-  // this.downloadSnapshot = function downloadSnapshot(dataURL) {
-  //     window.location.href = dataURL;
-  // };
-
-  // this.webcamError = false;
-  // this.onError = function (err) {
-  //     $scope.$apply(
-  //         function() {
-  //             self.webcamError = err;
-  //         }
-  //     );
-  // };
