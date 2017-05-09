@@ -2,8 +2,8 @@ const request = require('request');
 const api = require('../config/api.js');
 const Promise = require('bluebird');
 const database = require('../database');
-const apiKey = process.env.kairosApiKey || api.kairos.apiKey;
-const appId = process.env.kairosAppId || api.kairos.appId;
+const apiKey = process.env.kairosApiKey || api.kairos.app_key;
+const appId = process.env.kairosAppId || api.kairos.app_id;
 const kairosApiUrl = 'https://api.kairos.com';
 
 const enroll = (person, galleryName, callback) => {
@@ -64,7 +64,7 @@ const recognize = (uploadImage, galleryName, callback) => {
     url: kairosApiUrl + '/recognize',
     headers: {
       'app_id': appId,
-      'app_key': appKey
+      'app_key': apiKey
     },
     body: body
   };
