@@ -51,10 +51,6 @@
   position: relative;
 }
 
-.person-image {
-  border-radius: 50%;
-}
-
 .webcam-buttons-div {
   text-align:center;
 }
@@ -69,37 +65,19 @@
   text-align: center;
 }
 
-.blue {
-  background-color: blue;
-}
-
-.green {
-  background-color: green;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.pink {
-  background-color: pink;
-}
-
-/* Style for Sephia and thumbnails*/
 img.header {
   filter: gray; /* IE6-9 */
-  -webkit-filter: sepia(); /* Google Chrome, Safari 6+ & Opera 15+ */
-    -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-    margin-bottom:20px;
+  -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+  box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+  margin-bottom:20px;
 }
 
 img:hover {
   filter: none; /* IE6-9 */
   -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
-
 }
+
 body {
   background: url(./assets/graytravel.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -107,20 +85,35 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+
 .jumbotron{
-    background: rgba(220, 220, 220, 0.1);
-    color:#fff;
+  background: rgba(220, 220, 220, 0.75);
+  color:#fff;
 }
 
-
-.person {
-    border: 10px solid transparent;
-    margin-bottom: 25px;
-    width: 80%;
-    height: 80%;
-    opacity: 0.7;
-}
-.person:hover {
-    border-color: #f1f1f1;
+.carousel-caption {
+  text-shadow: 1.5px 1.5px rgba(0,0,0,0.75);
 }
 
+.carousel-caption h1 {
+  font-size: 4em;
+}
+
+.carousel-caption h4 {
+  margin-bottom: 20px;
+}
+
+.team-member-photo {
+  width: 80%;
+  height: 80%;
+}
+
+.team-name {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.team-member-name {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
