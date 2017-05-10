@@ -75,17 +75,26 @@
 }
 
 #video {
+  z-index: 1;
   position:relative;
   width:720px;
   height:400px;
 }
 
-#canvas {
+#photo-booth-canvas {
+  z-index: 2;
   position:absolute;
   width:720px;
   height:400px;
   margin-left: -720px;
 }
+
+#photo-display-canvas {
+  width:720px;
+  height:400px;
+  margin-bottom: 100px;
+}
+
 .inyourface-motion-detect {
   position:relative;
   margin-top:30px;
