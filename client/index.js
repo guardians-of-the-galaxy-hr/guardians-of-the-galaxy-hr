@@ -15,8 +15,11 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
       controllerAs: 'ctrl',
       bindToController: true
     })
-    .when('/red', {
-      templateUrl: '/templates/red.html'
+    .when('/photobooth', {
+      templateUrl: '/templates/motionDetect.html',
+      controller: 'motionDetectCtrl',
+      controllerAs: 'ctrl',
+      bindToController: true
     });
 
     // Basic setup
