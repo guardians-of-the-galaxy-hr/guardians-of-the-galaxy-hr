@@ -94,9 +94,6 @@ app.get('/query', (req, res) => {
   });
 });
 
-// kairos.analyze();
-
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port: ', process.env.PORT || 3000);
-  console.log('Very Secret Password:', process.env.VERY_SECRET_PASSWORD || 'no very secret password set')
 });
