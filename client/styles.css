@@ -91,6 +91,14 @@
   margin-top:30px;
 }
 
+.motion-detect-div {
+  text-align:center;
+}
+
+.motion-detect-button {
+  margin:10px;
+  vertical-align: middle;
+}
 
 img.header {
   filter: gray; /* IE6-9 */
