@@ -70,11 +70,23 @@
   text-align: center;
 }
 
-#video, #canvas {
-  margin-left: 230px;
-  margin-top: 120px;
-  position: absolute;
+#video {
+  position:relative;
+  width:720px;
+  height:400px;
 }
+
+#canvas {
+  position:absolute;
+  width:720px;
+  height:400px;
+  margin-left: -720px;
+}
+.inyourface-motion-detect {
+  position:relative;
+  margin-top:30px;
+}
+
 
 img.header {
   filter: gray; /* IE6-9 */
