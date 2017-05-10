@@ -97,9 +97,8 @@ const recognize = (uploadImage, galleryName, callback) => {
 
 module.exports.recognize = recognize;
 
-const detect = (callback) => {
+const detect = (imageUrl, callback) => {
   console.log ('kairos detect');
-  var imageUrl = 'http://www.skrappie.com/hrsf-76/Alana-Turangan.jpg';
   request({
     method: 'POST',
     url: kairosApiUrl + '/detect',
