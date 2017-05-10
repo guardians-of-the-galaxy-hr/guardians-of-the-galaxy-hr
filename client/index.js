@@ -15,14 +15,17 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
       controllerAs: 'ctrl',
       bindToController: true
     })
+    .when('/classmates/:student', {
+      templateUrl: '/templates/student.html',
+      controller: 'studentCtrl',
+      controllerAs: 'ctrl',
+      bindToController: true
+    })
     .when('/photobooth', {
       templateUrl: '/templates/motionDetect.html',
       controller: 'motionDetectCtrl',
       controllerAs: 'ctrl',
       bindToController: true
-    })
-    .when('/classmates/:student', {
-      templateUrl: '/templates/student.html'
     })
 
     // Basic setup
@@ -31,7 +34,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
       appId: '1929333797297736'
     });
 })
-.controller('landingCtrl', function(rank, ezfb, $scope, $window) {
+.controller('landingCtrl', function(ezfb, $window) {
   this.goToClassmates = () => {
     $window.location.href = '/#/classmates';
   };
@@ -55,7 +58,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
     }, {scope: 'email,user_likes'});
   };
 })
-.controller('classmatesCtrl', function(rank, ezfb, $scope, $window) {
+.controller('classmatesCtrl', function(ezfb) {
   this.persons = [];
 
   this.picCallback = (response) => {
@@ -84,4 +87,12 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
     // https://developers.facebook.com/docs/reference/javascript/FB.logout
     ezfb.logout(() => { this.takePicPage = true; });
   };
+})
+.controller('studentCtrl', function($routeParams, service) {
+  this.student = $routeParams.student;
+  this.attributes = {}
+
+  service.getStudent(this.student, result => {
+    this.attributes = result.data.images[0].faces[0].attributes;
+  });
 });
