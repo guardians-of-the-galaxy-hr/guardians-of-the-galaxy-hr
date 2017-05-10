@@ -94,7 +94,7 @@ app.get('/query', (req, res) => {
   });
 });
 
-kairos.analyze();
+// kairos.analyze();
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port: ', process.env.PORT || 3000);
