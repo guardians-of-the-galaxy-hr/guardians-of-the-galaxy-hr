@@ -1,6 +1,7 @@
 <div id="person-table-entry-container">
   <span>{{$parent.$index + 1}}. {{ctrl.person.name}}</span><span class="person-score">{{ctrl.person.confidence}}%</span>
-  <span>
+  <div>
+    <img ng-if="ctrl.index < 3" class="person-table-winner-deco" src="./assets/{{ctrl.index+1}}.png" />
     <a href="#/classmates/{{ctrl.person.name}}"><img class="person-table-entry-pic" ng-src={{ctrl.person.imageUrl}} /></a>
-  </span>
+  </div>
 </div>
