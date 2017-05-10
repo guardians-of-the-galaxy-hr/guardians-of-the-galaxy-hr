@@ -97,22 +97,63 @@ const recognize = (uploadImage, galleryName, callback) => {
 
 module.exports.recognize = recognize;
 
-const analyze = () => {
+const detect = (callback) => {
+  console.log ('kairos detect');
+  var imageUrl = 'http://www.skrappie.com/hrsf-76/Alana-Turangan.jpg';
+  request({
+    method: 'POST',
+    url: kairosApiUrl + '/detect',
+    headers: {
+      'app_id': appId,
+      'app_key': apiKey
+    },
+    body: `{"image": "${imageUrl}"}`
+  }, (err, res, body) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(err, body);
+    }
+  });
+}
+
+module.exports.detect = detect;
+
+const post = (imageUrl, callback) => {
+  console.log ('kairos post');
+  request({
+    method: 'POST',
+    url: kairosApiUrl + '/v2/media?source=' + imageUrl,
+    headers: {
+      'app_id': appId,
+      'app_key': apiKey
+    }
+  }, (err, res, body) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(err, body);
+    }
+  });
+}
+
+module.exports.post = post;
+
+const analyze = (id) => {
   console.log ('kairos analyze');
   const options = {
     method: 'GET',
-    url: api.kairos.api_url + '/v2/analytics/591119d02683c6244139',
+    url: kairosApiUrl + '/v2/analytics/' + id,
     headers: {
       'app_id': api.kairos.app_id,
       'app_key': api.kairos.app_key
     }
   };
-  request(options, (error, results, body) => {
-    if (error) {
-      console.log(error);
+  request(options, (err, res, body) => {
+    if (err) {
+      callback(err);
     } else {
-      console.log ('analyze results', results);
-      console.log ('analyze body', body);
+      callback(err, body)
     }
   });
 };

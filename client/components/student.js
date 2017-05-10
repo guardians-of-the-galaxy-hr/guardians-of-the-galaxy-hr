@@ -1,5 +1,5 @@
 angular.module('in-your-face')
-.directive('personsTable', function() {
+.directive('student', function() {
   return {
     scope: {
       persons: '<'
@@ -9,6 +9,6 @@ angular.module('in-your-face')
     bindToController: true,
     controller: function() {
     },
-    templateUrl: '../templates/personTable.html'
+    templateUrl: './templates/student.html'
   };
 });

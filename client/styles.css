@@ -24,12 +24,12 @@
   text-align:center;
 }
 
-#persons-table-container {
+#person-table-container {
   margin-left:25px;
   margin-right:25px;
 }
 
-.persons-table-winner-deco {
+.person-table-winner-deco {
   position:absolute;
   top: 20px;
   z-index: 2;
@@ -37,7 +37,7 @@
   width:40px;
 }
 
-.persons-table-entry-pic {
+.person-table-entry-pic {
   height:230px;
   z-index: 1;
 }

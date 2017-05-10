@@ -20,7 +20,10 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
       controller: 'motionDetectCtrl',
       controllerAs: 'ctrl',
       bindToController: true
-    });
+    })
+    .when('/classmates/:student', {
+      templateUrl: '/templates/student.html'
+    })
 
     // Basic setup
     // https://github.com/pc035860/angular-easyfb#configuration

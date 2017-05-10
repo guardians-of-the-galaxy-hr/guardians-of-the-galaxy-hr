@@ -1,5 +1,5 @@
 angular.module('in-your-face')
-.directive('personsTable', function() {
+.directive('personTable', function() {
   return {
     scope: {
       persons: '<'
