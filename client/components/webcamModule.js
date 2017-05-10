@@ -1,5 +1,5 @@
 angular.module('in-your-face')
-.controller('webcamModuleCtrl', function(rank) {
+.controller('webcamModuleCtrl', function(service) {
 
   var _video = null;
   var patData = null;
@@ -58,9 +58,8 @@ angular.module('in-your-face')
    */
   this.sendSnapshotToServer = () => {
     // this.snapshotData = imgBase64;
-    rank.uploadFile(this.snapshotData, this.picCallback);
+    service.uploadFile(this.snapshotData, this.picCallback);
     console.log('base64 image file sent to server!');
-
   };
 
   this.makeSnapshot = () => {
