@@ -96,3 +96,25 @@ const recognize = (uploadImage, galleryName, callback) => {
 };
 
 module.exports.recognize = recognize;
+
+const analyze = () => {
+  console.log ('kairos analyze');
+  const options = {
+    method: 'GET',
+    url: api.kairos.api_url + '/v2/analytics/591119d02683c6244139',
+    headers: {
+      'app_id': api.kairos.app_id,
+      'app_key': api.kairos.app_key
+    }
+  };
+  request(options, (error, results, body) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log ('analyze results', results);
+      console.log ('analyze body', body);
+    }
+  });
+};
+
+module.exports.analyze = analyze;
