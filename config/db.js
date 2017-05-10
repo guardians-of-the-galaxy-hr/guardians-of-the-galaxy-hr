@@ -1,3 +1,3 @@
 module.exports = {
-  dbKey: '<INSERT_YOUR_DB_KEY_HERE>',
+  dbKey: 'mongodb://root:root@ds131041.mlab.com:31041/in-your-face',
 };
