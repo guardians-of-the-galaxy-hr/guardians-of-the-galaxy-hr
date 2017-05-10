@@ -1,15 +1,15 @@
 angular.module('in-your-face')
 .controller('motionDetectCtrl', function() {
+
+  this.showRemoveEffectButton = false;
+
   // instantiate video camera and canvases
   var video = document.getElementById('video');
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
 
   // constants for picture links
-  // const fred = './assets/fred_pic.gif';
-  // const sophie = './assets/sophie_pic.gif';
-  // const jamil = './assets/jamil_pic.gif';
-  var selectedPicLink = './assets/fire.gif';
+  var selectedPicLink = '';
 
   // instantiate tracker object and set initial values for face tracking parameters
   var tracker = new tracking.ObjectTracker('face');
@@ -18,25 +18,35 @@ angular.module('in-your-face')
   tracker.setEdgesDensity(0.1);
   tracking.track('#video', tracker, { camera: true });
 
+
   // change picture upon button clicking
   this.onChangePicButtonClicked = (personName) => {
-    console.log('person name: ', personName);
+    if (personName === '') {
+      this.showRemoveEffectButton = false;
+    } else {
+      this.showRemoveEffectButton = true;
+    }
     selectedPicLink = personName;
   };
 
+  // face detection event handling function
   tracker.on('track', function(event) {
-    // console.log('event: ', event);
     context.clearRect(0, 0, canvas.width, canvas.height);
-
-
     event.data.forEach(function(rect) {
-      var imageObj = new Image();
+      console.log(rect);
 
-      console.log("selected: ", selectedPicLink);
+      var imageObj = new Image();
       imageObj.src = selectedPicLink;
-      console.log("123: ", imageObj.src);
-      // console.log('rect: ', rect);
-      context.drawImage(imageObj, rect.x / 2.3 - 15, rect.y / 2.3 - 30, 90, 105);
+
+      if (rect.width >= 100 && rect.width < 205) {
+        context.drawImage(imageObj, rect.x / 2.5, rect.y / 2.5 * 0.7, rect.width * 0.52, rect.width * 0.52 * 1.15);
+      } else if (rect.width >= 205 && rect.width < 305) {
+        context.drawImage(imageObj, rect.x / 2.5, rect.y / 3.2 * 0.05, rect.width * 0.52, rect.width * 0.52 * 1.15);
+      }
+
+
+
+
     });
   });
 });
