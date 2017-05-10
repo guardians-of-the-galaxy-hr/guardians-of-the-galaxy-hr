@@ -15,6 +15,8 @@ const kairos = require('./server/kairos');
 var Promise = require('bluebird');
 Promise.promisifyAll(kairos);
 
+const database = require('./database');
+
 app.use(express.static(__dirname + '/client'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
@@ -70,28 +72,21 @@ app.get('/classmates', (req, res) => {
   });
 });
 
-app.get('/query', (req, res) => {
-  var body = {
-    gallery_name: 'testGallery'
-  };
-  body = JSON.stringify(body);
-  var options = {
-    method: 'POST',
-    url: 'https://api.kairos.com/gallery/view',
-    headers: {
-      'app_id': '077d4b23',
-      'app_key': 'd217274b4c07e0acef0e9cec7507d94d'
-    },
-    body: body
-  };
-  request(options, (error, results, body) => {
-    if (error) {
-      console.log('ERROR IN RECOGNIZE-----', error);
-    } else {
-      console.log('RECOGNIZED-----', body);
-      res.send(JSON.parse(body));
-    }
+app.get('/classmates/:student', (req, res) => {
+  console.log ('classmates student get route');
+  var student = req.params.student;
+
+  database.photo.findAsync({userName: student, galleryName: galleryName})
+  .then((result) => {
+    return kairos.detectAsync(result[0].filePath)
+  })
+  .then((results) => {
+    res.send(results);
+  })
+  .catch((error) => {
+    console.log ('error', error);
   });
+
 });
 
 app.listen(process.env.PORT || 3000, () => {
