@@ -1,6 +1,6 @@
 <div id="person-table-entry-container">
   <span>{{$parent.$index + 1}}.&nbsp{{ctrl.person.name}}&nbsp&nbsp&nbsp{{ctrl.person.confidence}}%</span>
   <span>
-    <img class="persons-table-entry-pic" ng-src={{ctrl.person.imageUrl}} />
+    <a href="#/classmates/{{ctrl.person.name}}"><img class="person-table-entry-pic" ng-src={{ctrl.person.imageUrl}} /></a>
   </span>
 </div>
