@@ -64,7 +64,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
     }, {scope: 'email,user_likes'});
   };
 })
-.controller('classmatesCtrl', function(ezfb) {
+.controller('classmatesCtrl', function(ezfb, service) {
   this.persons = [];
   this.galleryName = 'hrsf-76';
   this.picCallback = service.picCallback.bind(this);
