@@ -24,6 +24,10 @@ angular.module('in-your-face')
     selectedPicLink = personName;
   };
 
+  this
+
+
+
   this.onTakeSnapshotButtonClicked = () => {
     var hiddenCanvas = document.getElementById('photo-display-canvas');
     hiddenCanvas.width = canvas.width;
@@ -35,7 +39,7 @@ angular.module('in-your-face')
     // get canvas data
     ctx.drawImage(canvas, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
     // draw both of them on the same hidden canvas
-    var imageData = ctx.getImageData(0, 0, 10, 10);
+    var imageData = ctx.getImageData(0, 0, canvas.offsetWidth, canvas.offsetHeight);
     // var dataURI = hiddenCanvas.toDataURL('image/jpeg');
     ctx.putImageData(imageData, 0, 0);
   };
