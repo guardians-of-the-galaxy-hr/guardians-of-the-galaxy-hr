@@ -84,7 +84,6 @@ angular.module('in-your-face')
       patData = idata;
     }
   };
-
 })
 .directive('webcamModule', function() {
   return {
