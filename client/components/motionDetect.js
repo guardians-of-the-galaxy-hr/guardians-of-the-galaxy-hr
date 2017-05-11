@@ -1,8 +1,9 @@
 angular.module('in-your-face')
-.controller('motionDetectCtrl', function() {
+.controller('motionDetectCtrl', function($scope) {
 
   this.count = 4;
   this.showRemoveEffectButton = false;
+  this.showPhotoDisplayCanvas = true;
 
   var video = document.getElementById('video');
 
@@ -16,7 +17,7 @@ angular.module('in-your-face')
 
   // instantiate count-down-canvas
   var cdCanvas = document.getElementById('count-down-canvas');
-  var cdContext = pdCanvas.getContext('2d');
+  var cdContext = cdCanvas.getContext('2d');
   // constant for picture links
   var selectedPicLink = '';
 
@@ -45,19 +46,18 @@ angular.module('in-your-face')
 
     // fill with gradient
     cdContext.fillStyle = gradient;
-    cdContext.clearRect(0, 0, cdContext.width, cdContext.height);
+    cdContext.clearRect(0, 0, 1000, 1000);
     cdContext.fillText(this.count - 1, 100, 100);
 
-    // decrease the counting variable
     this.count--;
     if (this.count > 0) {
       setTimeout(this.countDown, 1000);
     } else if (this.count === 0) {
-      cdContext.clearRect(0, 0, cdContext.width, cdContext.height);
+      cdContext.clearRect(0, 0, 1000, 1000);
       console.log('cheese!');
       cdContext.fillText('cheese!', 100, 100);
       setTimeout(function() {
-        cdContext.clearRect(0, 0, cdContext.width, cdContext.height);
+        cdContext.clearRect(0, 0, 1000, 1000);
         pdContext.drawImage(video, 0, 0, pdCanvas.width, pdCanvas.height);
         pdContext.drawImage(pbCanvas, 0, 0, pdCanvas.width, pdCanvas.height);
         var imageData = pdContext.getImageData(0, 0, pbCanvas.offsetWidth, pbCanvas.offsetHeight);

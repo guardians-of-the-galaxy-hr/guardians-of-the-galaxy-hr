@@ -54,8 +54,8 @@
 
 #person-table-entry-container {
   margin-bottom:20px;
-  position: relative;
-  text-align: center;
+  position:relative;
+  text-align:center;
 }
 
 .webcam-buttons-div {
@@ -64,21 +64,22 @@
 
 .webcam-button {
   margin:10px;
-  vertical-align: middle;
+  margin-bottom:15px;
+  vertical-align:middle;
 }
 
 #webcam-module-container {
-  vertical-align: middle;
-  text-align: center;
+  vertical-align:middle;
+  text-align:center;
 }
 
 #motion-detect-container {
-  vertical-align: middle;
-  text-align: center;
+  vertical-align:middle;
+  text-align:center;
 }
 
 #video {
-  z-index: 1;
+  z-index:1;
   position:relative;
   width:720px;
   height:400px;
@@ -93,14 +94,18 @@
 }
 
 #photo-display-canvas {
+  position:relative;
   width:720px;
   height:400px;
-  margin-bottom: 100px;
+  margin-bottom:100px;
 }
 
 #count-down-canvas {
+  z-index:3;
+  position:absolute;
   width:720px;
   height:400px;
+  margin-left: -720px;
 }
 
 .inyourface-motion-detect {

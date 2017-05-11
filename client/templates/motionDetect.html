@@ -22,8 +22,8 @@
             <button class="btn btn-primary motion-detect-button" ng-click="ctrl.onTakeSnapshotButtonClicked()" ng-show="true">
                 <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Take snapshot  </button>
         </div>
-        <div>
-            <canvas id="photo-display-canvas"></canvas>
+        <div ng-show="ctrl.showPhotoDisplayCanvas">
+            <canvas id="photo-display-canvas" ></canvas>
         </div>
     </div>
 </div>
