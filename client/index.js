@@ -10,7 +10,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
       bindToController: true
     })
     .when('/classmates', {
-      templateUrl: '/templates/classmates.html',
+      templateUrl: '/templates/rankings.html',
       controller: 'classmatesCtrl',
       controllerAs: 'ctrl',
       bindToController: true
@@ -24,6 +24,12 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
     .when('/photobooth', {
       templateUrl: '/templates/motionDetect.html',
       controller: 'motionDetectCtrl',
+      controllerAs: 'ctrl',
+      bindToController: true
+    })
+    .when('/celebrities', {
+      templateUrl: 'templates/rankings.html',
+      controller: 'celebritiesCtrl',
       controllerAs: 'ctrl',
       bindToController: true
     })
@@ -58,35 +64,15 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
     }, {scope: 'email,user_likes'});
   };
 })
-.controller('classmatesCtrl', function(ezfb) {
+.controller('classmatesCtrl', function(ezfb, service) {
   this.persons = [];
-
-  this.picCallback = (response) => {
-    console.log('FROM PIC CALLBACK', response.data)
-    this.persons = response.data.map(person => {
-      var confidence = (person.confidence * 100).toFixed(1);
-      return {
-        name: person.subject_id,
-        imageUrl: person.imageUrl,
-        confidence: confidence
-      };
-    });
-  };
-
-  //Facebook
-  this.login = () => {
-    // Calling FB.login with required permissions specified
-    // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.0
-    ezfb.login((res) => {
-      //no manual $scope.$apply, I got that handled
-      if (res.authResponse) {this.goGoToClassmates(); }
-    }, {scope: 'email,user_likes'});
-  };
-  this.logout = () => {
-    // Calling FB.logout
-    // https://developers.facebook.com/docs/reference/javascript/FB.logout
-    ezfb.logout(() => { this.takePicPage = true; });
-  };
+  this.galleryName = 'hrsf-76';
+  this.picCallback = service.picCallback.bind(this);
+})
+.controller('celebritiesCtrl', function(ezfb, service) {
+  this.persons = [];
+  this.galleryName = 'celebrity';
+  this.picCallback = service.picCallback.bind(this);
 })
 .controller('studentCtrl', function($routeParams, service) {
   this.student = $routeParams.student;
