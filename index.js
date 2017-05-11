@@ -10,10 +10,12 @@ const multiparty = require('multiparty');
 const util = require('util');
 const base64 = require('file-base64');
 const jsonfile = require('jsonfile');
-//Kairos
-const kairos = require('./server/kairos');
+
 var Promise = require('bluebird');
+const kairos = require('./server/kairos');
 Promise.promisifyAll(kairos);
+const celebrityBucks = require('./server/celebrity-bucks');
+Promise.promisifyAll(celebrityBucks);
 
 const database = require('./database');
 
@@ -22,10 +24,10 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(bodyParser.json());
 
-var galleryName = 'hrsf-76';
-
 //Receive enncoded image and decode and save as pic.jpg
-app.post('/upload/url', (req, res) => {
+app.post('/upload/url/:gallery', (req, res) => {
+  var galleryName = req.params.gallery;
+
   // console.log('hello from uploader');
   var form = new multiparty.Form();
 
@@ -49,6 +51,7 @@ app.post('/upload/url', (req, res) => {
 });
 
 app.get('/classmates', (req, res) => {
+  var galleryName = 'hrsf-76';
   console.log ('classmates get route');
   request({
     method: 'POST',
@@ -58,7 +61,7 @@ app.get('/classmates', (req, res) => {
       'app_key': api.kairos.app_key
     },
     body: JSON.stringify({
-      'gallery_name': 'hrsf76'
+      'gallery_name': galleryName
     })
   }, (error, response, body) => {
     if (error) {
@@ -73,6 +76,7 @@ app.get('/classmates', (req, res) => {
 });
 
 app.get('/classmates/:student', (req, res) => {
+  var galleryName = 'hrsf-76';
   console.log ('classmates student get route');
   var student = req.params.student;
 
@@ -86,7 +90,17 @@ app.get('/classmates/:student', (req, res) => {
   .catch((error) => {
     console.log ('error', error);
   });
+});
 
+app.get('/celebrities', (req, res) => {
+  console.log ('celebrities get route');
+  celebrityBucks.topListAsync()
+  .then((result) => {
+    res.send (result);
+  })
+  .catch((error) => {
+    console.log ('error', error);
+  });
 });
 
 app.listen(process.env.PORT || 3000, () => {

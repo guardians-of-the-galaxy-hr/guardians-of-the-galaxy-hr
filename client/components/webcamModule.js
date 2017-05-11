@@ -58,7 +58,7 @@ angular.module('in-your-face')
    */
   this.sendSnapshotToServer = () => {
     // this.snapshotData = imgBase64;
-    service.uploadFile(this.snapshotData, this.picCallback);
+    service.uploadFile(this.snapshotData, this.galleryName, this.picCallback);
     console.log('base64 image file sent to server!');
   };
 
@@ -91,6 +91,7 @@ angular.module('in-your-face')
     scope: {
       persons: '<',
       picCallback: '<',
+      galleryName: '<'
     },
     restrict: 'E',
     bindToController: true,

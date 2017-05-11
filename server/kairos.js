@@ -6,10 +6,7 @@ const apiKey = process.env.kairosApiKey || api.kairos.app_key;
 const appId = process.env.kairosAppId || api.kairos.app_id;
 const kairosApiUrl = 'https://api.kairos.com';
 
-const enroll = (person, galleryName, callback) => {
-  const userName = person.userName;
-  const filePath = person.filePath;
-
+const enroll = (userName, filePath, galleryName, callback) => {
   request({
     method: 'POST',
     url: kairosApiUrl + '/enroll',
@@ -54,7 +51,7 @@ const recognize = (uploadImage, galleryName, callback) => {
     image: uploadImage,
     gallery_name: galleryName,
     threshold: 0.00001,
-    max_num_results: 50
+    max_num_results: 100
   };
 
   body = JSON.stringify(body);
