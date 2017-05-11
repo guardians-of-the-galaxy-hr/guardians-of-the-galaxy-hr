@@ -1,14 +1,21 @@
 angular.module('in-your-face')
 .controller('motionDetectCtrl', function() {
 
+  var count = 3;
   this.showRemoveEffectButton = false;
 
-  // instantiate video camera and canvases
+  // instantiate video camera and photo-booth-canvas
   var video = document.getElementById('video');
-  var canvas = document.getElementById('photo-booth-canvas');
-  var context = canvas.getContext('2d');
+  var photoBoothCanvas = document.getElementById('photo-booth-canvas');
+  var context = photoBoothCanvas.getContext('2d');
 
-  // constants for picture links
+  // instantiate photo-display-canvas
+  var displayCanvas = document.getElementById('photo-display-canvas');
+  displayCanvas.width = photoBoothCanvas.width;
+  displayCanvas.height = photoBoothCanvas.height;
+  var ctx = displayCanvas.getContext('2d');
+
+  // constant for picture links
   var selectedPicLink = '';
 
   // instantiate tracker object and set initial values for face tracking parameters
@@ -18,36 +25,51 @@ angular.module('in-your-face')
   tracker.setEdgesDensity(0.1);
   tracking.track('#video', tracker, { camera: true });
 
-  // change picture upon button clicking
+  // change picture link upon button clicking
   this.onChangePicButtonClicked = (personName) => {
     personName === '' ? this.showRemoveEffectButton = false : this.showRemoveEffectButton = true;
     selectedPicLink = personName;
   };
 
-  this
+  this.countDown = ()=> {
+    console.log('counting down ', count);
+    // context.clearRect(0, 0, photoBoothCanvas.width, photoBoothCanvas.height);
 
+    context.font = '30px Verdana';
+    // create gradient
+    // var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
+    // gradient.addColorStop('0', 'magenta');
+    // gradient.addColorStop('0.5', 'blue');
+    // gradient.addColorStop('1.0', 'red');
+    // Fill with gradient
+    // context.fillStyle = gradient;
+    context.fillText('Hi', 100, 100);
 
-
-  this.onTakeSnapshotButtonClicked = () => {
-    var hiddenCanvas = document.getElementById('photo-display-canvas');
-    hiddenCanvas.width = canvas.width;
-    hiddenCanvas.height = canvas.height;
-    var ctx = hiddenCanvas.getContext('2d');
-
-    // get video frame
-    ctx.drawImage(video, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-    // get canvas data
-    ctx.drawImage(canvas, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
-    // draw both of them on the same hidden canvas
-    var imageData = ctx.getImageData(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-    // var dataURI = hiddenCanvas.toDataURL('image/jpeg');
-    ctx.putImageData(imageData, 0, 0);
+    // decrease the counting variable
+    count--;
+    if (count > 0) {
+      setTimeout(this.countDown, 1000);
+    } else if (count === 0) {
+      console.log("cheese!");
+      // get video frame
+      ctx.drawImage(video, 0, 0, displayCanvas.width, displayCanvas.height);
+      // get canvas data
+      ctx.drawImage(photoBoothCanvas, 0, 0, displayCanvas.width, displayCanvas.height);
+      // draw both of them on the same hidden canvas
+      var imageData = ctx.getImageData(0, 0, photoBoothCanvas.offsetWidth, photoBoothCanvas.offsetHeight);
+      // var dataURI = displayCanvas.toDataURL('image/jpeg');
+      ctx.putImageData(imageData, 0, 0);
+    }
   };
 
+  this.onTakeSnapshotButtonClicked = () => {
+    count = 3;
+    this.countDown();
+  };
 
   // face detection event handling function
   tracker.on('track', function(event) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, photoBoothCanvas.width, photoBoothCanvas.height);
     event.data.forEach(function(rect) {
       var imageObj = new Image();
       imageObj.src = selectedPicLink;
@@ -56,10 +78,6 @@ angular.module('in-your-face')
       } else if (rect.width >= 205 && rect.width < 305) {
         context.drawImage(imageObj, rect.x / 2.5, rect.y / 3.2 * 0.05, rect.width * 0.52, rect.width * 0.52 * 1.15);
       }
-
-
-
-
     });
   });
 });
