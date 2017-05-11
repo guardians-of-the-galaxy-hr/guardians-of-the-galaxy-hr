@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="motion-detect-div">
+        <div class="motion-detect-button-div">
             <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/sophie_pic.gif')">
                 <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Sophie</button>
             <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/fred_pic.gif')">
@@ -22,8 +22,8 @@
             <button class="btn btn-primary motion-detect-button" ng-click="ctrl.onTakeSnapshotButtonClicked()" ng-show="true">
                 <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Take snapshot  </button>
         </div>
-        <div ng-show="ctrl.showPhotoDisplayCanvas">
-            <canvas id="photo-display-canvas" ></canvas>
+        <div>
+            <canvas id="photo-display-canvas" ng-show="ctrl.showPhotoDisplayCanvas"></canvas>
         </div>
     </div>
 </div>

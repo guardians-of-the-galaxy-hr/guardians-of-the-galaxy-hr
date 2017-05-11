@@ -3,8 +3,8 @@ angular.module('in-your-face')
 
   this.count = 4;
   this.showRemoveEffectButton = false;
-  this.showPhotoDisplayCanvas = true;
-
+  this.showPhotoDisplayCanvas = false;
+  var self = this;
   var video = document.getElementById('video');
 
   // instantiate video camera and photo-booth-canvas
@@ -35,9 +35,7 @@ angular.module('in-your-face')
   };
 
   this.countDown = ()=> {
-    console.log('counting down ', this.count - 1);
-    cdContext.font = '20px Verdana';
-
+    cdContext.font = '40px Verdana';
     // create gradient
     var gradient = cdContext.createLinearGradient(0, 0, pbCanvas.width, 0);
     gradient.addColorStop('0', 'magenta');
@@ -46,23 +44,26 @@ angular.module('in-your-face')
 
     // fill with gradient
     cdContext.fillStyle = gradient;
-    cdContext.clearRect(0, 0, 1000, 1000);
-    cdContext.fillText(this.count - 1, 100, 100);
+    cdContext.clearRect(0, 0, cdCanvas.width, cdCanvas.height);
+    cdContext.fillText(this.count - 1, 10, 50);
 
     this.count--;
     if (this.count > 0) {
       setTimeout(this.countDown, 1000);
     } else if (this.count === 0) {
-      cdContext.clearRect(0, 0, 1000, 1000);
-      console.log('cheese!');
-      cdContext.fillText('cheese!', 100, 100);
+      $scope.$apply( function() {
+        self.showPhotoDisplayCanvas = true;
+      });
+      cdContext.clearRect(0, 0, cdCanvas.width, cdCanvas.height);
+      cdContext.font = '30px Verdana';
+      cdContext.fillText('cheese!', 10, 50);
       setTimeout(function() {
-        cdContext.clearRect(0, 0, 1000, 1000);
+        cdContext.clearRect(0, 0, cdCanvas.width, cdCanvas.height);
         pdContext.drawImage(video, 0, 0, pdCanvas.width, pdCanvas.height);
         pdContext.drawImage(pbCanvas, 0, 0, pdCanvas.width, pdCanvas.height);
         var imageData = pdContext.getImageData(0, 0, pbCanvas.offsetWidth, pbCanvas.offsetHeight);
         pdContext.putImageData(imageData, 0, 0);
-      }, 1000);
+      }, 800);
     }
   };
 
@@ -85,30 +86,3 @@ angular.module('in-your-face')
     });
   });
 });
-
-// relocated directive in the routing
-  // .directive('motionDetect', function() {
-  //   return {
-  //     scope: {
-
-  //     },
-  //     restrict: 'E',
-  //     bindToController: true,
-  //     controllerAs: 'ctrl',
-  //     controller: 'motionDetectCtrl',
-  //     templateUrl: '../templates/motionDetect.html'
-  //   };
-  // });
-
-// change coordinate location, font and size
-  // context.font = '11px Helvetica';
-  // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-  // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
-
-// track human face and print purple rectangle on the screen
-  // context.strokeStyle = '#a64ceb';
-  // context.strokeRect(rect.x / 2.3 - 10, rect.y / 2.3 - 10, rect.width / 2.3, rect.height / 2.3); //rect.x, rect.y
-  // context.font = '8px Helvetica';
-  // context.fillStyle = '#fff';
-  // context.fillText('x: ' + rect.x + 'px', 0 + rect.width / 2 + 5, 0 + 11);
-  // context.fillText('y: ' + rect.y + 'px', 0 + rect.width / 2 + 5, 0 + 22);
