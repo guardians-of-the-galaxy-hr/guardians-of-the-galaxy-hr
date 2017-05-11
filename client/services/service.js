@@ -1,5 +1,4 @@
 app.service('service', function($http, Upload) {
-  console.log ('service', this);
   //send base64 encoded image to server
   this.uploadFile = function (file, galleryName, callback) {
     Upload.upload({
