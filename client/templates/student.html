@@ -1,8 +1,7 @@
 <nav-bar></nav-bar>
-<div class="container inyourface">
-  <div class="row">
-    <div class="col-md-12">
-      <span>Student: {{ctrl.student}} {{ctrl.attributes}}</span>
-    </div>
+  <h1>Breakdown</h1>
+  <div ng-hide="ctrl.image">
+    <img class="placeholder-image" ng-src="https://img.buzzfeed.com/buzzfeed-static/static/2014-10/15/11/enhanced/webdr09/enhanced-2698-1413386870-4.jpg" />
   </div>
-</div>
+  <img ng-src="{{ctrl.image}}" class="individual-student-image"/>
+      <div>Student: {{ctrl.student}} {{ctrl.attributes}}</div>

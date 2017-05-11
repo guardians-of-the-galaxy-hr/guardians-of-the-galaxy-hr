@@ -79,6 +79,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
   this.attributes = {};
 
   service.getStudent(this.student, result => {
-    this.attributes = result.data.images[0].faces[0].attributes;
+    console.log(result.data);
+    this.image = result.data.filePath;
   });
 });

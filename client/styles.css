@@ -175,3 +175,15 @@ body {
   font-size: 1.2em;
   margin-top: 10px;
 }
+
+.placeholder-image {
+  width: 800px;
+  height: 537px;
+  display: block;
+  margin: 0 auto;
+}
+
+.individual-student-image {
+  display: block;
+  margin: 0 auto;
+}
