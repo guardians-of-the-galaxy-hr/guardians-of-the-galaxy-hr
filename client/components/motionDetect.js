@@ -1,20 +1,22 @@
 angular.module('in-your-face')
 .controller('motionDetectCtrl', function() {
 
-  var count = 3;
+  this.count = 4;
   this.showRemoveEffectButton = false;
 
-  // instantiate video camera and photo-booth-canvas
   var video = document.getElementById('video');
-  var photoBoothCanvas = document.getElementById('photo-booth-canvas');
-  var context = photoBoothCanvas.getContext('2d');
+
+  // instantiate video camera and photo-booth-canvas
+  var pbCanvas = document.getElementById('photo-booth-canvas');
+  var pbContext = pbCanvas.getContext('2d');
 
   // instantiate photo-display-canvas
-  var displayCanvas = document.getElementById('photo-display-canvas');
-  displayCanvas.width = photoBoothCanvas.width;
-  displayCanvas.height = photoBoothCanvas.height;
-  var ctx = displayCanvas.getContext('2d');
+  var pdCanvas = document.getElementById('photo-display-canvas');
+  var pdContext = pdCanvas.getContext('2d');
 
+  // instantiate count-down-canvas
+  var cdCanvas = document.getElementById('count-down-canvas');
+  var cdContext = pdCanvas.getContext('2d');
   // constant for picture links
   var selectedPicLink = '';
 
@@ -32,51 +34,53 @@ angular.module('in-your-face')
   };
 
   this.countDown = ()=> {
-    console.log('counting down ', count);
-    // context.clearRect(0, 0, photoBoothCanvas.width, photoBoothCanvas.height);
+    console.log('counting down ', this.count - 1);
+    cdContext.font = '20px Verdana';
 
-    context.font = '30px Verdana';
     // create gradient
-    // var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
-    // gradient.addColorStop('0', 'magenta');
-    // gradient.addColorStop('0.5', 'blue');
-    // gradient.addColorStop('1.0', 'red');
-    // Fill with gradient
-    // context.fillStyle = gradient;
-    context.fillText('Hi', 100, 100);
+    var gradient = cdContext.createLinearGradient(0, 0, pbCanvas.width, 0);
+    gradient.addColorStop('0', 'magenta');
+    gradient.addColorStop('0.5', 'blue');
+    gradient.addColorStop('1.0', 'red');
+
+    // fill with gradient
+    cdContext.fillStyle = gradient;
+    cdContext.clearRect(0, 0, cdContext.width, cdContext.height);
+    cdContext.fillText(this.count - 1, 100, 100);
 
     // decrease the counting variable
-    count--;
-    if (count > 0) {
+    this.count--;
+    if (this.count > 0) {
       setTimeout(this.countDown, 1000);
-    } else if (count === 0) {
-      console.log("cheese!");
-      // get video frame
-      ctx.drawImage(video, 0, 0, displayCanvas.width, displayCanvas.height);
-      // get canvas data
-      ctx.drawImage(photoBoothCanvas, 0, 0, displayCanvas.width, displayCanvas.height);
-      // draw both of them on the same hidden canvas
-      var imageData = ctx.getImageData(0, 0, photoBoothCanvas.offsetWidth, photoBoothCanvas.offsetHeight);
-      // var dataURI = displayCanvas.toDataURL('image/jpeg');
-      ctx.putImageData(imageData, 0, 0);
+    } else if (this.count === 0) {
+      cdContext.clearRect(0, 0, cdContext.width, cdContext.height);
+      console.log('cheese!');
+      cdContext.fillText('cheese!', 100, 100);
+      setTimeout(function() {
+        cdContext.clearRect(0, 0, cdContext.width, cdContext.height);
+        pdContext.drawImage(video, 0, 0, pdCanvas.width, pdCanvas.height);
+        pdContext.drawImage(pbCanvas, 0, 0, pdCanvas.width, pdCanvas.height);
+        var imageData = pdContext.getImageData(0, 0, pbCanvas.offsetWidth, pbCanvas.offsetHeight);
+        pdContext.putImageData(imageData, 0, 0);
+      }, 1000);
     }
   };
 
   this.onTakeSnapshotButtonClicked = () => {
-    count = 3;
+    this.count = 4;
     this.countDown();
   };
 
   // face detection event handling function
   tracker.on('track', function(event) {
-    context.clearRect(0, 0, photoBoothCanvas.width, photoBoothCanvas.height);
+    pbContext.clearRect(0, 0, pbCanvas.width, pbCanvas.height);
     event.data.forEach(function(rect) {
       var imageObj = new Image();
       imageObj.src = selectedPicLink;
       if (rect.width >= 100 && rect.width < 205) {
-        context.drawImage(imageObj, rect.x / 2.5, rect.y / 2.5 * 0.7, rect.width * 0.52, rect.width * 0.52 * 1.15);
+        pbContext.drawImage(imageObj, rect.x / 2.5, rect.y / 2.5 * 0.7, rect.width * 0.52, rect.width * 0.52 * 1.15);
       } else if (rect.width >= 205 && rect.width < 305) {
-        context.drawImage(imageObj, rect.x / 2.5, rect.y / 3.2 * 0.05, rect.width * 0.52, rect.width * 0.52 * 1.15);
+        pbContext.drawImage(imageObj, rect.x / 2.5, rect.y / 3.2 * 0.05, rect.width * 0.52, rect.width * 0.52 * 1.15);
       }
     });
   });

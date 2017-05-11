@@ -98,6 +98,11 @@
   margin-bottom: 100px;
 }
 
+#count-down-canvas {
+  width:720px;
+  height:400px;
+}
+
 .inyourface-motion-detect {
   position:relative;
   margin-top:30px;
