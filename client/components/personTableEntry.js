@@ -12,4 +12,4 @@ angular.module('in-your-face')
     },
     templateUrl: './templates/personTableEntry.html'
   };
-});``
+});

@@ -32,13 +32,13 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
       controller: 'celebritiesCtrl',
       controllerAs: 'ctrl',
       bindToController: true
-    })
+    });
 
     // Basic setup
     // https://github.com/pc035860/angular-easyfb#configuration
-    ezfbProvider.setInitParams({
-      appId: '1929333797297736'
-    });
+  ezfbProvider.setInitParams({
+    appId: '1929333797297736'
+  });
 })
 .controller('landingCtrl', function(ezfb, $window) {
   this.goToClassmates = () => {
@@ -76,7 +76,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
 })
 .controller('studentCtrl', function($routeParams, service) {
   this.student = $routeParams.student;
-  this.attributes = {}
+  this.attributes = {};
 
   service.getStudent(this.student, result => {
     this.attributes = result.data.images[0].faces[0].attributes;

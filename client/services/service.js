@@ -1,9 +1,8 @@
 app.service('service', function($http, Upload) {
-  console.log ('service', this);
   //send base64 encoded image to server
   this.uploadFile = function (file, galleryName, callback) {
     Upload.upload({
-      url: 'upload/url/'+galleryName,
+      url: 'upload/url/' + galleryName,
       data: {file: file}
     }).then(function (resp) {
       console.log('Success ', typeof(resp));
@@ -20,7 +19,7 @@ app.service('service', function($http, Upload) {
     console.log ('get student service');
     var options = {
       method: 'GET',
-      url: '/classmates/'+student,
+      url: '/classmates/' + student,
     };
 
     $http(options)
