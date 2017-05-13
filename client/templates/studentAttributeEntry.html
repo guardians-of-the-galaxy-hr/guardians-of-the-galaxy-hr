@@ -35,20 +35,20 @@
     <li>
       Age : {{ctrl.detect.images[0].faces[0].attributes.age}}
     </li>
-  <li>
-      Asian : {{ctrl.detect.images[0].faces[0].attributes.asian * 100}}%
+    <li>
+      Asian : {{(ctrl.detect.images[0].faces[0].attributes.asian * 100).toFixed(2)}}%
     </li>
     <li>
-      Black : {{ctrl.detect.images[0].faces[0].attributes.black * 100}}%
+      Black : {{(ctrl.detect.images[0].faces[0].attributes.black * 100).toFixed(2)}}%
     </li>
     <li>
-      Hispanic : {{ctrl.detect.images[0].faces[0].attributes.hispanic * 100}}%
+      Hispanic : {{(ctrl.detect.images[0].faces[0].attributes.hispanic * 100).toFixed(2)}}%
     </li>
     <li>
-      White : {{ctrl.detect.images[0].faces[0].attributes.white * 100}}%
+      White : {{(ctrl.detect.images[0].faces[0].attributes.white * 100).toFixed(2)}}%
     </li>
     <li>
-      Other : {{ctrl.detect.images[0].faces[0].attributes.other * 100}}%
+      Other : {{(ctrl.detect.images[0].faces[0].attributes.other * 100).toFixed(2)}}%
     </li>
   </div>
 </ul>
