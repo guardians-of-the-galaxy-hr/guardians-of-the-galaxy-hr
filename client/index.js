@@ -74,12 +74,17 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
   this.galleryName = 'celebrity';
   this.picCallback = service.picCallback.bind(this);
 })
-.controller('studentCtrl', function($routeParams, service) {
+.controller('studentCtrl', function($routeParams, service, $window) {
   this.student = $routeParams.student;
-  this.attributes = {};
+  this.attributes = {}
+  this.show = false;
+  this.goToClassmates = () => {
+    $window.location.href = '/#/classmates';
+  };
 
   service.getStudent(this.student, result => {
-    console.log(result.data);
+    this.analyze = result.data.analyzeResult;
+    this.detect = result.data.detectResult;
     this.image = result.data.filePath;
   });
 });

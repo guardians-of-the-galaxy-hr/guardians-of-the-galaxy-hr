@@ -1,7 +1,16 @@
 <nav-bar></nav-bar>
-  <h1>Breakdown</h1>
-  <div ng-hide="ctrl.image">
-    <img class="placeholder-image" ng-src="https://img.buzzfeed.com/buzzfeed-static/static/2014-10/15/11/enhanced/webdr09/enhanced-2698-1413386870-4.jpg" />
+  <div class="student-container">
+    <button class="btn btn-warning" style="float:right" ng-click="ctrl.goToClassmates()">Go Back</button>
   </div>
-  <img ng-src="{{ctrl.image}}" class="individual-student-image"/>
-      <div>Student: {{ctrl.student}} {{ctrl.attributes}}</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6">
+      <h1 class="student-header" align="center">Student Summary</h1>
+      <p class="student-name">Student Name: {{ctrl.student}}</p>
+      <student-attribute-entry analyze="ctrl.analyze" detect="ctrl.detect"/></student-attribute-entry>
+    </div>
+    <div class="col-xs-6">
+     <img class="placeholder-image" ng-src={{ctrl.image||"../assets/loading.gif"}} />
+    </div>
+  </div>
+</div>
