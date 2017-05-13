@@ -204,3 +204,23 @@ body {
   background-color: white;
   font-size: 25px;
 }
+
+/*facebook Login*/
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 57px;
+}
