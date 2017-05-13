@@ -1,32 +1,206 @@
+.background {
+  background: #FFB75E;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ED8F03, #FFB75E);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ED8F03, #FFB75E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.inyourface {
+  background-color:white;
+  margin-top:80px;
+  padding-top:40px;
+}
+
 .person-row {
-  width: 100%;
+  width:100%;
+  margin-top:10px
+}
+
+.person-score {
+  margin-left: 10px;
 }
 
 .person-name {
-  display: inline-block;
-  color: red;
-  width: 30%;
-  font-family: Scada;
-  font-size: 2.0em;
-  font-weight: 700;
+  display:inline-block;
+  width:30%;
+  font-family:Scada;
+  font-size:2.0em;
+  font-weight:700;
+  text-align:center;
 }
 
-.person-image {
+#person-table-container {
+  margin-left:25px;
+  margin-right:25px;
+}
+
+.person-table-winner-deco {
+  position:absolute;
+  top: 20px;
+  z-index: 2;
+  height:60px;
+  margin-top:5px;
+  margin-left:5px;
+  /*width:40px;*/
+}
+
+.person-table-entry-pic {
+  height:130px;
+  z-index: 1;
+}
+
+.person-table-entry-align {
+  vertical-align: middle;
+}
+
+#person-table-entry-container {
+  margin-bottom:20px;
+  position:relative;
+  text-align:center;
+}
+
+.webcam-buttons-div {
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.webcam-button {
+  margin:10px;
+  vertical-align:middle;
+}
+
+#webcam-module-container {
+  vertical-align:middle;
+  text-align:center;
+}
+
+#motion-detect-container {
+  vertical-align:middle;
+  text-align:center;
+}
+
+#video {
+  z-index:1;
+  position:relative;
+  width:720px;
+  height:400px;
+}
+
+#photo-booth-canvas {
+  z-index: 2;
+  position:absolute;
+  width:720px;
+  height:400px;
+  margin-left: -720px;
+}
+
+#photo-display-canvas {
+  position:relative;
+  width:720px;
+  height:400px;
+  margin-bottom:100px;
+}
+
+#count-down-canvas {
+  z-index:3;
+  position:absolute;
+  width:720px;
+  height:400px;
+  margin-left: -720px;
+}
+
+.inyourface-motion-detect {
+  position:relative;
+  margin-top:30px;
+}
+
+.motion-detect-button-div {
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.motion-detect-button {
+  margin:10px;
+  vertical-align: middle;
+}
+
+img.header {
+  filter: gray; /* IE6-9 */
+  -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+  box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+  margin-bottom:20px;
+}
+
+img:hover {
+  filter: none; /* IE6-9 */
+  -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+
+body {
+  background: url(./assets/graytravel.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.jumbotron{
+  background: rgba(220, 220, 220, 0.75);
+  color:#fff;
+}
+
+.carousel-caption {
+  text-shadow: 1.5px 1.5px rgba(0,0,0,0.75);
+}
+
+.carousel-caption h1 {
+  font-size: 4em;
+}
+
+.carousel-caption h4 {
+  margin-bottom: 20px;
+}
+
+.team-member-photo {
+  width: 80%;
+  height: 80%;
+}
+
+.team-name {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.team-member-name {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.placeholder-image {
+  width: 800px;
+  height: 537px;
+  display: inline;
+  margin: 0 auto;
+  border: dotted 20px;
+}
+
+.student-container {
+  margin: 50px 0px 50px 0px;
+}
+
+.student-attributes {
+  font-family: "Scada";
+  background-color: white;
+  font-size: 25px;
+}
+
+.student-header {
+  font-family:"Scada";
+  padding: 20px;
   background-color: white;
 }
 
-.blue {
-    background-color: blue;
-}
-
-.green {
-    background-color: green;
-}
-
-.yellow {
-    background-color: yellow;
-}
-
-.pink {
-    background-color: pink;
+.student-name {
+  background-color: white;
+  font-size: 25px;
 }

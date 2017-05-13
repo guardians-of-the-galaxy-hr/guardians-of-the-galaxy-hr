@@ -1,0 +1,9 @@
+<div id="person-table-container">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-xs-4 person-table-entry-align" ng-repeat="($index, person) in ctrl.persons track by $index">
+      <div>
+        <person-table-entry  person="person" index="$index"></person-table-entry>
+      </div>
+    </div>
+  </div>
+</div>

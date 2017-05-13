@@ -3,14 +3,33 @@
 <head>
   <title>In Your Face</title>
   <script src="/node_modules/angular/angular.js"></script>
+  <script src="/node_modules/webcam-directive/dist/webcam.min.js"></script>
+  <script src="/node_modules/angular-route/angular-route.min.js"></script>
+  <script src="/node_modules/tracking/build/tracking-min.js"></script>
+  <script src="/node_modules/tracking/build/data/face.js"></script>
+  <script src="/node_modules/tracking/build/data/eye.js"></script>
+  <script src="/node_modules/tracking/build/data/mouth.js"></script>
+  <!--<script src="/node_modules/dat.gui/build/dat.gui.min.js"></script>-->
+  <!--Client base64 file upload-->
+  <!--<script src="/bower_components/ng-file-upload/ng-file-upload.min.js"></script>-->
+  <script src="/node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+  <script src="/node_modules/angular-easyfb/src/angular-easyfb.js"></script>
   <script src="index.js"></script>
-  <script src="components/personsTable.js"></script>
-  <script src="components/personsTableEntry.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Scada:400,700" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <script src="services/service.js"></script>
+  <script src="components/navBar.js"></script>
+  <script src="components/personTable.js"></script>
+  <script src="components/personTableEntry.js"></script>
+  <script src="components/webcamModule.js"></script>
+  <script src="components/motionDetect.js"></script>
+  <script src="components/studentAttributeEntry.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Scada:400,700" rel="stylesheet">
+  <script src="https://use.fontawesome.com/787320064d.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <app ng-app="in-your-face"></app>
+<body class="background" ng-app="in-your-face">
+  <div ng-view></div>
 </body>
 </html>

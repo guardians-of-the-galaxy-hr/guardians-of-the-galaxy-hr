@@ -1,37 +1,90 @@
-var classmates = [
-  {
-    name: 'Edward Kim',
-    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwSzZETlI5aVhSZE0=w2560-h1398-iv1',
-  },
-  {
-    name: 'Mahima Shrikanta',
-    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwaEhsOWI3NUtwcTQ=w2560-h1398-iv2',
-  },
-  {
-    name: 'Mike Diodoro',
-    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwb2c2MUMzeDNJbTg=w2560-h1398-iv1',
-  },
-  {
-    name: 'Sean Feng',
-    imageUrl: 'https://lh3.google.com/u/0/d/0B3AAJJ2UZGHwUkN4QmpzLWJLRjQ=w2560-h1398-iv1',
-  }
-];
+var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngRoute'])
 
-angular.module('in-your-face', [])
-.directive('app', function() {
-  return {
-    restrict: 'E',
-    controller: function($scope) {
-      $scope.persons = classmates;
-    },
-    template:
-      `<div class="container">
-        <div class="row">
-          <div class="col-md-7 yellow">Placeholder Text</div>
-          <div class="col-md-5 pink">
-            <persons-table persons=$scope.persons></persons-table>
-          </div>
-        </div>
-      </div>`,
+.config(function($routeProvider, $locationProvider, ezfbProvider) {
+  $locationProvider.hashPrefix('');
+  $routeProvider
+    .when('/', {
+      templateUrl: '/templates/landing.html',
+      controller: 'landingCtrl',
+      controllerAs: 'ctrl',
+      bindToController: true
+    })
+    .when('/classmates', {
+      templateUrl: '/templates/rankings.html',
+      controller: 'classmatesCtrl',
+      controllerAs: 'ctrl',
+      bindToController: true
+    })
+    .when('/classmates/:student', {
+      templateUrl: '/templates/student.html',
+      controller: 'studentCtrl',
+      controllerAs: 'ctrl',
+      bindToController: true
+    })
+    .when('/photobooth', {
+      templateUrl: '/templates/motionDetect.html',
+      controller: 'motionDetectCtrl',
+      controllerAs: 'ctrl',
+      bindToController: true
+    })
+    .when('/celebrities', {
+      templateUrl: 'templates/rankings.html',
+      controller: 'celebritiesCtrl',
+      controllerAs: 'ctrl',
+      bindToController: true
+    });
+
+    // Basic setup
+    // https://github.com/pc035860/angular-easyfb#configuration
+  ezfbProvider.setInitParams({
+    appId: '1929333797297736'
+  });
+})
+.controller('landingCtrl', function(ezfb, $window) {
+  this.goToClassmates = () => {
+    $window.location.href = '/#/classmates';
   };
+
+  this.goToCelebrities = () => {
+    $window.location.href = '/#/celebrities';
+  };
+
+  this.goToFriends = () => {
+    $window.location.href = '/#/friends';
+  };
+
+  //Facebook Login
+  this.login = () => {
+    // Calling FB.login with required permissions specified
+    // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.0
+    ezfb.login((res) => {
+      console.log(res);
+      // no manual $scope.$apply, I got that handled
+      if (res.authResponse) { this.takePicPage = false; }
+    }, {scope: 'email,user_likes'});
+  };
+})
+.controller('classmatesCtrl', function(ezfb, service) {
+  this.persons = [];
+  this.galleryName = 'hrsf-76';
+  this.picCallback = service.picCallback.bind(this);
+})
+.controller('celebritiesCtrl', function(ezfb, service) {
+  this.persons = [];
+  this.galleryName = 'celebrity';
+  this.picCallback = service.picCallback.bind(this);
+})
+.controller('studentCtrl', function($routeParams, service, $window) {
+  this.student = $routeParams.student;
+  this.attributes = {}
+  this.show = false;
+  this.goToClassmates = () => {
+    $window.location.href = '/#/classmates';
+  };
+
+  service.getStudent(this.student, result => {
+    this.analyze = result.data.analyzeResult;
+    this.detect = result.data.detectResult;
+    this.image = result.data.filePath;
+  });
 });
