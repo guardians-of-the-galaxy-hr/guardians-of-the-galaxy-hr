@@ -89,7 +89,7 @@ app.get('/auth/facebook/callback',
     console.log("Redirecting after login"+req.protocol + '://' + req.get('host') + req.originalUrl);
     console.log(req.protocol+'://'+process.env.HOST+':'+process.env.PORT+'/#/friends')
     //res.redirect(process.env.PROTOCOL+'://'+process.env.HOST+':'+process.env.PORT+'/#/friends');
-    res.redirect('/#/friends');
+    res.redirect('https://in-your-face-staging-pr-66.herokuapp.com/#/friends');
   });
 
 //Facebook logout
