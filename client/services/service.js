@@ -19,7 +19,7 @@ app.service('service', function($http, Upload) {
     console.log ('get student service');
     var options = {
       method: 'GET',
-      url: '/classmates/' + student,
+      url: '/classmates/'+student
     };
 
     $http(options)

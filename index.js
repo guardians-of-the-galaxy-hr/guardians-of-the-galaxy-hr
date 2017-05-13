@@ -78,15 +78,29 @@ app.get('/classmates', (req, res) => {
 app.get('/classmates/:student', (req, res) => {
   var galleryName = 'hrsf-76';
   console.log ('classmates student get route');
-  var student = req.params.student;
+  var studentInfo = {};
+  studentInfo.studentName = req.params.student;
+  studentInfo.filePath;
+  studentInfo.detectResult;
+  studentInfo.studentId;
 
-  database.photo.findAsync({userName: student, galleryName: galleryName})
+  database.photo.findAsync({userName: studentInfo.studentName, galleryName: galleryName})
   .then((result) => {
-    return kairos.detectAsync(result[0].filePath)
+    studentInfo.filePath = result[0].filePath;
+    return kairos.detectAsync(studentInfo.filePath);
   })
-  .then((results) => {
-    res.send(results);
+  .then((result) => {
+    studentInfo.detectResult = JSON.parse(result);
+    return kairos.postAsync(studentInfo.filePath);
   })
+  .then((result) => {
+    studentInfo.studentId = JSON.parse(result).id;
+    return kairos.analyzeAsync(studentInfo.studentId);
+  })
+  .then((result) => {
+    studentInfo.analyzeResult = JSON.parse(result);
+    res.send(studentInfo);
+  }) 
   .catch((error) => {
     console.log ('error', error);
   });
