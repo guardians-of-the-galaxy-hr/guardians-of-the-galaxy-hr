@@ -89,8 +89,8 @@ app.get('/auth/facebook/callback',
     console.log("Redirecting after login"+req.protocol + '://' + req.get('host') + req.originalUrl);
     //res.redirect(process.env.PROTOCOL+'://'+process.env.HOST+':'+process.env.PORT+'/#/friends');
     console.log("Config Details from Herokuuuuu", process.env.IP);
-   // res.redirect(process.env.IP+'/#/friends');
-   res.redirect('/#/friends')
+   res.redirect(process.env.IP+'/#/friends');
+   //res.redirect('/#/friends');
   });
 
 //Facebook logout

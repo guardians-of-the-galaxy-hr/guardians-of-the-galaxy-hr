@@ -30,7 +30,7 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
       controller: 'motionDetectCtrl',
       controllerAs: 'ctrl',
       bindToController: true,
-      access: {restricted: true}
+      access: {restricted: false}
     })
     .when('/celebrities', {
       templateUrl: 'templates/rankings.html',
