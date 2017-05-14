@@ -10,6 +10,7 @@ app.controller('facebookFriendsCtrl', function(facebookService, $location, $rout
   this.displayFriends = true;
   this.displayLoading = false;
   this.displayFriendDetails = false;
+  this.displayError = false;
 
   //Get Facebook user friends Details
   this.getFacebookFriendsDetails = (response) => {
@@ -28,6 +29,10 @@ app.controller('facebookFriendsCtrl', function(facebookService, $location, $rout
     this.displayLoading = false;
     if (err) {
       this.Error = err;
+      this.displayError = true;
+    } else if (result.data.Errors) {
+      this.Error = result.data.Errors[0].Message;
+      this.displayError = true;
     } else {
       this.FriendDetails = result.data.images[0];
       console.log(this.FriendDetails);
@@ -46,6 +51,7 @@ app.controller('facebookFriendsCtrl', function(facebookService, $location, $rout
   //Back Button
   this.goBack = () => {
     this.displayFriendDetails = false;
+    this.displayError = false;
     this.displayFriends = true;
   };
 

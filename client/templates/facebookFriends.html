@@ -68,6 +68,12 @@
             </div>
            
    </div>
+   <div ng-show="ctrl.displayError" ng-cloak>
+    <p> Sorry we are unable to process your request</p>
+    <p>Reason: {{ctrl.Error}}</p>
+     <p> Please try again or select different friend</p>
+     <button ng-click = "ctrl.goBack()"class="btn btn-warning pull-right">Back</button>
+   </div>
    </div>
 
 

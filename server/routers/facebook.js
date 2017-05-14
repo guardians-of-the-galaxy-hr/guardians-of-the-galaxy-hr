@@ -47,9 +47,11 @@ router.route('/getFriendsFaceAnalysis').get(function(req, res) {
   var personDetails= JSON.parse(req.query.person);
   kairos.detectAsync(personDetails.picture.data.url)
   .then((result)=> {
+    console.log('result', result);
     res.send(result);
   })
   .catch((error)=> {
+    console.log('error', error);
     res.send(error);
   });
 
