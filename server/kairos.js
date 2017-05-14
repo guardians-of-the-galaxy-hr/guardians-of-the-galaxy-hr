@@ -95,7 +95,6 @@ const recognize = (uploadImage, galleryName, callback) => {
 module.exports.recognize = recognize;
 
 const detect = (imageUrl, callback) => {
-  console.log ('kairos detect');
   request({
     method: 'POST',
     url: kairosApiUrl + '/detect',
@@ -111,7 +110,7 @@ const detect = (imageUrl, callback) => {
       callback(err, body);
     }
   });
-}
+};
 
 module.exports.detect = detect;
 

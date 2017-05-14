@@ -1,10 +1,15 @@
-var express = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
 //const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const FB = require('fb');
 const fbAuth = require('../facebookAuth')(passport);
+//Kairos
+const Promise = require('bluebird');
+const kairos = require('../kairos');
+Promise.promisifyAll(kairos);
+
 var router = express.Router();
 
 //Passport session settings
@@ -34,6 +39,20 @@ router.route('/getFriendsDetails').get(function(req, res) {
     res.send(response.taggable_friends.data);
   });
   
+
+});
+
+//Get selected friends face analysis details
+router.route('/getFriendsFaceAnalysis').get(function(req, res) {
+  var personDetails= JSON.parse(req.query.person);
+  kairos.detectAsync(personDetails.picture.data.url)
+  .then((result)=> {
+    res.send(result);
+  })
+  .catch((error)=> {
+    res.send(error);
+  });
+
 
 });
 module.exports = router;

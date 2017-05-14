@@ -103,11 +103,12 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
 })
 .controller('studentCtrl', function($routeParams, service, $window) {
   this.student = $routeParams.student;
-  this.attributes = {}
+  this.attributes = {};
   this.show = false;
   this.goToClassmates = () => {
     $window.location.href = '/#/classmates';
   };
+
 
   service.getStudent(this.student, result => {
     this.analyze = result.data.analyzeResult;

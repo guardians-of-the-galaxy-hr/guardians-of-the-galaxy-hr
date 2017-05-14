@@ -87,10 +87,9 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
     console.log("Redirecting after login"+req.protocol + '://' + req.get('host') + req.originalUrl);
-    console.log("******************************heroku details**************",process.env.IP+'/#/friends');
     //res.redirect(process.env.PROTOCOL+'://'+process.env.HOST+':'+process.env.PORT+'/#/friends');
-    res.redirect(process.env.IP+'/#/friends');
-    //res.redirect('/#/friends')
+    //res.redirect(process.env.IP+'/#/friends');
+    res.redirect('/#/friends')
   });
 
 //Facebook logout
