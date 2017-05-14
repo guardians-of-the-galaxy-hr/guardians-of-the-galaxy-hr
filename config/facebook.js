@@ -1,7 +1,7 @@
 var facebookAuth = {
 
-  clientID: '1929333797297736',
-  clientSecret: '23c319fd5e5cb11f73ea365d15c89052',
+  clientID: '282508915543842',
+  clientSecret: '4741930c1f55e715610de159d669900a',
   callbackURL: '/auth/facebook/callback',
   protocol: process.env.PROTOCOL,
   passReqToCallback: true,

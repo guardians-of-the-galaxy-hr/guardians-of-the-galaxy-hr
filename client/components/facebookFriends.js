@@ -1,6 +1,7 @@
 
 app.controller('facebookFriendsCtrl', function(facebookService, $location, $route) {
 
+  $('#memberModal').modal('show');
   this.userDetails;
   this.friends;
   this.Error;
@@ -35,7 +36,6 @@ app.controller('facebookFriendsCtrl', function(facebookService, $location, $rout
       this.displayError = true;
     } else {
       this.FriendDetails = result.data.images[0];
-      console.log(this.FriendDetails);
       this.displayFriendDetails = true;
        
     }
@@ -44,7 +44,6 @@ app.controller('facebookFriendsCtrl', function(facebookService, $location, $rout
     this.displayFriends = false;
     this.displayLoading = true;
     this.selectedFriends = person;
-    console.log(this.selectedFriends);
     facebookService.facebookFriendDetailsAnalyze (person, this.friendsFaceDetails);
   };
 

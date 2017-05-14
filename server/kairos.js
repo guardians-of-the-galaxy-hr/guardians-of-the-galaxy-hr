@@ -115,7 +115,7 @@ const detect = (imageUrl, callback) => {
 module.exports.detect = detect;
 
 const post = (imageUrl, callback) => {
-  console.log ('kairos post');
+  console.log ('kairos post', imageUrl);
   request({
     method: 'POST',
     url: kairosApiUrl + '/v2/media?source=' + imageUrl,
@@ -135,7 +135,7 @@ const post = (imageUrl, callback) => {
 module.exports.post = post;
 
 const analyze = (id, callback) => {
-  console.log ('kairos analyze');
+
   const options = {
     method: 'GET',
     url: kairosApiUrl + '/v2/analytics/' + id,
