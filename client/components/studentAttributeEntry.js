@@ -9,7 +9,6 @@ angular.module('in-your-face')
     controllerAs: 'ctrl',
     bindToController: true,
     controller: function($scope) {
-      console.log($scope)
     },
     templateUrl: './templates/studentAttributeEntry.html'
   };
