@@ -1,44 +1,38 @@
 <nav-bar></nav-bar>
-
-
 <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                 <h4 class="modal-title" id="memberModalLabel">Thank you for signing in!</h4>
-
-            </div>
-            <div class="modal-body">
-                <p> Instructions:</p>
-                 <ul>
-                   <li>Your Taggable Friends List is provided</li>
-                   <li>Click on any of your friend's profile pic to get some interesting details </li>
-                 </ul>
-  
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="memberModalLabel">Thank you for signing in!</h4>
+      </div>
+      <div class="modal-body">
+        <p> Instructions:</p>
+        <ul>
+          <li>Your Taggable Friends List is provided</li>
+          <li>Click on any of your friend's profile pic to get some interesting details</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 <div class="container inyourface">
-  <div ng-show = "ctrl.displayFriends" ng-cloak>
-  <div class = "row">
-    <div class="col-md-12">
-      <!--<person-table persons="ctrl.persons"></person-table>-->
-      <h4 class= "text-center">Facebook FriendsList</h4>
-      <div id="person-table-container">
-        <div class="row">
-          <div class="col-lg-4 col-md-4 col-xs-4 person-table-entry-align" ng-repeat="($index, person) in ctrl.friends track by $index">
-            <div>
-              <!--<person-table-entry  person="person" index="$index"></person-table-entry>-->
+  <div ng-show="ctrl.displayFriends" ng-cloak>
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class= "text-center">Facebook FriendsList</h4>
+        <div id="person-table-container">
+          <div class="row">
+            <div class="col-xs-4 person-table-entry-align" ng-repeat="($index, person) in ctrl.friends track by $index">
               <div id="person-table-entry-container">
                 <span>{{person.name}}</span>
                 <div>
-               <img class="person-table-entry-pic" ng-src= {{person.picture.data.url}} ng-click= "ctrl.selectedFriend(person)" />
+                  <img class="person-table-entry-pic" ng-src= {{person.picture.data.url}} ng-click= "ctrl.selectedFriend(person)" />
                 </div>
               </div>
             </div>
@@ -46,55 +40,49 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="row" ng-show = "ctrl.displayLoading" ng-cloak>
+    <div class="col-md-offset-4 col-md-8">
+      <img ng-src={{'../assets/loading2.gif'}} />
     </div>
   </div>
-<div class="row" ng-show = "ctrl.displayLoading" ng-cloak>
-   <div class="col-md-offset-4 col-md-8">
-      <img ng-src={{'../assets/loading2.gif'}} />
-   </div>
-</div>
-            <div class="row row-margin-bottom" ng-show = "ctrl.displayFriendDetails" ng-cloak>
-            <div class="col-md-offset-2 col-md-9 no-padding lib-item" data-category="view">
-                <div class="lib-panel">
-                    <div class="row box-shadow">
-                        <div class="col-md-6">
-                            <img class="lib-img-show" ng-src={{ctrl.selectedFriends.picture.data.url}}>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="lib-row lib-header">
-                                {{ctrl.selectedFriends.name}}
-                                <div class="lib-header-seperator"></div>
-                            </div>
-                            
-                            <div class="lib-row lib-desc">
-                              <p>{{ctrl.FriendDetails.faces.length}} Face Detected.</p>
-                              <ul ng-repeat= "face in ctrl.FriendDetails.faces">
-                                <li>Age: {{face.attributes.age}}</li>
-                                <li>Sex: {{face.attributes.gender.type === "F" ? "Female": "Male" }}</li>
-                                <ul>Ethnicity Summary</ul>
-                                  <li>Asian:{{face.attributes.asian *100 | number:0}} %</li>
-                                  <li>Black:{{face.attributes.black *100 | number:0}} %</li>
-                                  <li>Hispanic:{{face.attributes.hispanic *100 | number:0}} %</li>
-                                  <li>White:{{face.attributes.white *100 | number:0}} %</li>
-                                  <li>other:{{face.attributes.other *100 | number:0}} %</li>
-                                   <hr>
-                                </ul>
-                                <hr>
-                                 <button ng-click = "ctrl.goBack()"class="btn btn-warning pull-right">Back</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="row row-margin-bottom" ng-show = "ctrl.displayFriendDetails" ng-cloak>
+    <div class="col-md-offset-2 col-md-9 no-padding lib-item" data-category="view">
+      <div class="lib-panel">
+        <div class="row box-shadow">
+          <div class="col-md-6">
+            <img class="lib-img-show" ng-src={{ctrl.selectedFriends.picture.data.url}}>
+          </div>
+          <div class="col-md-6">
+            <div class="lib-row lib-header">
+              {{ctrl.selectedFriends.name}}
+              <div class="lib-header-seperator"></div>
             </div>
-           
-   </div>
-   <div ng-show="ctrl.displayError" ng-cloak>
-    <p> Sorry we are unable to process your request</p>
+            <div class="lib-row lib-desc">
+              <p>{{ctrl.FriendDetails.faces.length}} Face Detected.</p>
+              <ul ng-repeat= "face in ctrl.FriendDetails.faces">
+                <li>Age: {{face.attributes.age}}</li>
+                <li>Sex: {{face.attributes.gender.type === "F" ? "Female": "Male" }}</li>
+                <ul>Ethnicity Summary</ul>
+                <li>Asian:{{face.attributes.asian *100 | number:0}} %</li>
+                <li>Black:{{face.attributes.black *100 | number:0}} %</li>
+                <li>Hispanic:{{face.attributes.hispanic *100 | number:0}} %</li>
+                <li>White:{{face.attributes.white *100 | number:0}} %</li>
+                <li>other:{{face.attributes.other *100 | number:0}} %</li>
+                <hr>
+              </ul>
+              <hr>
+              <button ng-click = "ctrl.goBack()"class="btn btn-warning pull-right">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="ctrl.displayError" ng-cloak>
+    <p>Sorry we are unable to process your request</p>
     <p>Reason: {{ctrl.Error}}</p>
-     <p> Please try again or select different friend</p>
-     <button ng-click = "ctrl.goBack()"class="btn btn-warning pull-right">Back</button>
-   </div>
-   </div>
-
-
-
+    <p>Please try again or select different friend</p>
+    <button ng-click = "ctrl.goBack()"class="btn btn-warning pull-right">Back</button>
+  </div>
+</div>
