@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const api = require('./config/api.js');
 const request = require('request');
 const url = require('url');
-// maultiParty
+
+// multiParty
 const multiparty = require('multiparty');
 const util = require('util');
 const base64 = require('file-base64');
@@ -35,7 +36,6 @@ app.use(cookieParser());
 //Route for facebook
 app.use('/facebook', facebook);
 
-
 //Passport session settings
 app.use(session({
   secret: 'InYourFace', // session secret
@@ -45,89 +45,45 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-//
-// app.use(function (req, res, next) {
-//   res.locals.login = req.isAuthenticated();
-//   next();
-// });
-
-
-
 //Receive enncoded image and decode and save as pic.jpg
 app.post('/upload/url/:gallery', (req, res) => {
   var galleryName = req.params.gallery;
-
-  // console.log('hello from uploader');
   var form = new multiparty.Form();
 
   form.parse(req, (err, fields, files) => {
     if (!err) {
       kairos.recognize(fields.file[0].split(',')[1], galleryName, (kairosResults) => {
         console.log('results from kairos', typeof(kairosResults));
-       // res.json(util.inspect(kairoResults));
         res.send((kairosResults));
       });
     }
-    //decoding back to image file text.jpg
-    // base64.decode(fields.file[0].split(',')[1], 'pic.jpg', function(err, output) {
-    //   if (!err) {
-    //     console.log('success');
-    //     //Here we can call the Kairo's recognize function and pass the base64 encoded string as fields.file[0].split(',')[1]
-    //     //testing(fields.file[0].split(',')[1]);
-    //   }
-    // });
   });
 });
 
 //Facebook Auth
-app.get('/auth/facebook',
-  passport.authenticate('facebook', { scope: ['email', 'user_friends'] }));
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_friends'] }));
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
-    console.log('Redirecting after login' + req.protocol + '://' + req.get('host') + req.originalUrl);
-    //res.redirect(process.env.PROTOCOL+'://'+process.env.HOST+':'+process.env.PORT+'/#/friends');
-    console.log('Config Details from Herokuuuuu', process.env.IP);
+    // console.log('Redirecting after login' + req.protocol + '://' + req.get('host') + req.originalUrl);
+    // res.redirect(process.env.PROTOCOL+'://'+process.env.HOST+':'+process.env.PORT+'/#/friends');
+    // console.log('Config Details from Heroku', process.env.IP);
     res.redirect(process.env.IP + '/#/friends');
-   //res.redirect('/#/friends');
-  });
+    // res.redirect('/#/friends');
+  }
+);
 
 //Facebook logout
 app.get('/logout', function(req, res, next) {
-  console.log('Request user', req.user);
-
-  // console.log('before', req.user);
-  // req.session.destroy(function (err) {
-  //   if (err) { console.log(err); }
-  //  // fbAuth.deleteSession(req.user);
-  //   // database.facebook.findOneAndUpdateAsync({facebookId: req.user.facebookId},
-  //   // {$set: {token: ''}}, {new: true})
-  //   // .then(function(result) {
-  //   //   req.logout();
-  //   //   res.send({'user': req.user });
-  //   // })
-  //   // .catch(function(err) {
-  //   //   res.send(err);
-  //   // });
-  //     req.logout();
-  // res.send({'user': req.user });
-
-  // });
-  // FB.api('/me/permissions', 'DELETE', function(response) {
-  //   console.log(response); //gives true on app delete success
-  // });
   req.logout();
   res.send({'user': req.user });
-
 });
 
 //Facebook isLoggedIn middleware
 app.get('/isLoggedIn', function(req, res) {
   res.send({'auth': req.isAuthenticated(), 'user': req.user});
 });
-
-
 
 app.get('/classmates', (req, res) => {
   var galleryName = 'hrsf-76';
@@ -146,9 +102,9 @@ app.get('/classmates', (req, res) => {
     if (error) {
       console.log (err);
     } else {
-      console.log('Status:', response.statusCode);
-      console.log('Headers:', JSON.stringify(response.headers));
-      console.log('Response:', body);
+      // console.log('Status:', response.statusCode);
+      // console.log('Headers:', JSON.stringify(response.headers));
+      // console.log('Response:', body);
       res.send(body);
     }
   });

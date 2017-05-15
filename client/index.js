@@ -63,8 +63,8 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
         }
       };
       facebookService.facebookIsLogged (isLoggedIn);
-
-    });
+    }
+  );
 })
 
 .controller('landingCtrl', function(ezfb, $window, facebookService) {
@@ -108,7 +108,6 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
   this.goToClassmates = () => {
     $window.location.href = '/#/classmates';
   };
-
 
   service.getStudent(this.student, result => {
     this.analyze = result.data.analyzeResult;
