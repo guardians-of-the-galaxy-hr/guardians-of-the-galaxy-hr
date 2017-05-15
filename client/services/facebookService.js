@@ -71,5 +71,23 @@ app.service('facebookService', function ($http) {
 
   };
 
+//Receive face analyses results of selected friend from kairos
+  this.facebookFriendDetailsAnalyze = (friendDetails, callback) => {
+    var options = {
+      method: 'GET',
+      url: '/facebook/getFriendsFaceAnalysis',
+      params: { person: friendDetails },
+    };
+    $http(options)
+      .then(
+      function success(result) {
+        callback(null, result);
+
+
+      },
+      function error(err) {
+        callback(err);
+      });
+  };
 
 });

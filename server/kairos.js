@@ -95,7 +95,6 @@ const recognize = (uploadImage, galleryName, callback) => {
 module.exports.recognize = recognize;
 
 const detect = (imageUrl, callback) => {
-  console.log ('kairos detect');
   request({
     method: 'POST',
     url: kairosApiUrl + '/detect',
@@ -111,12 +110,12 @@ const detect = (imageUrl, callback) => {
       callback(err, body);
     }
   });
-}
+};
 
 module.exports.detect = detect;
 
 const post = (imageUrl, callback) => {
-  console.log ('kairos post');
+  console.log ('kairos post', imageUrl);
   request({
     method: 'POST',
     url: kairosApiUrl + '/v2/media?source=' + imageUrl,
@@ -136,7 +135,7 @@ const post = (imageUrl, callback) => {
 module.exports.post = post;
 
 const analyze = (id, callback) => {
-  console.log ('kairos analyze');
+
   const options = {
     method: 'GET',
     url: kairosApiUrl + '/v2/analytics/' + id,
