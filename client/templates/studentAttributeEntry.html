@@ -1,55 +1,67 @@
 <ul class="student-attributes">
   <div ng-hide="!ctrl.analyze.impressions">
     <li>
-      Sex : {{ctrl.analyze.impressions[0].demographics.gender}}
+      Sex: {{ctrl.analyze.impressions[0].demographics.gender}}
     </li>
     <li>
-      Glasses : {{ctrl.analyze.impressions[0].appearance.glasses}}
+      Glasses: {{ctrl.analyze.impressions[0].appearance.glasses}}
     </li>
-    <li>
-      Age Group : {{ctrl.analyze.impressions[0].demographics.age_group}}
-    </li>
-    <ul>
-      <h4>Average Emotion</h4>
-      <li>
-        Anger : {{ctrl.analyze.impressions[0].average_emotion.anger}}
-      </li>
-      <li>
-        Disgust : {{ctrl.analyze.impressions[0].average_emotion.disgust}}
-      </li>
-      <li>
-        Fear : {{ctrl.analyze.impressions[0].average_emotion.fear}}
-      </li>
-      <li>
-        Joy : {{ctrl.analyze.impressions[0].average_emotion.joy}}
-      </li>
-      <li>  
-        Sadness : {{ctrl.analyze.impressions[0].average_emotion.sadness}}
-      </li>
-      <li>
-      Surprise : {{ctrl.analyze.impressions[0].average_emotion.surprise}}
-      </li>
-    </ul>
   </div>
   <div ng-hide="!ctrl.detect">
     <li>
-      Age : {{ctrl.detect.images[0].faces[0].attributes.age}}
-    </li>
-    <li>
-      Asian : {{(ctrl.detect.images[0].faces[0].attributes.asian * 100).toFixed(2)}}%
-    </li>
-    <li>
-      Black : {{(ctrl.detect.images[0].faces[0].attributes.black * 100).toFixed(2)}}%
-    </li>
-    <li>
-      Hispanic : {{(ctrl.detect.images[0].faces[0].attributes.hispanic * 100).toFixed(2)}}%
-    </li>
-    <li>
-      White : {{(ctrl.detect.images[0].faces[0].attributes.white * 100).toFixed(2)}}%
-    </li>
-    <li>
-      Other : {{(ctrl.detect.images[0].faces[0].attributes.other * 100).toFixed(2)}}%
+      Age: {{ctrl.detect.images[0].faces[0].attributes.age}}
     </li>
   </div>
+  <div ng-hide="!ctrl.analyze.impressions">
+    <li>
+      Age Group: {{ctrl.analyze.impressions[0].demographics.age_group}}
+    </li>
+  </div>
+  <div ng-hide="!ctrl.detect">
+    <li>
+      Ethnic Make-up:
+    </li>
+    <ul>
+      <li>
+        Asian: {{(ctrl.detect.images[0].faces[0].attributes.asian * 100).toFixed(2)}}%
+      </li>
+      <li>
+        Black: {{(ctrl.detect.images[0].faces[0].attributes.black * 100).toFixed(2)}}%
+      </li>
+      <li>
+        Hispanic: {{(ctrl.detect.images[0].faces[0].attributes.hispanic * 100).toFixed(2)}}%
+      </li>
+      <li>
+        White: {{(ctrl.detect.images[0].faces[0].attributes.white * 100).toFixed(2)}}%
+      </li>
+      <li>
+        Other: {{(ctrl.detect.images[0].faces[0].attributes.other * 100).toFixed(2)}}%
+      </li>
+    </ul>
+  </div>
+  <div ng-hide="!ctrl.analyze.impressions">
+    <li>
+      Average Emotion:
+    </li>
+    <ul>
+      <li>
+        Anger: {{ctrl.analyze.impressions[0].average_emotion.anger}}
+      </li>
+      <li>
+        Disgust: {{ctrl.analyze.impressions[0].average_emotion.disgust}}
+      </li>
+      <li>
+        Fear: {{ctrl.analyze.impressions[0].average_emotion.fear}}
+      </li>
+      <li>
+        Joy: {{ctrl.analyze.impressions[0].average_emotion.joy}}
+      </li>
+      <li>  
+        Sadness: {{ctrl.analyze.impressions[0].average_emotion.sadness}}
+      </li>
+      <li>
+      Surprise: {{ctrl.analyze.impressions[0].average_emotion.surprise}}
+      </li>
+    </ul>
+  </div>
 </ul>
-
