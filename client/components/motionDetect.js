@@ -29,6 +29,41 @@ angular.module('in-your-face')
   tracker.setEdgesDensity(0.1);
   tracking.track('#video', tracker, { camera: true });
 
+
+
+  // constructor for tracker object
+  this.createTracker = (target) => {
+    var tracker = new tracking.ObjectTracker(target);
+    tracker.setInitialScale(4);
+    tracker.setStepSize(1);
+    tracker.setEdgesDensity(0.1);
+    tracking.track('#video', tracker, { camera: true });
+    // face detection event handling function
+    tracker.on('track', function(event) {
+      pbContext.clearRect(0, 0, pbCanvas.width, pbCanvas.height);
+      event.data.forEach(function(rect) {
+        var imageObj = new Image();
+        imageObj.src = selectedPicLink;
+        console.log(imageObj.src);
+        if (target === 'face') {
+          if (rect.width >= 100 && rect.width < 205) {
+            pbContext.drawImage(imageObj, rect.x / 2.5, rect.y / 2.4 * 0.7, rect.width * 0.52, rect.width * 0.52 * 1.15);
+          } else if (rect.width >= 205 && rect.width < 305) {
+            pbContext.drawImage(imageObj, rect.x / 2.5, rect.y / 6, rect.width * 0.52, rect.width * 0.52 * 1.15);
+          }
+        } else if (target === 'mouth') {
+          if (rect.width >= 100 && rect.width < 205) {
+            pbContext.drawImage(imageObj, rect.x / 2.25, rect.y / 2.25, rect.width * 0.25, rect.width );
+          } else if (rect.width >= 205 && rect.width < 305) {
+            pbContext.drawImage(imageObj, rect.x / 2, rect.y / 2.25, rect.width * 0.25, rect.width );
+          }
+        }
+      });
+    });
+  };
+
+
+
   // change picture link upon button clicking
   this.onChangePicButtonClicked = (personName) => {
     personName === '' ? this.showRemoveEffectButton = false : this.showRemoveEffectButton = true;
@@ -73,17 +108,4 @@ angular.module('in-your-face')
     this.countDown();
   };
 
-  // face detection event handling function
-  tracker.on('track', function(event) {
-    pbContext.clearRect(0, 0, pbCanvas.width, pbCanvas.height);
-    event.data.forEach(function(rect) {
-      var imageObj = new Image();
-      imageObj.src = selectedPicLink;
-      if (rect.width >= 100 && rect.width < 205) {
-        pbContext.drawImage(imageObj, rect.x / 2.5, rect.y / 2.5 * 0.7, rect.width * 0.52, rect.width * 0.52 * 1.15);
-      } else if (rect.width >= 205 && rect.width < 305) {
-        pbContext.drawImage(imageObj, rect.x / 2.5, rect.y / 3.2 * 0.05, rect.width * 0.52, rect.width * 0.52 * 1.15);
-      }
-    });
-  });
 });
