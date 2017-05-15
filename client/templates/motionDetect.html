@@ -11,11 +11,13 @@
             </div>
         </div>
         <div class="motion-detect-button-div">
-            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/sophie_pic.gif')">
+            <button class="btn btn-info motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/rainbow.gif'); ctrl.createTracker('mouth')">
+                <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Rainbow  </button>
+            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/sophie_pic.gif'); ctrl.createTracker('face')">
                 <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Sophie</button>
-            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/fred_pic.gif')">
+            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/fred_pic.gif'); ctrl.createTracker('face')">
                 <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Fred  </button>
-            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/jamil_pic.gif')">
+            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/jamil_pic.gif'); ctrl.createTracker('face')">
                 <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Jamil  </button>
             <button class="btn btn-danger motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('')" ng-show="ctrl.showRemoveEffectButton">
                 <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Remove effect  </button>
