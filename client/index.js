@@ -80,6 +80,10 @@ var app = angular.module('in-your-face', ['webcam', 'ngFileUpload', 'ezfb', 'ngR
     $window.location.href = '/#/friends';
   };
 
+  this.goToPhotoBooth = () => {
+    $window.location.href = '/#/photobooth';
+  };
+
   //Facebook Login
   this.login = () => {
     // Calling FB.login with required permissions specified
