@@ -34,8 +34,8 @@ app.service('service', function($http, Upload) {
   };
 
   this.picCallback = function(response) {
-    console.log ('this', this);
-    console.log('FROM PIC CALLBACK', response.data)
+    // console.log ('this', this);
+    // console.log('FROM PIC CALLBACK', response.data)
     this.persons = response.data.map(person => {
       var confidence = (person.confidence * 100).toFixed(1);
       return {
