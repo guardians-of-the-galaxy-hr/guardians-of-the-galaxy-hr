@@ -4,10 +4,11 @@ angular.module('in-your-face')
   this.count = 4;
   this.showRemoveEffectButton = false;
   this.showPhotoDisplayCanvas = false;
+
   var self = this;
   var video = document.getElementById('video');
 
-  // instantiate video camera and photo-booth-canvas
+  // instantiate photo-booth-canvas
   var pbCanvas = document.getElementById('photo-booth-canvas');
   var pbContext = pbCanvas.getContext('2d');
 
