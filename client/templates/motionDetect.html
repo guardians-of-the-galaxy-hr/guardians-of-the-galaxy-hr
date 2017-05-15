@@ -5,15 +5,15 @@
       <div class="row">
         <div class="col-xs-12">
           <video id="video"  preload autoplay loop muted></video>
-          <canvas id="photo-booth-canvas" ></canvas>
-          <canvas id="count-down-canvas" ></canvas>
+          <canvas id="photo-booth-canvas"></canvas>
+          <canvas id="count-down-canvas"></canvas>
         </div>
       </div>
     </div>
     <div class="motion-detect-button-div">
       <button class="btn btn-info motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/rainbow.gif'); ctrl.createTracker('mouth')">
         <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-        Rainbow
+        rainbow
       </button>
       <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/sophie_pic.gif'); ctrl.createTracker('face')">
         <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
@@ -29,11 +29,11 @@
       </button>
       <button class="btn btn-danger motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('')" ng-show="ctrl.showRemoveEffectButton">
         <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-        Remove effect
+        remove effect
       </button>
       <button class="btn btn-primary motion-detect-button" ng-click="ctrl.onTakeSnapshotButtonClicked()" ng-show="true">
         <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-        Take snapshot
+        take picture
       </button>
     </div>
     <div>
