@@ -68,9 +68,9 @@ angular.module('in-your-face')
       if (!patCanvas) { return; }
 
       patCanvas.width = _video.width;
-      console.log('video width: ', _video.width);
+      // console.log('video width: ', _video.width);
       patCanvas.height = _video.height;
-      console.log('video height: ', _video.height);
+      // console.log('video height: ', _video.height);
       var ctxPat = patCanvas.getContext('2d');
 
       var idata = this.getVideoData(this.patOpts.x, this.patOpts.y, this.patOpts.w, this.patOpts.h);
