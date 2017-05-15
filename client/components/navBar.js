@@ -2,13 +2,12 @@ angular.module('in-your-face')
   .controller('navBarCtrl', function ($location, $cookies, facebookService) {
     this.displayUser = false;
 
-
-
     this.logoutCallback = (response) => {
       if (response.data.user === null) {
         $location.path('/');
       }
     };
+
     this.logout = () => {
       facebookService.facebookLogout(this.logoutCallback);
     };
@@ -26,8 +25,8 @@ angular.module('in-your-face')
         facebookService.facebookGetUserDetails(this.userDetails.token, this.getfriendsDetails);
       }
     };
+    
     facebookService.facebookIsLogged(this.getUserDetails);
-
   })
   .directive('navBar', function () {
     return {

@@ -1,37 +1,43 @@
 <div id="motion-detect-container">
-    <nav-bar></nav-bar>
-    <div class="container inyourface">
-        <div class="inyourface-motion-detect">
-            <div class="row">
-                <div class="col-xs-12">
-                    <video id="video"  preload autoplay loop muted></video>
-                    <canvas id="photo-booth-canvas" ></canvas>
-                    <canvas id="count-down-canvas" ></canvas>
-                </div>
-            </div>
+  <nav-bar></nav-bar>
+  <div class="container inyourface">
+    <div class="inyourface-motion-detect">
+      <div class="row">
+        <div class="col-xs-12">
+          <video id="video"  preload autoplay loop muted></video>
+          <canvas id="photo-booth-canvas"></canvas>
+          <canvas id="count-down-canvas"></canvas>
         </div>
-        <div class="motion-detect-button-div">
-            <button class="btn btn-info motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/rainbow.gif'); ctrl.createTracker('mouth')">
-                <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Rainbow  </button>
-            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/sophie_pic.gif'); ctrl.createTracker('face')">
-                <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Sophie</button>
-            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/fred_pic.gif'); ctrl.createTracker('face')">
-                <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Fred  </button>
-            <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/jamil_pic.gif'); ctrl.createTracker('face')">
-                <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Jamil  </button>
-            <button class="btn btn-danger motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('')" ng-show="ctrl.showRemoveEffectButton">
-                <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Remove effect  </button>
-            <button class="btn btn-primary motion-detect-button" ng-click="ctrl.onTakeSnapshotButtonClicked()" ng-show="true">
-                <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Take snapshot  </button>
-        </div>
-        <div>
-            <canvas id="photo-display-canvas" ng-show="ctrl.showPhotoDisplayCanvas"></canvas>
-        </div>
+      </div>
     </div>
+    <div class="motion-detect-button-div">
+      <button class="btn btn-info motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/rainbow.gif'); ctrl.createTracker('mouth')">
+        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+        rainbow
+      </button>
+      <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/sophie_pic.gif'); ctrl.createTracker('face')">
+        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+        Sophie
+      </button>
+      <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/fred_pic.gif'); ctrl.createTracker('face')">
+        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+        Fred
+      </button>
+      <button class="btn btn-warning motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('./assets/jamil_pic.gif'); ctrl.createTracker('face')">
+        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+        Jamil
+      </button>
+      <button class="btn btn-danger motion-detect-button" ng-click="ctrl.onChangePicButtonClicked('')" ng-show="ctrl.showRemoveEffectButton">
+        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+        remove effect
+      </button>
+      <button class="btn btn-primary motion-detect-button" ng-click="ctrl.onTakeSnapshotButtonClicked()" ng-show="true">
+        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+        take picture
+      </button>
+    </div>
+    <div>
+      <canvas id="photo-display-canvas" ng-show="ctrl.showPhotoDisplayCanvas"></canvas>
+    </div>
+  </div>
 </div>
-
-
-
-
-
-
