@@ -23,13 +23,18 @@ angular.module('in-your-face')
   var selectedPicLink = '';
 
   // instantiate tracker object and set initial values for face tracking parameters
-  var tracker = new tracking.ObjectTracker('face');
-  tracker.setInitialScale(4);
-  tracker.setStepSize(1);
-  tracker.setEdgesDensity(0.1);
-  tracking.track('#video', tracker, { camera: true });
+  var tracker = new tracking.ObjectTracker('');
+  this.initialTrackerTask = tracking.track('#video', tracker, { camera: true });
+  this.initialTrackerTask.stop();
 
-
+  // print image onto tracted location
+  this.printImage = (rect, ctx, image, x1, y1, width1, length1, x2, y2, width2, length2) => {
+    if (rect.width >= 100 && rect.width < 205) {
+      ctx.drawImage(image, x1, y1, width1, length1);
+    } else if (rect.width >= 205 && rect.width < 305) {
+      ctx.drawImage(image, x2, y2, width2, length2);
+    }
+  };
 
   // constructor for tracker object
   this.createTracker = (target) => {
@@ -37,7 +42,8 @@ angular.module('in-your-face')
     tracker.setInitialScale(4);
     tracker.setStepSize(1);
     tracker.setEdgesDensity(0.1);
-    tracking.track('#video', tracker, { camera: true });
+    this.trackerTask = tracking.track('#video', tracker, { camera: true });
+
     // face detection event handling function
     tracker.on('track', function(event) {
       pbContext.clearRect(0, 0, pbCanvas.width, pbCanvas.height);
@@ -46,26 +52,23 @@ angular.module('in-your-face')
         imageObj.src = selectedPicLink;
         console.log(imageObj.src);
         if (target === 'face') {
-          if (rect.width >= 100 && rect.width < 205) {
-            pbContext.drawImage(imageObj, rect.x / 2.5, rect.y / 2.4 * 0.7, rect.width * 0.52, rect.width * 0.52 * 1.15);
-          } else if (rect.width >= 205 && rect.width < 305) {
-            pbContext.drawImage(imageObj, rect.x / 2.5, rect.y / 6, rect.width * 0.52, rect.width * 0.52 * 1.15);
-          }
+          self.printImage(rect, pbContext, imageObj, rect.x / 2.5, rect.y / 2.4 * 0.7, rect.width * 0.52,
+            rect.width * 0.52 * 1.15, rect.x / 2.5, rect.y / 6, rect.width * 0.52, rect.width * 0.52 * 1.15);
         } else if (target === 'mouth') {
-          if (rect.width >= 100 && rect.width < 205) {
-            pbContext.drawImage(imageObj, rect.x / 2.25, rect.y / 2.25, rect.width * 0.25, rect.width );
-          } else if (rect.width >= 205 && rect.width < 305) {
-            pbContext.drawImage(imageObj, rect.x / 2, rect.y / 2.25, rect.width * 0.25, rect.width );
-          }
+          self.printImage(rect, pbContext, imageObj, rect.x / 2.25, rect.y / 2.25, rect.width * 0.25, rect.width,
+            rect.x / 2, rect.y / 2.25, rect.width * 0.25, rect.width );
         }
       });
     });
   };
 
-
-
   // change picture link upon button clicking
   this.onChangePicButtonClicked = (personName) => {
+    if (personName === '') {
+      // Stops the tracking if personName is empty
+      this.trackerTask.stop();
+      pbContext.clearRect(0, 0, pbCanvas.width, pbCanvas.height);
+    }
     personName === '' ? this.showRemoveEffectButton = false : this.showRemoveEffectButton = true;
     selectedPicLink = personName;
   };
@@ -107,5 +110,4 @@ angular.module('in-your-face')
     this.count = 4;
     this.countDown();
   };
-
 });
